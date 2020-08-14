@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "84328f6b-5bfc-4334-b3de-6492193b9221",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 177,
+  "height": 49,
+  "platformSettings": {},
+  "subMetas": {
+    "离线收益": {
+      "ver": "1.0.4",
+      "uuid": "33ff5517-ca6f-4ae1-9b39-a67d0ba8dee6",
+      "rawTextureUuid": "84328f6b-5bfc-4334-b3de-6492193b9221",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0.5,
+      "trimX": 15,
+      "trimY": 4,
+      "width": 146,
+      "height": 40,
+      "rawWidth": 177,
+      "rawHeight": 49,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

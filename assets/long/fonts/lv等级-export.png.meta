@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "2f1a3542-5225-4ea4-ada0-1ac12a3e1dfc",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 128,
+  "height": 128,
+  "platformSettings": {},
+  "subMetas": {
+    "lv等级-export": {
+      "ver": "1.0.4",
+      "uuid": "07d99f2f-e9c2-440a-8126-64103726afd7",
+      "rawTextureUuid": "2f1a3542-5225-4ea4-ada0-1ac12a3e1dfc",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -18,
+      "offsetY": 2.5,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 92,
+      "height": 123,
+      "rawWidth": 128,
+      "rawHeight": 128,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

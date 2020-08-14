@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "bddcf912-828b-4c9d-8b24-b0ff88e512c4",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 537,
+  "height": 104,
+  "platformSettings": {},
+  "subMetas": {
+    "商店框和世界排行榜": {
+      "ver": "1.0.4",
+      "uuid": "417ea821-b4fe-42f8-a1f4-9b8940c9273a",
+      "rawTextureUuid": "bddcf912-828b-4c9d-8b24-b0ff88e512c4",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 1,
+      "offsetY": 0,
+      "trimX": 4,
+      "trimY": 0,
+      "width": 531,
+      "height": 104,
+      "rawWidth": 537,
+      "rawHeight": 104,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "24cbdbd1-502b-4788-98fe-f8d4734ecc1c",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 261,
+  "height": 49,
+  "platformSettings": {},
+  "subMetas": {
+    "获得飞机宝箱字体": {
+      "ver": "1.0.4",
+      "uuid": "2b4be89c-3bdb-4cc3-9acc-e702aec812ee",
+      "rawTextureUuid": "24cbdbd1-502b-4788-98fe-f8d4734ecc1c",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 1,
+      "offsetY": 0.5,
+      "trimX": 22,
+      "trimY": 4,
+      "width": 219,
+      "height": 40,
+      "rawWidth": 261,
+      "rawHeight": 49,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

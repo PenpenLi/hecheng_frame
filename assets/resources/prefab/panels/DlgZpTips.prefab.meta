@@ -1,0 +1,8 @@
+{
+  "ver": "1.2.6",
+  "uuid": "fda3d2c0-3054-4361-803e-cc589ebf41ac",
+  "optimizationPolicy": "SINGLE_INSTANCE",
+  "asyncLoadAssets": false,
+  "readonly": false,
+  "subMetas": {}
+}
