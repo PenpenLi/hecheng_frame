@@ -1,0 +1,24 @@
+import { GameType, Game } from "../../game/Game";
+
+export class Console {
+
+    isTest: GameType = GameType.OFFICIAL;
+
+    GetGameType() {
+        if (UrlManager.GameType == 'TEST') {
+            this.isTest = GameType.TEST;
+        }
+        else if (UrlManager.GameType == 'OFFICIAL') {
+            this.isTest = GameType.OFFICIAL;
+        }
+    }
+
+    Log(...msg) {
+        if (this.isTest === GameType.TEST) {
+            if (cc.sys.isBrowser) {
+                console.log(msg);
+            }
+        }
+    }
+
+}

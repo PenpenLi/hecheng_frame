@@ -1,18 +1,13 @@
 {
-  "group-list": [
-    "default",
-    "block",
-    "Dustbin",
-    "cat"
-  ],
+  "assets-sort-type": "name",
   "collision-matrix": [
     [
-      true
+      false
     ],
     [
       false,
       false,
-      null,
+      false,
       true
     ],
     [
@@ -28,8 +23,10 @@
       false
     ]
   ],
+  "design-resolution-height": 640,
+  "design-resolution-width": 960,
   "excluded-modules": [
-    "DragonBones",
+    "Toggle",
     "TiledMap",
     "3D",
     "3D Primitive",
@@ -37,19 +34,6 @@
     "3D Physics/Builtin",
     "3D Particle"
   ],
-  "last-module-event-record-time": 1597113483182,
-  "design-resolution-width": 960,
-  "design-resolution-height": 640,
-  "fit-width": false,
-  "fit-height": true,
-  "use-project-simulator-setting": false,
-  "simulator-orientation": false,
-  "use-customize-simulator": true,
-  "simulator-resolution": {
-    "height": 640,
-    "width": 960
-  },
-  "assets-sort-type": "name",
   "facebook": {
     "appID": "",
     "audience": {
@@ -60,5 +44,21 @@
       "enable": false
     }
   },
+  "fit-height": true,
+  "fit-width": false,
+  "group-list": [
+    "default",
+    "block",
+    "Dustbin",
+    "Bird"
+  ],
+  "last-module-event-record-time": 1595814593782,
+  "simulator-orientation": false,
+  "simulator-resolution": {
+    "height": 640,
+    "width": 960
+  },
+  "use-customize-simulator": true,
+  "use-project-simulator-setting": false,
   "start-scene": "8ff5ef8d-87b4-45cc-b9dd-47cf9249b395"
 }

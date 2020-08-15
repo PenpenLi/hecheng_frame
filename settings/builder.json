@@ -1,43 +1,61 @@
 {
-  "title": "duoduoshijie",
-  "packageName": "",
-  "startScene": "8ff5ef8d-87b4-45cc-b9dd-47cf9249b395",
-  "excludeScenes": [],
-  "includeSDKBox": false,
-  "orientation": {
-    "landscapeLeft": true,
-    "landscapeRight": true,
-    "portrait": false,
-    "upsideDown": false
-  },
-  "webOrientation": "auto",
-  "inlineSpriteFrames": true,
-  "inlineSpriteFrames_native": true,
-  "mergeStartScene": false,
-  "optimizeHotUpdate": false,
-  "md5Cache": true,
-  "encryptJs": true,
-  "xxteaKey": "af2ee535-d355-48",
-  "zipCompressJs": true,
-  "fb-instant-games": {},
-  "android": {
-    "packageName": ""
-  },
-  "ios": {
-    "packageName": ""
-  },
-  "mac": {
-    "packageName": ""
-  },
-  "win32": {},
   "android-instant": {
-    "REMOTE_SERVER_ROOT": "",
+    "REMOTE_SERVER_ROOT": "http://192.168.0.101:7456/preview-android-instant/",
     "host": "",
-    "packageName": "",
+    "packageName": "org.cocos2d.demo1",
     "pathPattern": "",
     "recordPath": "",
     "scheme": "https",
     "skipRecord": false
   },
-  "appBundle": false
+  "appBundle": false,
+  "baidugame": {
+    "REMOTE_SERVER_ROOT": "",
+    "appid": "testappid",
+    "orientation": "portrait",
+    "subContext": ""
+  },
+  "encryptJs": true,
+  "excludeScenes": [],
+  "fb-instant-games": {},
+  "includeSDKBox": false,
+  "inlineSpriteFrames": true,
+  "inlineSpriteFrames_native": true,
+  "md5Cache": true,
+  "mergeStartScene": false,
+  "optimizeHotUpdate": false,
+  "orientation": {
+    "landscapeLeft": false,
+    "landscapeRight": false,
+    "portrait": true,
+    "upsideDown": false
+  },
+  "packageName": "org.cocos2d.demo1",
+  "qqplay": {
+    "REMOTE_SERVER_ROOT": "",
+    "orientation": "portrait",
+    "zip": false
+  },
+  "startScene": "8ff5ef8d-87b4-45cc-b9dd-47cf9249b395",
+  "title": "TengyuanKeji",
+  "webOrientation": "auto",
+  "wechatgame": {
+    "REMOTE_SERVER_ROOT": "http://192.168.0.109/",
+    "appid": "wx42090f2b9073c9aa",
+    "orientation": "portrait",
+    "separate_engine": false,
+    "subContext": ""
+  },
+  "xxteaKey": "474716b0-d70a-4a",
+  "zipCompressJs": true,
+  "android": {
+    "packageName": "org.cocos2d.Tengyuankeji"
+  },
+  "ios": {
+    "packageName": "org.cocos2d.demo1"
+  },
+  "mac": {
+    "packageName": "org.cocos2d.demo1"
+  },
+  "win32": {}
 }

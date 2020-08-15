@@ -82,28 +82,6 @@
         }
       },
       "btnstartbg": {
-        "props": {
-          "angle": [
-            {
-              "frame": 0,
-              "value": 0
-            },
-            {
-              "frame": 0.6666666666666666,
-              "value": -360
-            }
-          ],
-          "scale": [
-            {
-              "frame": 0,
-              "value": {
-                "__type__": "cc.Vec2",
-                "x": 1,
-                "y": 1
-              }
-            }
-          ]
-        },
         "comps": {
           "cc.Sprite": {
             "spriteFrame": [
@@ -115,6 +93,18 @@
               }
             ]
           }
+        },
+        "props": {
+          "angle": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.6666666666666666,
+              "value": 360
+            }
+          ]
         }
       }
     },

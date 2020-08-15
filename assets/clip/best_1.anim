@@ -56,23 +56,11 @@
               {
                 "frame": 0,
                 "value": {
-                  "__uuid__": "90caab98-111c-4d1f-9aec-ebb8a3a23f2f"
+                  "__uuid__": "b3343096-a95c-47c0-ab44-fd8a2a9cbc25"
                 }
               }
             ]
           }
-        },
-        "props": {
-          "scale": [
-            {
-              "frame": 0,
-              "value": {
-                "__type__": "cc.Vec2",
-                "x": 1.1,
-                "y": 1.1
-              }
-            }
-          ]
         }
       }
     },

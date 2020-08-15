@@ -30,7 +30,7 @@
         "__id__": 6
       },
       {
-        "__id__": 8
+        "__id__": 7
       }
     ],
     "_prefab": {
@@ -46,8 +46,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
-      "height": 105
+      "width": 60,
+      "height": 60
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -58,15 +58,15 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        0,
-        0,
+        -80,
+        15,
         0,
         0,
         0,
         0,
         1,
-        0.5,
-        0.5,
+        0.8,
+        0.8,
         1
       ]
     },
@@ -123,7 +123,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        -60.245,
+        -50,
         0,
         0,
         0,
@@ -206,10 +206,10 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "c9ae04b1-67ba-4682-ba51-be9fe54f5369"
+      "__uuid__": "02f31d11-062c-4299-a327-b953dca7afbe"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -219,7 +219,22 @@
     "_fillStart": 0,
     "_fillRange": 0,
     "_isTrimmedMode": true,
-    "_atlas": null,
+    "_atlas": {
+      "__uuid__": "391c1a20-923e-4d2c-9438-7280ec86f251"
+    },
+    "_id": ""
+  },
+  {
+    "__type__": "7bf49LXDzdMH4w/Q2kWWdCA",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "labTips": {
+      "__id__": 3
+    },
     "_id": ""
   },
   {
@@ -236,7 +251,7 @@
     "zoomScale": 1.2,
     "clickEvents": [
       {
-        "__id__": 7
+        "__id__": 8
       }
     ],
     "_N$interactable": true,
@@ -245,9 +260,9 @@
     "transition": 0,
     "_N$normalColor": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 214,
+      "g": 214,
+      "b": 214,
       "a": 255
     },
     "_N$pressedColor": {
@@ -291,7 +306,9 @@
     "_N$hoverSprite": null,
     "hoverSprite": null,
     "_N$disabledSprite": null,
-    "_N$target": null,
+    "_N$target": {
+      "__id__": 1
+    },
     "_id": ""
   },
   {
@@ -300,22 +317,9 @@
       "__id__": 1
     },
     "component": "",
-    "_componentId": "505fcI8t0xKf4zztPdWWZUd",
+    "_componentId": "7bf49LXDzdMH4w/Q2kWWdCA",
     "handler": "btnClickJewel",
     "customEventData": ""
-  },
-  {
-    "__type__": "505fcI8t0xKf4zztPdWWZUd",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "labTips": {
-      "__id__": 3
-    },
-    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",

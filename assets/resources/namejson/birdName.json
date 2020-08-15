@@ -1,6 +1,6 @@
 [{
 		"id": "0",
-		"birdName": "灵龙",
+		"birdName": "鸟蛋",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -9,7 +9,7 @@
 	},
 	{
 		"id": "1",
-		"birdName": "异特龙",
+		"birdName": "蛋鸟",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -18,7 +18,7 @@
 	},
 	{
 		"id": "2",
-		"birdName": "恶灵龙",
+		"birdName": "幼鸟",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -27,7 +27,7 @@
 	},
 	{
 		"id": "3",
-		"birdName": "文雅龙",
+		"birdName": "麻雀",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -36,7 +36,7 @@
 	},
 	{
 		"id": "4",
-		"birdName": "原鸟形龙",
+		"birdName": "翠鸟",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -45,7 +45,7 @@
 	},
 	{
 		"id": "5",
-		"birdName": "活堡龙",
+		"birdName": "乌鸦",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -54,16 +54,16 @@
 	},
 	{
 		"id": "6",
-		"birdName": "奥卡龙",
+		"birdName": "喜鹊",
 		"anchorChongwu": {
 			"x": 0,
-			"y": -20
+			"y": 0
 		},
 		"recePrice": "337312"
 	},
 	{
 		"id": "7",
-		"birdName": "高吻龙",
+		"birdName": "鹦鹉",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -72,7 +72,7 @@
 	},
 	{
 		"id": "8",
-		"birdName": "迷惑龙",
+		"birdName": "鸽子",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -81,7 +81,7 @@
 	},
 	{
 		"id": "9",
-		"birdName": "风神龙",
+		"birdName": "海鸥",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -90,7 +90,7 @@
 	},
 	{
 		"id": "10",
-		"birdName": "爱氏角龙",
+		"birdName": "蛋鹰",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -99,7 +99,7 @@
 	},
 	{
 		"id": "11",
-		"birdName": "阿拉果龙",
+		"birdName": "幼鹰",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -108,7 +108,7 @@
 	},
 	{
 		"id": "12",
-		"birdName": "顶棘龙",
+		"birdName": "雀鹰",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -117,7 +117,7 @@
 	},
 	{
 		"id": "13",
-		"birdName": "杏齿龙",
+		"birdName": "猫头鹰",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -126,7 +126,7 @@
 	},
 	{
 		"id": "14",
-		"birdName": "盐海龙",
+		"birdName": "条纹鹰",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -135,7 +135,7 @@
 	},
 	{
 		"id": "15",
-		"birdName": "祖母暴龙",
+		"birdName": "蛇鹰",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -144,7 +144,7 @@
 	},
 	{
 		"id": "16",
-		"birdName": "弃械龙",
+		"birdName": "小雕鹰",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -153,34 +153,34 @@
 	},
 	{
 		"id": "17",
-		"birdName": "雷前龙",
+		"birdName": "大雕鹰",
 		"anchorChongwu": {
-			"x": 20,
+			"x": 0,
 			"y": 0
 		},
 		"recePrice": "15650928492"
 	},
 	{
 		"id": "18",
-		"birdName": "葡萄园龙",
+		"birdName": "苍鹰",
 		"anchorChongwu": {
-			"x": -10,
+			"x": 0,
 			"y": 0
 		},
 		"recePrice": "41568866075"
 	},
 	{
 		"id": "19",
-		"birdName": "南方梁龙",
+		"birdName": "飞天鹰",
 		"anchorChongwu": {
 			"x": 0,
-			"y": -20
+			"y": 0
 		},
 		"recePrice": "110406908295"
 	},
 	{
 		"id": "20",
-		"birdName": "准角龙",
+		"birdName": "鹰雕",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -189,25 +189,25 @@
 	},
 	{
 		"id": "21",
-		"birdName": "阿拉斯加头龙",
+		"birdName": "白头雕",
 		"anchorChongwu": {
 			"x": 0,
-			"y": -15
+			"y": 0
 		},
 		"recePrice": "778847427835"
 	},
 	{
 		"id": "22",
-		"birdName": "南方海神龙",
+		"birdName": "草原雕",
 		"anchorChongwu": {
-			"x": -15,
+			"x": 0,
 			"y": 0
 		},
 		"recePrice": "2068618768330"
 	},
 	{
 		"id": "23",
-		"birdName": "无齿龙",
+		"birdName": "蛇雕",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -216,7 +216,7 @@
 	},
 	{
 		"id": "24",
-		"birdName": "远食龙",
+		"birdName": "虎头雕",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -225,7 +225,7 @@
 	},
 	{
 		"id": "25",
-		"birdName": "沟牙龙",
+		"birdName": "花雕",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -234,7 +234,7 @@
 	},
 	{
 		"id": "26",
-		"birdName": "弯嚼龙",
+		"birdName": "白尾海雕",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -243,7 +243,7 @@
 	},
 	{
 		"id": "27",
-		"birdName": "奥卡龙",
+		"birdName": "金雕",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -252,7 +252,7 @@
 	},
 	{
 		"id": "28",
-		"birdName": "阿穆尔龙",
+		"birdName": "大鹏银雕",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -261,7 +261,7 @@
 	},
 	{
 		"id": "29",
-		"birdName": "无鼻角龙",
+		"birdName": "大鹏金雕",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -270,7 +270,7 @@
 	},
 	{
 		"id": "30",
-		"birdName": "独龙",
+		"birdName": "九头鸟",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -279,7 +279,7 @@
 	},
 	{
 		"id": "31",
-		"birdName": "始祖鸟",
+		"birdName": "三足鸟",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -288,7 +288,7 @@
 	},
 	{
 		"id": "32",
-		"birdName": "安尼柯龙",
+		"birdName": "不死鸟",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -297,7 +297,7 @@
 	},
 	{
 		"id": "33",
-		"birdName": "阿拉果龙",
+		"birdName": "狮鹫",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -306,7 +306,7 @@
 	},
 	{
 		"id": "34",
-		"birdName": "河神龙",
+		"birdName": "巨鹏",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -315,7 +315,7 @@
 	},
 	{
 		"id": "35",
-		"birdName": "砂龙",
+		"birdName": "毕方",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -324,7 +324,7 @@
 	},
 	{
 		"id": "36",
-		"birdName": "黎明角龙",
+		"birdName": "朱雀",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -333,7 +333,7 @@
 	},
 	{
 		"id": "37",
-		"birdName": "金神龙",
+		"birdName": "金凤",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -342,7 +342,7 @@
 	},
 	{
 		"id": "38",
-		"birdName": "木神龙",
+		"birdName": "木凤",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -351,7 +351,7 @@
 	},
 	{
 		"id": "39",
-		"birdName": "水神龙",
+		"birdName": "水凤",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -360,7 +360,7 @@
 	},
 	{
 		"id": "40",
-		"birdName": "火神龙",
+		"birdName": "火凤",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -369,7 +369,7 @@
 	},
 	{
 		"id": "41",
-		"birdName": "土神龙",
+		"birdName": "土凤",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -378,7 +378,7 @@
 	},
 	{
 		"id": "42",
-		"birdName": "算力龙",
+		"birdName": "算力凤凰",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -387,7 +387,7 @@
 	},
 	{
 		"id": "43",
-		"birdName": "红包龙",
+		"birdName": "红包凤凰",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -396,7 +396,7 @@
 	},
 	{
 		"id": "44",
-		"birdName": "情侣龙♂",
+		"birdName": "情侣凤凰♂",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -405,7 +405,7 @@
 	},
 	{
 		"id": "45",
-		"birdName": "情侣龙♀",
+		"birdName": "情侣凤凰♀",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0
@@ -414,7 +414,7 @@
 	},
 	{
 		"id": "46",
-		"birdName": "分红龙",
+		"birdName": "分红凤凰",
 		"anchorChongwu": {
 			"x": 0,
 			"y": 0

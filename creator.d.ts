@@ -4,6 +4,7 @@ The main namespace of Cocos2d-JS, all engine core classes, functions, properties
 !#zh
 Cocos 引擎的主要命名空间，引擎代码中所有的类，函数，属性和常量都在这个命名空间中定义。 */
 declare namespace cc {
+
 	/** The current version of Cocos2d being used.<br/>
 	Please DO NOT remove this String, it is an important flag for bug tracking.<br/>
 	If you post a bug to forum, please attach this flag. */
@@ -16000,12 +16001,9 @@ declare namespace cc {
 	/** !#en Material Asset.
 	!#zh 材质资源类。 */
 	export class Material extends Asset {
-
-		/**
-		 * 获取内置材质
-		 * @param name 名称
-		 */
-		static getBuiltinMaterial(name: string): Material;
+		static getBuiltinMaterial(arg0: string): Material {
+			throw new Error("Method not implemented.");
+		}
 		/**
 		!#en Creates a Material with builtin Effect.
 		!#zh 使用内建 Effect 创建一个材质。
@@ -30125,6 +30123,8 @@ declare namespace jsb {
      * FileUtils  Helper class to handle file operations.
      */
 	export module fileUtils {
+
+		export function getDataFromFile(path: string): any;
         /**
          *  Checks whether the path is an absolute path.
          *
@@ -30481,12 +30481,5 @@ declare const CC_WECHATGAME: boolean;
 
 /**api库 */
 declare const api: any = {};
-declare function RSA(ket: string): string;
 
-/****声明window */
-interface Window {
-	dd_httpUrl: string,
-	dd_webSocketUrl: string,
-	dd_token: string,
-	dd_isDebug: boolean,
-}
+declare function RSA(ket: string): string;
