@@ -20,6 +20,7 @@ const { ccclass, property } = cc._decorator;
 
 class NetTips implements INetworkTips {
     connectTips(isShow: boolean): void {
+        console.log("------", uiManager.ins())
         if (isShow) {
             uiManager.ins().waiting.showtips("网络开小差了")
         } else {
@@ -98,8 +99,8 @@ export default class NewClass extends cc.Component {
         });
         NetManager.getInstance().setNetNode(Node);
         NetManager.getInstance().connect({ url: websockeConfig.ins().URL, autoReconnect: -1 })
-
     }
+    
     /**根据长连接的返回参数做回应 */
     swicthWebsocket(res: any) {
         if (res) {

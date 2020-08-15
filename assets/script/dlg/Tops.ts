@@ -128,7 +128,7 @@ export default class Tops extends baseUi {
                 Game.ApiManager.clickMessage_0();
                 break;
             case "BtnheadImage":
-                Game.gameManager.RestartGame();
+                // Game.gameManager.RestartGame();
                 uiManager.ins().show(UI_CONFIG_NAME.DlgLeftHead);
                 break;
             case "BtnrightCoins":
