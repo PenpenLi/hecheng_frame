@@ -1,9 +1,8 @@
 
-import main from "../game/main";
-import boxMove from "../game/BoxMove"
+import main from "./main";
+import boxMove from "./BoxMove"
 import { ApiManager } from "./ApiManager";
 import HTTP from "../HTTP/HTTP";
-import CfgManager from "./CfgManager";
 import Tops from "../dlg/Tops";
 import bottom from "../dlg/Bottom";
 import { Console } from "../common/unitl/Console";
@@ -17,14 +16,12 @@ export class Game {
     static Box: boxMove = null;
     static ApiManager: ApiManager = null;
     static HttpManager: HTTP = null;
-    static CfgManager: CfgManager = null;
     static Console: Console = null;
     static UtilFunction: UtilFunction = null;
 
     static ReloadGame() {
         this.ApiManager = new ApiManager();
         this.HttpManager = new HTTP();
-        this.CfgManager = CfgManager.ins();
         this.Console = new Console();
         this.Console.GetGameType();
         this.UtilFunction = new UtilFunction();

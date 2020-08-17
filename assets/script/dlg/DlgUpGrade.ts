@@ -3,6 +3,7 @@ import { uiFormType, uiFormPath } from "../common/base/gameConfigs";
 import uiType from "../common/ui/uitype";
 import pictureManager from "../game/pictureManager";
 import { Game } from "../game/Game";
+import { G_baseData } from "../data/baseData";
 
 const { ccclass, property } = cc._decorator;
 
@@ -51,7 +52,7 @@ export default class setup extends baseUi {
     /**换图片的方法 */
     changeBirdImage(num: number, type: number = 0) {
         this.sprBirdHead.spriteFrame = pictureManager.getIns().birdTuji[num - 1];
-        let str = Game.CfgManager.getBirdName(num);
+        let str = G_baseData.petData.getBirdName(num);
         //补写鸟的名字
         this.labBirdName.string = str;
         if (type == 0) {//普通升级

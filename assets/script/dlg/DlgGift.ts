@@ -1,7 +1,7 @@
 import baseUi from "../common/ui/baseUi"
 import { uiFormType, uiFormPath, isUseBananer, widdleType } from "../common/base/gameConfigs";
 import uiType from "../common/ui/uitype";
-import dataManager from "../game/dataManager";
+import userData from "../data/userData";
 import { Game } from "../game/Game";
 const { ccclass, property } = cc._decorator;
 
@@ -20,7 +20,7 @@ export default class setup extends baseUi {
 
     _open() {
         this.btnShare.node.on("click", this.btnShareFriend, this);
-        let str = `当前剩余(${dataManager.ins().inviteJuan})张邀请券`;
+        let str = `当前剩余(${userData.ins().inviteJuan})张邀请券`;
         this.inviteNum.string = str;
     }
 

@@ -66,19 +66,6 @@ export default class LabelGundong extends cc.Component {
         return str;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     SetStr(str: string, type) {
         if (type == 2) {
             this.UI_Label.string = str;

@@ -1,6 +1,6 @@
 import SingletonClass from "../base/SingletonClass"
-import { pool_Ui } from "../ui/pool_Ui"
-import baseUi from "../ui/baseUi"
+import { pool_Ui } from "./pool_Ui"
+import baseUi from "./baseUi"
 import { uiFormPath, uiFormType } from "../base/gameConfigs";
 import WaitingConnection from "../waiting/WaitingConnection";
 

@@ -1,10 +1,11 @@
 import baseUi from "../common/ui/baseUi"
 import { uiFormType, uiFormPath } from "../common/base/gameConfigs";
 import uiType from "../common/ui/uitype";
-import dataManager from "../game/dataManager";
+import userData from "../data/userData";
 import pictureManager from "../game/pictureManager";
 import BigVal from "../common/bigval/BigVal"
 import { Game } from "../game/Game";
+import { G_baseData } from "../data/baseData";
 
 const { ccclass, property } = cc._decorator;
 
@@ -66,8 +67,8 @@ export default class setup extends baseUi {
     }
     /**替换图片 */
     changeHeadImage() {
-        let num = dataManager.ins().BestBirdOfLv;
-        let str = Game.CfgManager.getBirdName((num));
+        let num = G_baseData.petData.BestBirdOfLv;
+        let str = G_baseData.petData.getBirdName((num));
         this.sprBirds.spriteFrame = pictureManager.getIns().birdTuji[num - 1];
         this.labBirdName.string = str;
         this.sendMessBird();

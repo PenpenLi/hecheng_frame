@@ -1,10 +1,9 @@
 import { uiFormType, isUseBananer, widdleType } from "../base/gameConfigs";
 import AdaptationManager, { AdaptationType } from "./AdaptationManager";
-import uiType from "../ui/uitype";
-import { uiManager } from "../ui/uiManager";
-import cfgManager from "../../game/CfgManager";
-import dataManager from "../../game/dataManager"
+import uiType from "./uitype";
+import { uiManager } from "./uiManager";
 import { Game } from "../../game/Game";
+import { G_baseData } from "../../data/baseData";
 
 const { ccclass, property } = cc._decorator;
 
@@ -82,7 +81,7 @@ export default class baseUi extends cc.Component {
                 this.node.setScale(cc.v2(1, 1));
             } else if (type === 1) {//原生+banner
                 AdaptationManager.GetInstance().adaptationFormByType(AdaptationType.Bottom, this.node, 550);
-                this.node.setScale(cc.v2(dataManager.ins().scaleBlock, dataManager.ins().scaleBlock));
+                this.node.setScale(cc.v2(G_baseData.petData.scaleBlock, G_baseData.petData.scaleBlock));
             }
         }
         if (this.formType.isopenbanner === isUseBananer.openbanner) {

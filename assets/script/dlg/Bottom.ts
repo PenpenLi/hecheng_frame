@@ -3,9 +3,10 @@ import { uiFormType, UI_CONFIG_NAME, uiFormPath } from "../common/base/gameConfi
 import uiType from "../common/ui/uitype";
 import AdaptationManager, { AdaptationType } from "../common/ui/AdaptationManager";
 import { uiManager } from "../common/ui/uiManager";
-import dataManager from "../game/dataManager";
+import userData from "../data/userData";
 import pictureManager from "../game/pictureManager"
 import { Game } from "../game/Game";
+import { G_baseData } from "../data/baseData";
 
 const { ccclass, property } = cc._decorator;
 
@@ -71,8 +72,8 @@ export default class bottom extends baseUi {
                 uiManager.ins().show(UI_CONFIG_NAME.DlgShopMall);
                 break;
             case "BtnBuyBird":
-                let cost = dataManager.ins().buy_price;
-                if (!dataManager.ins().isCanBuy(cost)) {
+                let cost = G_baseData.petData.buy_price;
+                if (!userData.ins().isCanBuy(cost)) {
                     uiManager.ins().show(UI_CONFIG_NAME.DlgNotCoin);
                     return;
                 }
@@ -100,9 +101,9 @@ export default class bottom extends baseUi {
 
     /**赋值购买健*/
     initmessBtnBuy() {
-        let lv = dataManager.ins().buy_level;
+        let lv = G_baseData.petData.buy_level;
         this.sprbtnBuy.spriteFrame = pictureManager.getIns().carHeads[lv - 1];
-        this.labcoinBtnBuy.string = dataManager.ins().buy_price.geteveryStr();
+        this.labcoinBtnBuy.string = G_baseData.petData.buy_price.geteveryStr();
         this.lablvBtnBuy.string = `Lv${lv}`;
     }
 
@@ -135,9 +136,9 @@ export default class bottom extends baseUi {
     /**加速方法  */
     startspeedup(isStartSpeed: boolean) {
         if (isStartSpeed) {
-            dataManager.ins().isSpeedUp = true;
+            G_baseData.petData.isSpeedUp = true;
         } else {
-            dataManager.ins().isSpeedUp = false;
+            G_baseData.petData.isSpeedUp = false;
         }
         try {
             var bg = Game.gameManager.birdBornFather;

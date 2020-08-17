@@ -2,8 +2,9 @@ import baseUi from "../common/ui/baseUi"
 import { uiFormType, uiFormPath, isUseBananer, widdleType } from "../common/base/gameConfigs";
 import AdaptationManager, { AdaptationType } from "../common/ui/AdaptationManager";
 import uiType from "../common/ui/uitype";
-import dataManager from "../game/dataManager";
+import userData from "../data/userData";
 import pictureManager from "../game/pictureManager"
+import { G_baseData } from "../data/baseData";
 
 const { ccclass, property } = cc._decorator;
 
@@ -57,7 +58,7 @@ export default class DlgTUjian extends baseUi {
 
     /**刷新 */
     initshuxin() {
-        if (dataManager.ins().CheckItemSelf(47)) {
+        if (G_baseData.petData.CheckItemSelf(47)) {
             this.fenhongNode.spriteFrame = pictureManager.getIns().birdTuji[46];
         } else {
             this.fenhongNode.spriteFrame = this.tuji[0];

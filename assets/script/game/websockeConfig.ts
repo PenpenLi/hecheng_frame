@@ -1,7 +1,8 @@
 import SingletonClass from "../common/base/SingletonClass";
 import { NetManager } from "../common/net/NetManager";
-import dataManager from "../game/dataManager";
+import userData from "../data/userData";
 import { Game } from "./Game";
+import { G_baseData } from "../data/baseData";
 /**演示服 */
 var url: string = 'wss://mihecheng.teamone.wang:443';
 /**本地 */
@@ -15,8 +16,8 @@ export default class websocketConfig extends SingletonClass {
 
     constructor() {
         super();
-        this.URL = `${UrlManager.WebsocketUrl}/?token=${dataManager.ins().token}`;
-        //this.URL = `${UrlManager.WebsocketUrl}/?token=${'0'}`;
+        this.URL = `${window.UrlManager.WebsocketUrl}/?token=${userData.ins().token}`;
+        //this.URL = `${window.UrlManager.WebsocketUrl}/?token=${'0'}`;
     }
 
     /**长连接的方法(购买)*/
@@ -117,7 +118,7 @@ export default class websocketConfig extends SingletonClass {
     /**本地游戏保存 */
     save_Birds_local() {
         setTimeout(function () {
-            dataManager.ins().localBirdsave();
+            G_baseData.petData.saveBirdLocalPosition();
         }, 100);
     }
 

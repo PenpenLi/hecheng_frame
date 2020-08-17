@@ -1,9 +1,8 @@
 import baseUi from "../common/ui/baseUi"
 import { uiFormType, uiFormPath, UI_CONFIG_NAME } from "../common/base/gameConfigs";
 import uiType from "../common/ui/uitype";
-import cfgManager from "../game/CfgManager";
 import pictureManager from "../game/pictureManager";
-import dataManager from "../game/dataManager";
+import userData from "../data/userData";
 import { uiManager } from "../common/ui/uiManager";
 import { Game } from "../game/Game";
 
@@ -179,7 +178,7 @@ export default class DlgXianshFhView extends baseUi {
         //     self.index_Jiang = Number(ret.id - 1);
         //     self.rewardXsChongwu(self.index_Jiang);
         //     self.controlFrame(self.index_Jiang); //对控制框的控制
-        //     dataManager.ins().dao_num -= 100;
+        //     userData.ins().dao_num -= 100;
         //     // cfgManager.ins().Bottom.shuaxinDao();
         // }
         // var funErr = function (ret) {
@@ -192,7 +191,7 @@ export default class DlgXianshFhView extends baseUi {
         console.log("sssssssssss", this.index_Jiang)
         this.rewardXsChongwu(this.index_Jiang);
         this.controlFrame(this.index_Jiang); //对控制框的控制
-        dataManager.ins().dao_num -= 100;
+        userData.ins().dao_num -= 100;
     }
 
     /**关闭按钮 */

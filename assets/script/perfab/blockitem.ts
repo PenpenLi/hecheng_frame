@@ -1,4 +1,4 @@
-import dataManager from "../game/dataManager";
+import userData from "../data/userData";
 import pictureManager from "../game/pictureManager";
 import BigVal from "../common/bigval/BigVal";
 import { uiManager } from "../common/ui/uiManager";
@@ -6,7 +6,9 @@ import { uiFormType, UI_CONFIG_NAME, uiFormPath, musicPath } from "../common/bas
 import musicManager from "../common/music/musicManager";
 import webscoketConfig from "../game/websockeConfig";
 import { Game } from "../game/Game";
-import block from "../perfab/block";
+import block from "./block";
+import { G_baseData } from "../data/baseData";
+import { Global_Var } from "../common/base/GlobalVar";
 
 const { ccclass, property } = cc._decorator;
 
@@ -59,8 +61,8 @@ export default class blockitem extends cc.Component {
     onLoad() {
         this.labFly.string = "";
 
-        Game.ParentItem.scaleX = dataManager.ins().scaleBlock;
-        Game.ParentItem.scaleY = dataManager.ins().scaleBlock;
+        Game.ParentItem.scaleX = G_baseData.petData.scaleBlock;
+        Game.ParentItem.scaleY = G_baseData.petData.scaleBlock;
         this.node.on(cc.Node.EventType.TOUCH_START, this.FingerStart, this);
         this.node.on(cc.Node.EventType.TOUCH_MOVE, this.FingerMove, this);
         this.node.on(cc.Node.EventType.TOUCH_END, this.FingerEnd, this);
@@ -76,15 +78,15 @@ export default class blockitem extends cc.Component {
             this.xianshiFenhong(num, timer);
             return;
         }
-        if (dataManager.ins().BestBirdOfLv < num && dataManager.ins().BestBirdOfLv < 38) { //给最高等级的值赋值
-            dataManager.ins().BestBirdOfLv = num;
+        if (G_baseData.petData.BestBirdOfLv < num && G_baseData.petData.BestBirdOfLv < 38) { //给最高等级的值赋值
+            G_baseData.petData.BestBirdOfLv = num;
         }
         //定位宠物锚点
-        Game.CfgManager.initanchor_chongwu(this.sprBird.node, num);
+        G_baseData.petData.initanchor_chongwu(this.sprBird.node, num);
 
         this.num_best = num; //记录鸟唯一的标记
-        this.Numlv = dataManager.ins().returnBirdLV(num); //鸟的合成等级
-        this.LabBirdLv.string = dataManager.ins().showBirdLV(num); //鸟的显示等级
+        this.Numlv = G_baseData.petData.returnBirdLV(num); //鸟的合成等级
+        this.LabBirdLv.string = G_baseData.petData.showBirdLv(num); //鸟的显示等级
         this.sprBird.spriteFrame = pictureManager.getIns().birdTuji[this.num_best - 1];
         //开一个定时器,每一秒产生多少金币
         this.dataTime = this.num_best * 0.02 + 5;
@@ -102,12 +104,12 @@ export default class blockitem extends cc.Component {
         this.Is_TimeBird = 1;
         this._issave = false;
         this.num_best = numlv; //唯一标记 
-        this.Numlv = dataManager.ins().returnBirdLV(numlv); //移动等级
+        this.Numlv = G_baseData.petData.returnBirdLV(numlv); //移动等级
         this.sprBird.spriteFrame = pictureManager.getIns().birdTuji[numlv - 1]; //本身图片
-        // this.LabBirdLv.string = dataManager.ins().showBirdLV(numlv); //显示等级 
+        // this.LabBirdLv.string = G_baseData.petData.showBirdLv(numlv); //显示等级 
         this.LabBirdLv.node.parent.active = false;
         this.xsTimmer.node.active = true;
-        this.xsTimmer.string = dataManager.ins().getTime(timmer);
+        this.xsTimmer.string = Global_Var.changeTimeToStr(timmer);
 
         this.TimeBird_TimeCount = timmer;
         this.TimeBird_Timestamp = Date.parse(new Date().toString());
@@ -118,7 +120,7 @@ export default class blockitem extends cc.Component {
         //         this.delYourself();
         //     }
         //     timmer--;
-        //     this.xsTimmer.string = dataManager.ins().getTime(timmer);
+        //     this.xsTimmer.string = Global_Var.changeTimeToStr(timmer);
         // }
         // this.schedule(call, 1);
     }
@@ -137,15 +139,15 @@ export default class blockitem extends cc.Component {
             if (_IndexTime[0] < 0) {
                 this.delYourself();
             }
-            this.xsTimmer.string = dataManager.ins().getTime(this.TimeBird_TimeCount - _IndexTime[1]);
+            this.xsTimmer.string = Global_Var.changeTimeToStr(this.TimeBird_TimeCount - _IndexTime[1]);
         }
     }
 
     /**数字飞升的效果 */
     FlyMoveThing() {
         //播放音效
-        if (!dataManager.ins().isAddCoin_bird) return; //网络加载时暂停收益
-        if (!dataManager.ins().isHoutai) {
+        if (!userData.ins().isAddCoin_bird) return; //网络加载时暂停收益
+        if (!userData.ins().isHoutai) {
             musicManager.ins().playEffectMusic(musicPath.getmoneyClip)
         }
         cc.tween(this.node)
@@ -161,7 +163,7 @@ export default class blockitem extends cc.Component {
         }
         var everyCoin = new BigVal(coins.toString());
         this.labFly.string = everyCoin.geteveryStr();
-        //dataManager.ins().TotalCoins = BigVal.Add(dataManager.ins().TotalCoins, everyCoin);
+        //userData.ins().TotalCoins = BigVal.Add(userData.ins().TotalCoins, everyCoin);
         let start_y = this.labFly.node.y;
         cc.tween(this.labFly.node)
             .to(0.2, { position: cc.v2(0, start_y + 70) })
@@ -174,7 +176,7 @@ export default class blockitem extends cc.Component {
 
     /**判断是否在加速中产币+速率*2 */
     getCoinSpeed() {
-        if (dataManager.ins().isSpeedUp) {
+        if (G_baseData.petData.isSpeedUp) {
             this.unscheduleAllCallbacks();
             this.schedule(() => {
                 this.FlyMoveThing();
@@ -189,7 +191,7 @@ export default class blockitem extends cc.Component {
 
     /**触摸开始(问题的关键)*/
     FingerStart(event: cc.Event.EventTouch) {
-        if (!dataManager.ins().isMoveBird) return;
+        if (!G_baseData.petData.isMoveBird) return;
         this.getComponent(cc.CircleCollider).enabled = true;
         this.num_Result = 0;
         // console.log("鸟窝的开始数字是", this.Numlv, this.num_best); //位置
@@ -201,14 +203,14 @@ export default class blockitem extends cc.Component {
 
         bgClonebird.setPosition(this.sprBird.node.position);
         bgClonebird.getComponent(cc.Sprite).spriteFrame = pictureManager.getIns().birdTuji[this.num_best - 1];
-        LabBirdlv.getComponent(cc.Label).string = dataManager.ins().showBirdLV(this.Numlv);
+        LabBirdlv.getComponent(cc.Label).string = G_baseData.petData.showBirdLv(this.Numlv);
 
         this.num_start = this.node.parent.getComponent(block).birdOfId; //鸟窝的标记    
         this.node.parent = Game.ParentItem;
         let fingerPos = event.getLocation(); //获得触摸点的坐标
         this.node.position = this.node.parent.convertToNodeSpaceAR(cc.v3(fingerPos)); //转换为UI坐标
 
-        dataManager.ins().isMoveBird = !dataManager.ins().isMoveBird; //限定多指移动的BOOl值
+        G_baseData.petData.isMoveBird = !G_baseData.petData.isMoveBird; //限定多指移动的BOOl值
         this.isMoveOnly = !this.isMoveOnly;
     }
 
@@ -257,7 +259,7 @@ export default class blockitem extends cc.Component {
             this.moveItem.destroy();
             this.getComponent(cc.CircleCollider).enabled = false;
 
-            dataManager.ins().isMoveBird = !dataManager.ins().isMoveBird; //限定多指移动的BOOl值
+            G_baseData.petData.isMoveBird = !G_baseData.petData.isMoveBird; //限定多指移动的BOOl值
             this.isMoveOnly = !this.isMoveOnly;
         } catch (e) {
             console.log(e);
@@ -325,7 +327,7 @@ export default class blockitem extends cc.Component {
         }
         this.getComponent(cc.CircleCollider).enabled = false;
 
-        dataManager.ins().isMoveBird = !dataManager.ins().isMoveBird; //限定多指移动的BOOl值
+        G_baseData.petData.isMoveBird = !G_baseData.petData.isMoveBird; //限定多指移动的BOOl值
         this.isMoveOnly = !this.isMoveOnly;
     }
 
@@ -392,7 +394,7 @@ export default class blockitem extends cc.Component {
     /**弹出垃圾桶界面的方法 */
     ShowDlgDusBin() {
         //回收价格
-        let price = Game.CfgManager.getBirdrecePrice(this.Numlv);
+        let price = G_baseData.petData.getBirdrecePrice(this.Numlv);
         this.Price_Huishou = new BigVal(price);
         uiManager.ins().show(UI_CONFIG_NAME.DlgDustBin, this.Price_Huishou, this.node)
     }
@@ -411,7 +413,7 @@ export default class blockitem extends cc.Component {
         this.delYourself();
         //刷新每秒产生金币
         Game.Tops.initCoinOfSecond();
-        dataManager.ins().TotalCoins = BigVal.Add(dataManager.ins().TotalCoins, this.Price_Huishou);
+        userData.ins().TotalCoins = BigVal.Add(userData.ins().TotalCoins, this.Price_Huishou);
         //总金币的刷新
         Game.Tops.initCoinOfTotal();
         //播放音效
@@ -469,15 +471,15 @@ export default class blockitem extends cc.Component {
     composeEnd(num: number) {
         var birdHead = this.otherBirdNest.getChildByName("Bird").getComponent(blockitem);
         birdHead.sprBird.spriteFrame = pictureManager.getIns().birdTuji[num - 1];
-        this.otherBirdNest.getChildByName("Bird").getComponent(blockitem).LabBirdLv.string = dataManager.ins().showBirdLV(num);
-        this.otherBirdNest.getChildByName("Bird").getComponent(blockitem).Numlv = dataManager.ins().returnBirdLV(num);; //进行合成判断
+        this.otherBirdNest.getChildByName("Bird").getComponent(blockitem).LabBirdLv.string = G_baseData.petData.showBirdLv(num);
+        this.otherBirdNest.getChildByName("Bird").getComponent(blockitem).Numlv = G_baseData.petData.returnBirdLV(num);; //进行合成判断
         this.otherBirdNest.getChildByName("Bird").getComponent(blockitem).num_best = num; //鸟唯一的标记
-        Game.CfgManager.initanchor_chongwu(this.otherBirdNest.getChildByName("Bird").getComponent(blockitem).sprBird.node, num);
+        G_baseData.petData.initanchor_chongwu(this.otherBirdNest.getChildByName("Bird").getComponent(blockitem).sprBird.node, num);
 
         this.delYourself();
         //关键的一步+(添加修复数组合成不能监听的bug)
         let index: number = this.otherBirdNest.getComponent(block).birdOfId;
-        dataManager.ins().isHaveBird[index] = num;
+        G_baseData.petData.isHaveBird[index] = num;
 
         //本地保存
         webscoketConfig.ins().save_Birds_local();
@@ -488,14 +490,14 @@ export default class blockitem extends cc.Component {
         //刷新每秒产生金币
         Game.Tops.initCoinOfSecond();
         if (type === 0) {
-            if (num_bestlv > dataManager.ins().BestBirdOfLv) {
-                dataManager.ins().BestBirdOfLv = num_bestlv; //给最高等级的鸟赋值
+            if (num_bestlv > G_baseData.petData.BestBirdOfLv) {
+                G_baseData.petData.BestBirdOfLv = num_bestlv; //给最高等级的鸟赋值
                 Game.Tops.initmyHead(num_bestlv);
                 uiManager.ins().show(UI_CONFIG_NAME.DlgUpGrade, num_bestlv, type);
             }
         } else {
-            if (num_bestlv > dataManager.ins().BestBirdOfLv) {
-                dataManager.ins().BestBirdOfLv = num_bestlv; //给最高等级的鸟赋值
+            if (num_bestlv > G_baseData.petData.BestBirdOfLv) {
+                G_baseData.petData.BestBirdOfLv = num_bestlv; //给最高等级的鸟赋值
                 Game.Tops.initmyHead(num_bestlv);
             }
             uiManager.ins().show(UI_CONFIG_NAME.DlgUpGrade, num_bestlv, type);

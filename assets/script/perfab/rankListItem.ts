@@ -1,6 +1,7 @@
 import BigVal from "../common/bigval/BigVal";
 import { loader_mgr } from "../common/load/loader_mgr"
 import { Game } from "../game/Game";
+import { G_baseData } from "../data/baseData";
 
 var zhuanghuan = function (num: number) {
     if (num > 38) {
@@ -68,7 +69,7 @@ export default class rankListItem extends cc.Component {
             this.user_labname.string = String(userMessage.nickname);
         }
         let dlgLv = Number(userMessage.level);
-        this.user_labbestBird.string = Game.CfgManager.getBirdName(dlgLv) + "  LV " + zhuanghuan(dlgLv);
+        this.user_labbestBird.string = G_baseData.petData.getBirdName(dlgLv) + "  LV " + zhuanghuan(dlgLv);
     }
 
 

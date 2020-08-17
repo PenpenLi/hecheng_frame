@@ -1,19 +1,20 @@
 import { uiManager } from "../common/ui/uiManager";
 import { uiFormType, UI_CONFIG_NAME, uiFormPath, musicPath } from "../common/base/gameConfigs";
 import BigVal from "../common/bigval/BigVal";
-import dataManager from "./dataManager";
-import boxMove from "../game/BoxMove";
+import userData from "../data/userData";
+import boxMove from "./BoxMove";
 
 //长连接
 import { WebSock } from "../common/net/WebSock";
 import { NetManager } from "../common/net/NetManager";
 import { NetNode } from "../common/net/NetNode";
 import { DefStringProtocol, NetData, INetworkTips } from "../common/net/NetInterface";
-import websockeConfig from "../game/websockeConfig";
+import websockeConfig from "./websockeConfig";
 import pictureManager from "./pictureManager";
 import musicManager from "../common/music/musicManager";
 import { Game } from "./Game";
 import { EventDispatch, Event_Name } from "../common/event/EventDispatch";
+import { G_baseData } from "../data/baseData";
 
 var callbackShop: Function = function () { };
 const { ccclass, property } = cc._decorator;
@@ -100,7 +101,7 @@ export default class NewClass extends cc.Component {
         NetManager.getInstance().setNetNode(Node);
         NetManager.getInstance().connect({ url: websockeConfig.ins().URL, autoReconnect: -1 })
     }
-    
+
     /**根据长连接的返回参数做回应 */
     swicthWebsocket(res: any) {
         if (res) {
@@ -117,7 +118,7 @@ export default class NewClass extends cc.Component {
                                 callbackShop(data.shop.price);
                                 this.initMenuBuy(data.recommend);
                             } else if (data.pay === "fhbc") {
-                                dataManager.ins().FHBC = dataManager.ins().FHBC - dataManager.ins().shop_buy_Fhbc;
+                                userData.ins().FHBC = userData.ins().FHBC - G_baseData.petData.shop_buy_Fhbc;
                                 Game.Tops.initFHBC();
                                 this.initMenuBuy(data.recommend);
                             }
@@ -129,7 +130,7 @@ export default class NewClass extends cc.Component {
                     {
                         if (err) return;
                         if (data) {
-                            dataManager.ins().RefrushGold(data.gold, data.timestamp);
+                            userData.ins().RefrushGold(data.gold, data.timestamp);
                             Game.Tops.initCoinOfTotal();
                         }
                     }
@@ -178,8 +179,8 @@ export default class NewClass extends cc.Component {
 
     /**主界面购买健的刷新+每秒产比的刷新 */
     initMenuBuy(res: any) {
-        dataManager.ins().buy_level = Number(res.bird);
-        dataManager.ins().buy_price = new BigVal(res.price);
+        G_baseData.petData.buy_level = Number(res.bird);
+        G_baseData.petData.buy_price = new BigVal(res.price);
         Game.Bottom.initmessBtnBuy();
         Game.Tops.initCoinOfSecond();
         websockeConfig.ins().save_Birds_local();
@@ -191,29 +192,29 @@ export default class NewClass extends cc.Component {
         console.log("this.birdBornFather.height", this.birdBornFather.height);
         let catFatherHeigth = Math.floor(this.birdBornFather.height);
         if (catFatherHeigth >= 750) {
-            dataManager.ins().scaleBlock = 1;
+            G_baseData.petData.scaleBlock = 1;
         } else {
-            dataManager.ins().scaleBlock = Number((catFatherHeigth / 780).toFixed(1));
-            console.log("缩放比例", dataManager.ins().scaleBlock);
+            G_baseData.petData.scaleBlock = Number((catFatherHeigth / 780).toFixed(1));
+            console.log("缩放比例", G_baseData.petData.scaleBlock);
         }
         //记录鸟窝的编号的
         var num0: number = 0;
         let x = -250;
         //Y默认220
-        let y = 220 + 190 * 2 * dataManager.ins().scaleBlock;
+        let y = 220 + 190 * 2 * G_baseData.petData.scaleBlock;
         // //分布12个格子
         for (let i = 0; i < 3; i++) {
             for (let j = 0; j < 4; j++) {
                 let block = cc.instantiate(this.blockFaps);
                 this.birdBornFather.addChild(block);
 
-                block.scaleX = dataManager.ins().scaleBlock;
-                block.scaleY = dataManager.ins().scaleBlock;
+                block.scaleX = G_baseData.petData.scaleBlock;
+                block.scaleY = G_baseData.petData.scaleBlock;
                 block.setPosition(cc.v2(x, y));
                 block.getComponent("block").init(num0++);
                 x += 170;
             }
-            y -= 180 * dataManager.ins().scaleBlock;
+            y -= 180 * G_baseData.petData.scaleBlock;
             x = -250;
         }
     }
@@ -243,18 +244,18 @@ export default class NewClass extends cc.Component {
         switch (type) {
             case 0:
                 pictureManager.getIns().guideFrist();
-                let birdFather_0 = this.addBird(dataManager.ins().buy_level);
+                let birdFather_0 = this.addBird(G_baseData.petData.buy_level);
                 if (birdFather_0) {
-                    dataManager.ins().TotalCoins = BigVal.Sub(dataManager.ins().TotalCoins, dataManager.ins().buy_price); //总金币减少
+                    userData.ins().TotalCoins = BigVal.Sub(userData.ins().TotalCoins, G_baseData.petData.buy_price); //总金币减少
                     Game.Tops.initCoinOfTotal(2);
-                    websockeConfig.ins().saveBuyMess(dataManager.ins().buy_level, "gold", "home")
+                    websockeConfig.ins().saveBuyMess(G_baseData.petData.buy_level, "gold", "home")
                 }
                 break;
             case 1:
                 callbackShop = call;
                 let birdFather_1 = this.addBird(shopnum);
                 if (birdFather_1) {
-                    dataManager.ins().TotalCoins = BigVal.Sub(dataManager.ins().TotalCoins, dataManager.ins().shop_buy_price); //总金币减少
+                    userData.ins().TotalCoins = BigVal.Sub(userData.ins().TotalCoins, G_baseData.petData.shop_buy_price); //总金币减少
                     Game.Tops.initCoinOfTotal(2);
                     websockeConfig.ins().saveBuyMess(shopnum, "gold", "shop")
                 }
@@ -289,7 +290,7 @@ export default class NewClass extends cc.Component {
 
     /**根据上次记录生成鸟的位置 */
     CreateBirdOfLast() {
-        var isHaveBird = dataManager.ins().isHaveBird; //是否有鸟,以及鸟的等级等（37级以下包括37）；
+        var isHaveBird = G_baseData.petData.isHaveBird; //是否有鸟,以及鸟的等级等（37级以下包括37）；
         var Birds = this.birdBornFather.children;
         for (let i = 0; i < Birds.length; i++) {
             if (isHaveBird[i] > 0 && isHaveBird[i] < 48) {
@@ -313,7 +314,7 @@ export default class NewClass extends cc.Component {
 
     /**是否有限时分红龙 */
     isHave_XsLong() {
-        let xianShi = dataManager.ins().fenhong_breakerBird;
+        let xianShi =  G_baseData.petData.fenhong_breakerBird;
         for (let index = 0; index < xianShi.length; index++) {
             this.addBird(47, 3, xianShi[index]);
         }
@@ -344,10 +345,10 @@ export default class NewClass extends cc.Component {
                             self.check_video_back(); //检查看视频的回调
                             break;
                         case "closeSound": //离开首页
-                            dataManager.ins().isHoutai = true; //关闭音效
+                            userData.ins().isHoutai = true; //关闭音效
                             break;
                         case "openSound": //点击首页
-                            dataManager.ins().isHoutai = false;
+                            userData.ins().isHoutai = false;
                             let ispauseGame_1 = cc.game.isPaused();
                             if (ispauseGame_1) {
                                 // console.log("恢复暂停");
@@ -376,9 +377,9 @@ export default class NewClass extends cc.Component {
         switch (type) {
             case "quan": //转盘券
                 var call = function () {
-                    dataManager.ins().NumOfTurntables = dataManager.ins().NumOfTurntables + Number(num_back);
+                    userData.ins().NumOfTurntables = userData.ins().NumOfTurntables + Number(num_back);
                     Game.gameManager.showFrameBack(1, num_back);
-                    dataManager.ins().addQuan_Video = dataManager.ins().addQuan_Video - 1;
+                    userData.ins().addQuan_Video = userData.ins().addQuan_Video - 1;
                 };
                 this.sendMes_videoback(call, 1); //看完视频的接口（转盘券）
                 break;
@@ -419,14 +420,14 @@ export default class NewClass extends cc.Component {
         var funSuc = function (ret) {
             if (ret.code == 0) {
                 if (type_0 <= 4 || type_0 == 9) {
-                    dataManager.ins().NumberOfVideosLeft = dataManager.ins().NumberOfVideosLeft - 1;
+                    userData.ins().NumberOfVideosLeft = userData.ins().NumberOfVideosLeft - 1;
                     self.Watch_restTime(); //限定视频时间
                 } else {
-                    dataManager.ins().inviteJuan = dataManager.ins().inviteJuan - 1;
-                    dataManager.ins().restOfJuan = dataManager.ins().restOfJuan - 1;
+                    userData.ins().inviteJuan = userData.ins().inviteJuan - 1;
+                    userData.ins().restOfJuan = userData.ins().restOfJuan - 1;
                 }
                 if (ret.data.amount != 0) {
-                    dataManager.ins().RefrushGold(ret.data.amount.toString(), ret.data.update_time);
+                    userData.ins().RefrushGold(ret.data.amount.toString(), ret.data.update_time);
                     Game.Tops.initCoinOfTotal();
                 }
                 call(ret.data);
@@ -450,12 +451,12 @@ export default class NewClass extends cc.Component {
 
     /**看视频的间隔 */
     Watch_restTime() {
-        dataManager.ins().resttime_video = 15;
+        userData.ins().resttime_video = 15;
         var callback = function () {
-            if (dataManager.ins().resttime_video == 0) {
+            if (userData.ins().resttime_video == 0) {
                 this.unschedule(callback);
             }
-            dataManager.ins().resttime_video--;
+            userData.ins().resttime_video--;
         }
         this.schedule(callback, 1);
     }

@@ -1,11 +1,12 @@
 import baseUi from "../common/ui/baseUi"
 import { uiFormType, uiFormPath } from "../common/base/gameConfigs";
 import uiType from "../common/ui/uitype";
-import dataManager from "../game/dataManager";
+import userData from "../data/userData";
 import pictureManager from "../game/pictureManager";
 import { Game } from "../game/Game";
 import websocketConfig from "../game/websockeConfig";
 import { EventDispatch, Event_Name } from "../common/event/EventDispatch";
+import { G_baseData } from "../data/baseData";
 
 
 
@@ -51,7 +52,7 @@ export default class setup extends baseUi {
     }
     /**根据两个数组得到五龙合成数组的数据 */
     initFivecompose() {
-        var isHaveBird = dataManager.ins().isHaveBird; //鸟的等级
+        var isHaveBird = G_baseData.petData.isHaveBird; //鸟的等级
         for (var i = 0; i < isFiveCompose.length; i++) {
             isFiveCompose[i] = 0; //记录五行鸟的数组归零
         }
@@ -118,7 +119,7 @@ export default class setup extends baseUi {
     Five_index_Array: Array<number> = [-1, -1, -1, -1, -1];
     /**记录五龙的索引方法 */
     indexBirdfive() {
-        var isHaveBird = dataManager.ins().isHaveBird; //鸟的等级
+        var isHaveBird = G_baseData.petData.isHaveBird; //鸟的等级
         for (let i = 0; i < isHaveBird.length; i++) { //查出金木水火土五种鸟的父级
             var num_bird = isHaveBird[i];
             switch (num_bird) {

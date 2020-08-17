@@ -1,7 +1,7 @@
 import baseUi from "../common/ui/baseUi"
 import { uiFormType, uiFormPath, isUseBananer } from "../common/base/gameConfigs";
 import uiType from "../common/ui/uitype";
-import dataManager from "../game/dataManager"
+import userData from "../data/userData"
 import BigVal from "../common/bigval/BigVal"
 import { Game } from "../game/Game";
 const { ccclass, property } = cc._decorator;
@@ -30,11 +30,11 @@ export default class setup extends baseUi {
 
     /**初始化 */
     initBOX() {
-        if (dataManager.ins().NumberOfVideosLeft > 0) { //剩余视频次数
+        if (userData.ins().NumberOfVideosLeft > 0) { //剩余视频次数
             this.BtnLookVideo.active = true;
             this.btnUserQuan.active = false;
             let nodes = this.BtnLookVideo.getChildByName("cishu");
-            nodes.getComponent(cc.Label).string = dataManager.ins().strOfLookVideo();
+            nodes.getComponent(cc.Label).string = userData.ins().strOfLookVideo();
         } else {
             this.BtnLookVideo.active = false;
             this.btnUserQuan.active = true;
@@ -45,8 +45,8 @@ export default class setup extends baseUi {
 
     /**观看视频的BUTTON */
     BtnWatchVideo() {
-        if (dataManager.ins().resttime_video > 0) {
-            var str = dataManager.ins().strTimeOfVideo();
+        if (userData.ins().resttime_video > 0) {
+            var str = userData.ins().strTimeOfVideo();
             Game.gameManager.gameTips(str)
             return;
         }
@@ -60,11 +60,11 @@ export default class setup extends baseUi {
     /**使用邀请券的按钮 */
     BtnUserQuan() {
         this.BtnClose();
-        if (dataManager.ins().inviteJuan <= 0) {
+        if (userData.ins().inviteJuan <= 0) {
             Game.gameManager.gameTips("邀请券不足");
             return;
         }
-        if (dataManager.ins().restOfJuan <= 0) {
+        if (userData.ins().restOfJuan <= 0) {
             Game.gameManager.gameTips("当日使用邀请券达到上限");
             return;
         }

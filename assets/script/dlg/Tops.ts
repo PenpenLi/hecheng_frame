@@ -4,11 +4,12 @@ import uiType from "../common/ui/uitype";
 import AdaptationManager, { AdaptationType } from "../common/ui/AdaptationManager";
 import { uiManager } from "../common/ui/uiManager";
 import { UI_CONFIG_NAME } from "../common/base/gameConfigs";
-import dataManager from "../game/dataManager";
+import userData from "../data/userData";
 import pictureManager from "../game/pictureManager"
 import BigVal from "../common/bigval/BigVal"
 import { Game } from "../game/Game";
 import LabelGundong from "../common/unitl/LabelGundong";
+import { G_baseData } from "../data/baseData";
 
 
 const { ccclass, property } = cc._decorator;
@@ -63,7 +64,7 @@ export default class Tops extends baseUi {
         this.initgameTops();
         this.FristRight_coin();
         //弹出离线金币
-        if (dataManager.ins().offLineCoin.Num != "0") {
+        if (userData.ins().offLineCoin.Num != "0") {
             uiManager.ins().show(UI_CONFIG_NAME.DlgOffLine)
         }
         this.initCoinOfTotal();
@@ -136,9 +137,9 @@ export default class Tops extends baseUi {
                     /**初始化值 */
                     let initOFRigthCoin = (price) => {
                         let _nowtime = parseInt((new Date().getTime() / 1000).toString());
-                        dataManager.ins().now_time = _nowtime;
-                        dataManager.ins().rec_time = _nowtime;
-                        dataManager.ins().LocolIndexTime = _nowtime;
+                        userData.ins().now_time = _nowtime;
+                        userData.ins().rec_time = _nowtime;
+                        userData.ins().LocolIndexTime = _nowtime;
 
                         var coins = new BigVal(price);
 
@@ -149,7 +150,7 @@ export default class Tops extends baseUi {
 
                     var funSuc = (ret) => {
                         Game.Console.Log(ret)
-                        dataManager.ins().RefrushGold(ret.data.amount, ret.data.update_time);
+                        userData.ins().RefrushGold(ret.data.amount, ret.data.update_time);
                         if (ret.code == 0) {
                             initOFRigthCoin(ret.data.add_num);
                         }
@@ -195,7 +196,7 @@ export default class Tops extends baseUi {
                 case "BtnFENHONG":
                     let fenghongnode = v.node.getChildByName("FENhong");
                     this.FONHONG = fenghongnode.getComponent(cc.Label);
-                    this.FONHONG.string = dataManager.ins().FENHONG.toString();
+                    this.FONHONG.string = userData.ins().FENHONG.toString();
                     break;
                 case "BtnheadImage":
                     this.myheadSpr = v.node.children[0].getChildByName("SprBirdHead").getComponent(cc.Sprite);
@@ -203,7 +204,7 @@ export default class Tops extends baseUi {
                     this.myheadLv = v.node.getChildByName("labBirdLv").getComponent(cc.Label);
                     //初始化左上角我的头像
                     setTimeout(() => {
-                        let numbest = dataManager.ins().BestBirdOfLv;
+                        let numbest = G_baseData.petData.BestBirdOfLv;
                         this.initmyHead(numbest);
                     }, 500)
                     break;
@@ -220,12 +221,12 @@ export default class Tops extends baseUi {
 
     /**进入游戏时的右上角首次金币时间的更新 */
     FristRight_coin() {
-        dataManager.ins().rest_time = 3600 - (dataManager.ins().now_time + (parseInt((new Date().getTime() / 1000).toString()) - dataManager.ins().LocolIndexTime) - dataManager.ins().rec_time);
+        userData.ins().rest_time = 3600 - (userData.ins().now_time + (parseInt((new Date().getTime() / 1000).toString()) - userData.ins().LocolIndexTime) - userData.ins().rec_time);
         this.showCoinTips();
     }
     /**右上方提示玩家收获金币的按钮 */
     showCoinTips() {
-        if (dataManager.ins().rest_time <= 0) {
+        if (userData.ins().rest_time <= 0) {
             this._iscd = false;
             this.btnrightCoins.getComponent(cc.Button).interactable = true;
             let tween = cc.tween()
@@ -267,14 +268,14 @@ export default class Tops extends baseUi {
         }
         this._time = 0;
 
-        let cd_time = dataManager.ins().rest_time = 3600 - (dataManager.ins().now_time + (parseInt((new Date().getTime() / 1000).toString()) - dataManager.ins().LocolIndexTime) - dataManager.ins().rec_time);
+        let cd_time = userData.ins().rest_time = 3600 - (userData.ins().now_time + (parseInt((new Date().getTime() / 1000).toString()) - userData.ins().LocolIndexTime) - userData.ins().rec_time);
         if (cd_time <= 0) {
             this.btnrightCoins.getChildByName("labtips").getComponent(cc.Label).string = '领取';
             this.showCoinTips(); //剩余时间为零
             return;
         }
-        let min = Math.floor(dataManager.ins().rest_time / 60);
-        let sec = Math.floor(dataManager.ins().rest_time % 60);
+        let min = Math.floor(userData.ins().rest_time / 60);
+        let sec = Math.floor(userData.ins().rest_time % 60);
         var str_time = this.addZone(min) + ":" + this.addZone(sec);
         this.btnrightCoins.getChildByName("labtips").getComponent(cc.Label).string = str_time;
     }
@@ -282,7 +283,7 @@ export default class Tops extends baseUi {
     /**每秒产生金币的更新 */
     initCoinOfSecond() {
         this.scheduleOnce(function () {
-            let isHaveBird = dataManager.ins().isHaveBird;
+            let isHaveBird = G_baseData.petData.isHaveBird;
             let totalCoin = new BigVal("0");
             for (let i = 0; i < isHaveBird.length; i++) {
                 if (isHaveBird[i] > 0 && isHaveBird[i] < 38) {
@@ -293,14 +294,14 @@ export default class Tops extends baseUi {
                     totalCoin = BigVal.Add(totalCoin, new BigVal(coin_1.toString()));
                 }
             }
-            dataManager.ins().everyCions = BigVal.Dev(totalCoin, new BigVal("5"));
-            this.labeveryCoins.string = dataManager.ins().everyCions.geteveryStr() + "/秒";
+            G_baseData.petData.everyCions = BigVal.Dev(totalCoin, new BigVal("5"));
+            this.labeveryCoins.string = G_baseData.petData.everyCions.geteveryStr() + "/秒";
         }, 1);
     }
 
     /**总金币金币的更新 */
     initCoinOfTotal(type = 1) {
-        let num = dataManager.ins().TotalCoins.getTotalStr();
+        let num = userData.ins().TotalCoins.getTotalStr();
         cc.tween(this.labTotalCoins.node)
             .to(0.2, { scale: 1.2 })
             .to(0.2, { scale: 1 })
@@ -312,7 +313,7 @@ export default class Tops extends baseUi {
     /**刷新我的头像 */
     initmyHead(lv: number) {
         this.myheadSpr.spriteFrame = pictureManager.getIns().birdTuji[lv - 1];
-        this.myheadName.string = Game.CfgManager.getBirdName(lv);
+        this.myheadName.string = G_baseData.petData.getBirdName(lv);
         let name_num: number = 1;
         if (lv < 38) {
             name_num = lv;
@@ -325,27 +326,27 @@ export default class Tops extends baseUi {
     /**刷新fhbc */
     initFHBC() {
         if (!this.FHBC) return;
-        this.FHBC.string = dataManager.ins().FHBC.toFixed(2);
+        this.FHBC.string = userData.ins().FHBC.toFixed(2);
     }
 
     /**FHBC界面的更新 */
     showJewelClick() {
-        if (dataManager.ins().FHBC_LIST.length == 0) {
-            this.FHBC_Progress.progress = dataManager.ins().FHBC_LIST.length / 12; //进度条
+        if (userData.ins().FHBC_LIST.length == 0) {
+            this.FHBC_Progress.progress = userData.ins().FHBC_LIST.length / 12; //进度条
             this.JewelClick.getChildByName("click_1").active = true;
             return;
         }
         this.JewelClick.getChildByName("click_1").active = false;
-        this.FHBC_Progress.progress = dataManager.ins().FHBC_LIST.length / 12;
+        this.FHBC_Progress.progress = userData.ins().FHBC_LIST.length / 12;
         var p1 = cc.v2(-50, 10),
             p2 = cc.v2(10, 10),
             p3 = cc.v2(70, 10),
             p4 = cc.v2(130, 10);
         var num_lenth = 0;
-        dataManager.ins().FHBC_LIST.length > 4 ? num_lenth = 4 : num_lenth = dataManager.ins().FHBC_LIST.length;
+        userData.ins().FHBC_LIST.length > 4 ? num_lenth = 4 : num_lenth = userData.ins().FHBC_LIST.length;
         for (let i = 0; i < num_lenth; i++) {
             let jewel = cc.instantiate(this.FHBC_Pab);
-            jewel.getComponent("jewelBiaoJi").initSelf(dataManager.ins().FHBC_LIST.shift()); //shift删除数组第一个元素并返回自身
+            jewel.getComponent("jewelBiaoJi").initSelf(userData.ins().FHBC_LIST.shift()); //shift删除数组第一个元素并返回自身
             jewel.setParent(this.JewelClick.getChildByName("click_0"));
             switch (i) {
                 case 0:
@@ -366,7 +367,7 @@ export default class Tops extends baseUi {
 
     /**收完FHBC后的更新 */
     ClickJewelEnd(price) {
-        dataManager.ins().FHBC = dataManager.ins().FHBC + price;
+        userData.ins().FHBC = userData.ins().FHBC + price;
         this.initFHBC();
         if (this.JewelClick.getChildByName("click_0").childrenCount == 1) {
             this.showJewelClick();
@@ -383,11 +384,11 @@ export default class Tops extends baseUi {
             console.log("res", res.data.type)
             switch (res.data.type) {
                 case 'gold':
-                    dataManager.ins().RefrushGold(res.data.amount, res.data.update_time);
+                    userData.ins().RefrushGold(res.data.amount, res.data.update_time);
                     uiManager.ins().show(UI_CONFIG_NAME.DlgFrame, 1, 3, new BigVal(res.data.num));
                     break;
                 case 'fhbc':
-                    dataManager.ins().FHBC += res.data.num;
+                    userData.ins().FHBC += res.data.num;
                     this.initFHBC();
                     uiManager.ins().show(UI_CONFIG_NAME.DlgFrame, 1, 4, res.data.num);
                     break;

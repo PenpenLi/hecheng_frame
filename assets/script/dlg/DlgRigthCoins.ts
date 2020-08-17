@@ -1,7 +1,7 @@
 import baseUi from "../common/ui/baseUi"
 import { uiFormType, uiFormPath } from "../common/base/gameConfigs";
 import uiType from "../common/ui/uitype";
-import dataManager from "../game/dataManager";
+import userData from "../data/userData";
 import BigVal from "../common/bigval/BigVal"
 import { Game } from "../game/Game";
 
@@ -19,7 +19,7 @@ export default class setup extends baseUi {
 
     _open(res) {
         this.btnSure.node.on("click", this.btnClose, this);
-        dataManager.ins().rest_time = 3600;
+        userData.ins().rest_time = 3600;
         Game.Tops.showCoinTips();
         this.labCoins.string = res;
         //this.sendMessRigthCoio();
@@ -28,9 +28,9 @@ export default class setup extends baseUi {
     // /**初始化值 */
     // initOFRigthCoin(price) {
     //     let _nowtime = parseInt((new Date().getTime() / 1000).toString());
-    //     dataManager.ins().now_time = _nowtime;
-    //     dataManager.ins().rec_time = _nowtime;
-    //     dataManager.ins().LocolIndexTime = _nowtime;
+    //     userData.ins().now_time = _nowtime;
+    //     userData.ins().rec_time = _nowtime;
+    //     userData.ins().LocolIndexTime = _nowtime;
 
     //     var coins = new BigVal(price);
     //     this.labCoins.string = "+" + coins.geteveryStr();
@@ -41,7 +41,7 @@ export default class setup extends baseUi {
     //     var self = this;
     //     var funSuc = function (ret) {
     //         Game.Console.Log(ret)
-    //         dataManager.ins().RefrushGold(ret.data.amount, ret.data.update_time);
+    //         userData.ins().RefrushGold(ret.data.amount, ret.data.update_time);
     //         if (ret.code == 0) {
     //             self.initOFRigthCoin(ret.data.add_num);
     //         }

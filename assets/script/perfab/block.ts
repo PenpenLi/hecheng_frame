@@ -1,5 +1,6 @@
 import blockItem from "./blockitem";
-import dataManager from "../game/dataManager";
+import userData from "../data/userData";
+import { G_baseData } from "../data/baseData";
 
 const { ccclass, property } = cc._decorator;
 
@@ -37,14 +38,14 @@ export default class block extends cc.Component {
         if (node.getComponent(blockItem)) {
             setTimeout(() => {
                 let num_best = node.getComponent(blockItem).num_best;
-                dataManager.ins().isHaveBird[this.birdOfId] = num_best;
+                G_baseData.petData.isHaveBird[this.birdOfId] = num_best;
             }, 0.1)
         }
     }
 
     removeChild(node: cc.Node) {
         if (node.getComponent(blockItem)) {
-            dataManager.ins().isHaveBird[this.birdOfId] = 0;
+            G_baseData.petData.isHaveBird[this.birdOfId] = 0;
         }
     }
 

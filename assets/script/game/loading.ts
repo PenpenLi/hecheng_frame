@@ -1,7 +1,9 @@
-import dataManager from "../game/dataManager";
+import userData from "../data/userData";
 import BigVal from "../common/bigval/BigVal";
 import { Game } from "./Game";
 import { GIFCache } from "../common/gif/GIF";
+import { G_baseData } from "../data/baseData";
+import { Global_Var } from "../common/base/GlobalVar";
 
 const { ccclass, property } = cc._decorator;
 
@@ -28,8 +30,10 @@ export default class loading extends cc.Component {
     init() {
         GIFCache.getInstance()
         Game.ReloadGame();
-        Game.CfgManager.LogCfg();
         Game.ApiManager.sengMessSure();
+
+        G_baseData.loadBaseData();
+        G_baseData.petData.LogCfg();
         this.GetGameData();
         this.getQueryVariable();
         cc.director.preloadScene("Game", null, () => {
@@ -52,10 +56,10 @@ export default class loading extends cc.Component {
 
     /**获取游戏设置数据 */
     GetGameData() {
-        var setupNum = JSON.parse(cc.sys.localStorage.getItem('setup'));
+        var setupNum = Global_Var.getStorage('setup');
         if (setupNum == null) return;
-        dataManager.ins().getArrayFromStr(setupNum, dataManager.ins().isBool);
-        if (dataManager.ins().isBool[2] === 0) {
+        Global_Var.getArrayFromStr(setupNum, userData.ins().isBool);
+        if (userData.ins().isBool[2] === 0) {
             cc.audioEngine.setEffectsVolume(0);
         }
     }
@@ -66,7 +70,7 @@ export default class loading extends cc.Component {
         var vars = query.split("&");
         var pair = vars[0].split("=");
         if (pair[0] == "token") {
-            dataManager.ins().token = pair[1];
+            userData.ins().token = pair[1];
         }
     }
 
@@ -96,33 +100,33 @@ export default class loading extends cc.Component {
     /**进入游戏后的赋值 */
     getMainCanshu(obj) {
         try {
-            let _datamanager = dataManager.ins();
-            _datamanager.uuid = obj.id;
-            _datamanager.setPlayerKey(obj.id); //获取玩家唯一的key
-            _datamanager.FHBC = Number(obj.fhbc); //fhbck
-            _datamanager.FENHONG = Number(obj.fenhong); //分红
-            _datamanager.BestBirdOfLv = Number(obj.level_bird) > 0 ? Number(obj.level_bird) : 1; //最高等级
+            let _userData = G_baseData.userData;
+            _userData.uuid = obj.id;
+            _userData.setPlayerKey(obj.id); //获取玩家唯一的key
+            _userData.FHBC = Number(obj.fhbc); //fhbck
+            _userData.FENHONG = Number(obj.fenhong); //分红
+            G_baseData.petData.BestBirdOfLv = Number(obj.level_bird) > 0 ? Number(obj.level_bird) : 1; //最高等级
 
-            _datamanager.TotalCoins = new BigVal(obj.gold); //金币总数量
-            _datamanager.offLineCoin = new BigVal((obj.offline_gold).toString()); //离线金币
-            _datamanager.BOX_NUM = obj.box; //宝箱数量
-            _datamanager.NumberOfVideosLeft = obj.video_num; //剩余视频次数
-            _datamanager.addQuan_Video = obj.ticket_turn_num; //增加转盘券剩余观看视频次数
-            _datamanager.NumOfTurntables = obj.ticket; //转盘券剩余次数；
-            _datamanager.inviteJuan = obj.invite_ticket; //邀请券次数
-            _datamanager.restOfJuan = obj.ticket_use_num; //每天使用邀请券次数
+            _userData.TotalCoins = new BigVal(obj.gold); //金币总数量
+            _userData.offLineCoin = new BigVal((obj.offline_gold).toString()); //离线金币
+            _userData.BOX_NUM = obj.box; //宝箱数量
+            _userData.NumberOfVideosLeft = obj.video_num; //剩余视频次数
+            _userData.addQuan_Video = obj.ticket_turn_num; //增加转盘券剩余观看视频次数
+            _userData.NumOfTurntables = obj.ticket; //转盘券剩余次数；
+            _userData.inviteJuan = obj.invite_ticket; //邀请券次数
+            _userData.restOfJuan = obj.ticket_use_num; //每天使用邀请券次数
 
-            _datamanager.FHBC_LIST = obj.fhbc_list; //FHBC列表
-            _datamanager.buy_level = obj.buy_level; //当前购买的等级
-            _datamanager.buy_price = new BigVal(obj.buy_price); //当前k购买的价格
+            _userData.FHBC_LIST = obj.fhbc_list; //FHBC列表
+            G_baseData.petData.buy_level = obj.buy_level; //当前购买的等级
+            G_baseData.petData.buy_price = new BigVal(obj.buy_price); //当前k购买的价格
 
-            _datamanager.bird_admin = obj.bird_admin; //是否有奖励的鸟
-            _datamanager.rec_time = obj.rec_time; //上次领取金币时间
-            _datamanager.now_time = obj.now_time; //刷新时间
-            _datamanager.LocolIndexTime = parseInt((new Date().getTime() / 1000).toString());
+            G_baseData.petData.bird_admin = obj.bird_admin; //是否有奖励的鸟
+            _userData.rec_time = obj.rec_time; //上次领取金币时间
+            _userData.now_time = obj.now_time; //刷新时间
+            _userData.LocolIndexTime = parseInt((new Date().getTime() / 1000).toString());
 
-            _datamanager.isxinshou = obj.is_novice; //新手指导
-            _datamanager.video_coin = new BigVal(obj.bird_top); //看视频返还的最高金币
+            _userData.isxinshou = obj.is_novice; //新手指导
+            _userData.video_coin = new BigVal(obj.bird_top); //看视频返还的最高金币
             this.BirdPosition_get(obj); //鸟的位置信息
         } catch (e) {
             console.log(e);
@@ -132,7 +136,7 @@ export default class loading extends cc.Component {
     /**获取鸟的位置信息 */
     BirdPosition_get(obj) {
         var str = null;
-        var birdPositon = JSON.parse(cc.sys.localStorage.getItem(dataManager.ins().PlayerId));
+        var birdPositon = Global_Var.getStorage(userData.ins().PlayerId);
         var birdPositonNet = obj.is_have_bird;
         if (!birdPositon) {
             str = birdPositonNet;
@@ -144,8 +148,10 @@ export default class loading extends cc.Component {
                 str = birdPositonNet;
             }
         }
-        dataManager.ins().getArrayFromStr(str, dataManager.ins().isHaveBird); //鸟的位置
-        dataManager.ins().fenhong_breakerBird = obj.fenhong_compose;
+        console.log("----", str)
+        Global_Var.getArrayFromStr(str, G_baseData.petData.isHaveBird); //鸟的位置
+        console.log("鸟的位置", G_baseData.petData.isHaveBird)
+        G_baseData.petData.fenhong_breakerBird = obj.fenhong_compose;
 
         this.MsgOK = true;
         this.LoadGame();
@@ -162,7 +168,9 @@ export default class loading extends cc.Component {
     /**冒泡排序 */
     NumBsort(str) {
         var arr = [];
-        dataManager.ins().getArrayFromStr(str, arr);
+        console.log("冒泡前", str);
+        Global_Var.getArrayFromStr(str, arr);
+        console.log("冒泡后", arr);
         var len = arr.length;
         let strarr = [];
         for (var i = 0; i < len; i++) {
@@ -183,7 +191,9 @@ export default class loading extends cc.Component {
     /**服务器和本地数据进行比较 */
     comparePosition(str, str2) {
         var islast = true; //默认读本地
+        console.log("SSSSS", str);
         var array1 = this.NumBsort(str); //本地
+        console.log("SSSSS111111", array1);
         var array2 = this.NumBsort(str2); //服务器
 
         let arr1count = 0;
@@ -197,6 +207,7 @@ export default class loading extends cc.Component {
         for (const key in array2) {
             arr2count++;
         }
+        console.log("ssss", arr1count, arr2count);
         if (arr1count != arr2count) {
             islast = false;
         }

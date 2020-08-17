@@ -5,10 +5,10 @@ export class Console {
     isTest: GameType = GameType.OFFICIAL;
 
     GetGameType() {
-        if (UrlManager.GameType == 'TEST') {
+        if (window.UrlManager.GameType == 'TEST') {
             this.isTest = GameType.TEST;
         }
-        else if (UrlManager.GameType == 'OFFICIAL') {
+        else if (window.UrlManager.GameType == 'OFFICIAL') {
             this.isTest = GameType.OFFICIAL;
         }
     }

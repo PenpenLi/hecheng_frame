@@ -1,7 +1,7 @@
 import baseUi from "../common/ui/baseUi"
 import { uiFormType, uiFormPath, isUseBananer, widdleType } from "../common/base/gameConfigs";
 import uiType from "../common/ui/uitype";
-import dataManager from "../game/dataManager";
+import userData from "../data/userData";
 import { Game } from "../game/Game";
 import websocketConfig from "../game/websockeConfig";
 
@@ -37,11 +37,11 @@ export default class DlgSpeed extends baseUi {
 
     /**获得打开加速框的Button */
     getBtnSpeed() {
-        if (dataManager.ins().NumberOfVideosLeft > 0) {
+        if (userData.ins().NumberOfVideosLeft > 0) {
             this.BtnwatchVideo.active = true;
             this.btnUserQuan.active = false;
             let node = this.BtnwatchVideo.getChildByName("tips");
-            node.getComponent(cc.Label).string = dataManager.ins().strOfLookVideo();
+            node.getComponent(cc.Label).string = userData.ins().strOfLookVideo();
         } else {
             this.btnUserQuan.active = true;
             this.BtnwatchVideo.active = false;
@@ -57,7 +57,7 @@ export default class DlgSpeed extends baseUi {
     BtnCostOfFHBC() {
         //补写花费的逻辑
         this.BtnClose();
-        if (dataManager.ins().FHBC > reduceOfjewel) {
+        if (userData.ins().FHBC > reduceOfjewel) {
             this.sendMessSpeed();
         } else {
             Game.gameManager.gameTips("MBC余额不足");
@@ -68,7 +68,7 @@ export default class DlgSpeed extends baseUi {
     sendMessSpeed() {
         var funSuc = function (ret) {
             if (ret.code == 0) {
-                dataManager.ins().FHBC = dataManager.ins().FHBC - reduceOfjewel; //成功减去FHBC数量
+                userData.ins().FHBC = userData.ins().FHBC - reduceOfjewel; //成功减去FHBC数量
                 Game.Tops.initFHBC(); //FHBC刷新
                 Game.Bottom.speed_video_back(jewelOfTime)
                 websocketConfig.ins().save_speedDouble(reduceOfjewel);
@@ -83,8 +83,8 @@ export default class DlgSpeed extends baseUi {
 
     /**视频加速功能 +或者thbc*/
     BtnWatchVideo() {
-        if (dataManager.ins().resttime_video > 0) {
-            var str = dataManager.ins().strTimeOfVideo();
+        if (userData.ins().resttime_video > 0) {
+            var str = userData.ins().strTimeOfVideo();
             Game.gameManager.gameTips(str);
             return;
         }
@@ -98,11 +98,11 @@ export default class DlgSpeed extends baseUi {
     /**花费邀请券 */
     CostYaoQingjuan() {
         this.BtnClose();
-        if (dataManager.ins().inviteJuan <= 0) {
+        if (userData.ins().inviteJuan <= 0) {
             Game.gameManager.gameTips("邀请券数量不足");
             return;
         }
-        if (dataManager.ins().restOfJuan <= 0) {
+        if (userData.ins().restOfJuan <= 0) {
             Game.gameManager.gameTips("当日使用邀请券达到上限");
             return;
         }

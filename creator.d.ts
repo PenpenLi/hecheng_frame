@@ -30483,3 +30483,9 @@ declare const CC_WECHATGAME: boolean;
 declare const api: any = {};
 
 declare function RSA(ket: string): string;
+
+
+interface Window {
+	UrlManager: any,
+	G_Data: any,
+}

@@ -1,9 +1,10 @@
 import pictureManager from "../game/pictureManager"
-import dataManager from "../game/dataManager"
+import userData from "../data/userData"
 import BigVal from "../common/bigval/BigVal"
 import { uiManager } from "../common/ui/uiManager";
 import { uiFormType, UI_CONFIG_NAME, uiFormPath } from "../common/base/gameConfigs";
 import { Game } from "../game/Game";
+import { G_baseData } from "../data/baseData";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -52,7 +53,7 @@ export default class shopItem extends cc.Component {
     initOfThing(obj) {
         this.IndexNum = obj.id; //每一个等级鸟的序号
         this.LabBirdsName.node.parent.active = true;
-        this.LabBirdsName.string = Game.CfgManager.getBirdName(this.IndexNum); //鸟的名字
+        this.LabBirdsName.string = G_baseData.petData.getBirdName(this.IndexNum); //鸟的名字
         //两张图片
         this.sprBird.spriteFrame = pictureManager.getIns().birdTuji[this.IndexNum - 1]; //鸟的图片
         this.sprBird.node.color = new cc.Color(255, 255, 255, 255);
@@ -97,13 +98,13 @@ export default class shopItem extends cc.Component {
 
     /**购买金币按钮 */
     BtnOfcoinBuy() {
-        if (dataManager.ins().is_Click_end) {
-            dataManager.ins().is_Click_end = !dataManager.ins().is_Click_end;
+        if (userData.ins().is_Click_end) {
+            userData.ins().is_Click_end = !userData.ins().is_Click_end;
             this.scheduleOnce(function () {
-                dataManager.ins().is_Click_end = !dataManager.ins().is_Click_end;
+                userData.ins().is_Click_end = !userData.ins().is_Click_end;
             }, 0.2);
-            dataManager.ins().shop_buy_price = this.costOfCoin;
-            if (!dataManager.ins().isCanBuy(this.costOfCoin)) {
+            G_baseData.petData.shop_buy_price = this.costOfCoin;
+            if (!userData.ins().isCanBuy(this.costOfCoin)) {
                 uiManager.ins().show(UI_CONFIG_NAME.DlgNotCoin);
                 return;
             }
@@ -121,17 +122,17 @@ export default class shopItem extends cc.Component {
 
     /**购买钻石按钮 */
     BtnOfjewelBuy() {
-        if (dataManager.ins().FHBC < this.costOfjewel) {
+        if (userData.ins().FHBC < this.costOfjewel) {
             let string_0 = "MBC余额不足";
             Game.gameManager.gameTips(string_0);
             return;
         } else {
-            if (dataManager.ins().is_Click_end) { //防止快速点击
-                dataManager.ins().is_Click_end = !dataManager.ins().is_Click_end;
+            if (userData.ins().is_Click_end) { //防止快速点击
+                userData.ins().is_Click_end = !userData.ins().is_Click_end;
                 this.scheduleOnce(function () {
-                    dataManager.ins().is_Click_end = !dataManager.ins().is_Click_end;
+                    userData.ins().is_Click_end = !userData.ins().is_Click_end;
                 }, 0.2);
-                dataManager.ins().shop_buy_Fhbc = this.costOfjewel;
+                G_baseData.petData.shop_buy_Fhbc = this.costOfjewel;
                 Game.gameManager.buyBird(2, this.IndexNum)
             } else {
                 console.log("请勿快速点击");

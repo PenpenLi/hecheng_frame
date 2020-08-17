@@ -1,4 +1,4 @@
-import dataManager from "../game/dataManager";
+import userData from "../data/userData";
 import { Game } from "./Game";
 import websocketConfig from "./websockeConfig";
 import { uiManager } from "../common/ui/uiManager";
@@ -69,7 +69,7 @@ export default class pictureManager extends cc.Component {
     // onKeyDown(event: cc.Event.EventKeyboard) {
     //     switch (event.keyCode) {
     //         case cc.macro.KEY.a:
-    //             console.log("鸟窝的等级", dataManager.ins().isHaveBird);
+    //             console.log("鸟窝的等级", G_baseData.petData.isHaveBird);
     //             break;
     //         case cc.macro.KEY.s:
     //             uiManager.ins().show(UI_CONFIG_NAME.DlgUpGrade, 15, 3);
@@ -108,7 +108,7 @@ export default class pictureManager extends cc.Component {
 
     /**更新屠龙刀模块 */
     shuaxinDao() {
-        let num_dao = dataManager.ins().dao_num;
+        let num_dao = userData.ins().dao_num;
         console.log("当前剩余屠龙刀" + num_dao);
         if (num_dao < 100) {
             this.jindu.fillRange = num_dao / 100;
@@ -122,7 +122,7 @@ export default class pictureManager extends cc.Component {
 
     /**新手指引第一步 */
     guideFrist() {
-        if (dataManager.ins().isxinshou != 0) return;
+        if (userData.ins().isxinshou != 0) return;
         try {
             var mask = cc.find("Canvas/mask");
             var hand = mask.getChildByName("hand");
@@ -161,7 +161,7 @@ export default class pictureManager extends cc.Component {
                     Game.ApiManager.openHongbao(7); //新手红包
                     mask.active = false;
                     mask2.active = false;
-                    dataManager.ins().isxinshou = 1;
+                    userData.ins().isxinshou = 1;
                     break;
             }
         } catch (e) {

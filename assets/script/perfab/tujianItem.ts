@@ -1,5 +1,6 @@
-import dataManager from "../game/dataManager";
+import userData from "../data/userData";
 import pictureManager from "../game/pictureManager";
+import { G_baseData } from "../data/baseData";
 
 const { ccclass, property } = cc._decorator;
 
@@ -36,7 +37,7 @@ export default class NewClass extends cc.Component {
                 this.labstr1.string = "100%获得5-50元现金红包（可提现）";
                 this.labstr2.string = "1.两只37级凤合成有概率获得；";
                 this.labstr3.string = "2.拖到回收箱即可领取红包";
-                if (dataManager.ins().CheckItemSelf(44)) {
+                if (G_baseData.petData.CheckItemSelf(44)) {
                     this.sprcatHead.spriteFrame = pictureManager.getIns().birdTuji[43];
                 } else {
                     this.sprcatHead.spriteFrame = this.bird_tuji[num];
@@ -47,7 +48,7 @@ export default class NewClass extends cc.Component {
                 this.labstr1.string = "持有额外增益500算力，提高MBC产量";
                 this.labstr2.string = "1.两只37级凤合成有概率获得；";
                 this.labstr3.string = "2.若回收，则算力增益效果将消失";
-                if (dataManager.ins().CheckItemSelf(43)) {
+                if (G_baseData.petData.CheckItemSelf(43)) {
                     this.sprcatHead.spriteFrame = pictureManager.getIns().birdTuji[42];
                 } else {
                     this.sprcatHead.spriteFrame = this.bird_tuji[num];
@@ -58,7 +59,7 @@ export default class NewClass extends cc.Component {
                 this.labstr1.string = "收集一对情侣凤获得52元现金红包";
                 this.labstr2.string = "1.两只37级凤合成有概率获得；";
                 this.labstr3.string = "2.“爱情里也有红包”";
-                if (dataManager.ins().CheckItemSelf(45)) {
+                if (G_baseData.petData.CheckItemSelf(45)) {
                     this.sprcatHead.spriteFrame = pictureManager.getIns().birdTuji[44];
                 } else {
                     this.sprcatHead.spriteFrame = this.bird_tuji[num];
@@ -69,7 +70,7 @@ export default class NewClass extends cc.Component {
                 this.labstr1.string = "收集一对情侣凤获得52元现金红包";
                 this.labstr2.string = "1.两只37级凤合成有概率获得；";
                 this.labstr3.string = "2.“爱情里也有红包”";
-                if (dataManager.ins().CheckItemSelf(46)) {
+                if (G_baseData.petData.CheckItemSelf(46)) {
                     this.sprcatHead.spriteFrame = pictureManager.getIns().birdTuji[45];
                 } else {
                     this.sprcatHead.spriteFrame = this.bird_tuji[num];
@@ -80,7 +81,7 @@ export default class NewClass extends cc.Component {
                 this.labstr1.string = "收集金木水火土召唤分红凤";
                 this.labstr2.string = "1.两只37级凤合成有概率获得；";
                 this.labstr3.string = "2.合成分红凤的碎片之一";
-                if (dataManager.ins().CheckItemSelf(38)) {
+                if (G_baseData.petData.CheckItemSelf(38)) {
                     this.sprcatHead.spriteFrame = pictureManager.getIns().birdTuji[37];
                 } else {
                     this.sprcatHead.spriteFrame = this.bird_tuji[num];
@@ -91,7 +92,7 @@ export default class NewClass extends cc.Component {
                 this.labstr1.string = "收集金木水火土召唤分红凤";
                 this.labstr2.string = "1.两只37级凤合成有概率获得；";
                 this.labstr3.string = "2.合成分红凤的碎片之一";
-                if (dataManager.ins().CheckItemSelf(39)) {
+                if (G_baseData.petData.CheckItemSelf(39)) {
                     this.sprcatHead.spriteFrame = pictureManager.getIns().birdTuji[38];
                 } else {
                     this.sprcatHead.spriteFrame = this.bird_tuji[num];
@@ -102,7 +103,7 @@ export default class NewClass extends cc.Component {
                 this.labstr1.string = "收集金木水火土召唤分红凤";
                 this.labstr2.string = "1.两只37级凤合成有概率获得；";
                 this.labstr3.string = "2.合成分红凤的碎片之一";
-                if (dataManager.ins().CheckItemSelf(40)) {
+                if (G_baseData.petData.CheckItemSelf(40)) {
                     this.sprcatHead.spriteFrame = pictureManager.getIns().birdTuji[39];
                 } else {
                     this.sprcatHead.spriteFrame = this.bird_tuji[num];
@@ -113,7 +114,7 @@ export default class NewClass extends cc.Component {
                 this.labstr1.string = "收集金木水火土召唤分红凤";
                 this.labstr2.string = "1.两只37级凤合成有概率获得；";
                 this.labstr3.string = "2.合成分红凤的碎片之一";
-                if (dataManager.ins().CheckItemSelf(41)) {
+                if (G_baseData.petData.CheckItemSelf(41)) {
                     this.sprcatHead.spriteFrame = pictureManager.getIns().birdTuji[40];
                 } else {
                     this.sprcatHead.spriteFrame = this.bird_tuji[num];
@@ -124,7 +125,7 @@ export default class NewClass extends cc.Component {
                 this.labstr1.string = "收集金木水火土召唤分红凤";
                 this.labstr2.string = "1.两只37级凤合成有概率获得；";
                 this.labstr3.string = "2.合成分红凤的碎片之一";
-                if (dataManager.ins().CheckItemSelf(42)) {
+                if (G_baseData.petData.CheckItemSelf(42)) {
                     this.sprcatHead.spriteFrame = pictureManager.getIns().birdTuji[41];
                 } else {
                     this.sprcatHead.spriteFrame = this.bird_tuji[num];

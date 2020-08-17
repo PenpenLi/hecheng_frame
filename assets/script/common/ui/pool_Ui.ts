@@ -1,6 +1,6 @@
 import SingletonClass from "../base/SingletonClass"
 import { loader_mgr } from "../load/loader_mgr"
-import ui_pool from "../ui/ui_Pool"
+import ui_pool from "./ui_Pool"
 
 export class pool_Ui extends SingletonClass {
     private ui_pool: ui_pool;

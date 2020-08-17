@@ -1,5 +1,5 @@
 
-import dataManager from "../game/dataManager";
+import userData from "../data/userData";
 var url0 = "http://mihecheng.vmall99.com"; //测示服  _注意视频回调接口的更换
 import aes = require("../HTTP/aes.js")
 import { Game } from "../game/Game";
@@ -38,7 +38,7 @@ export default class HTTP {
         };
         xhr.open("POST", url, true);
         xhr.setRequestHeader("Content-Type", "application/json;charset=utf-8");
-        xhr.setRequestHeader("token", dataManager.ins().token);
+        xhr.setRequestHeader("token", userData.ins().token);
         // xhr.send(JSON.stringify(datas));
         xhr.send(JSON.stringify(param));
         return xhr;
@@ -55,7 +55,8 @@ export default class HTTP {
     }
 
     GetHttpUrl() {
-        return UrlManager.HttpUrl
+        console.log("222222",window.UrlManager.HttpUrl)
+        return window.UrlManager.HttpUrl
     }
 
     // public sendRequest(url: string, param: any, funSuc: Function, funErr: Function) {
@@ -70,7 +71,7 @@ export default class HTTP {
     //     param = aes.AESEnc(key, JSON.stringify(param)); //对传入的参数进行加密,(先转换为字符串)
     //     var headers = {
     //         "Content-Type": "application/json;charset=utf-8",
-    //         'token': dataManager.ins().token
+    //         'token': userData.ins().token
     //     };
     //     try {
     //         api.ajax({

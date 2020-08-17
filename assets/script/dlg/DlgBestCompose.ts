@@ -6,6 +6,7 @@ import { Game } from "../game/Game";
 import websocketConfig from "../game/websockeConfig";
 import { EventDispatch, Event_Name } from "../common/event/EventDispatch";
 import blockitem from "../perfab/blockitem";
+import { G_baseData } from "../data/baseData";
 
 const START_NUM: number = 36;
 const JIN_BIRD: number = 38; //金
@@ -68,7 +69,7 @@ export default class DlgBestCompose extends baseUi {
             var node = cc.instantiate(this.BirdPerfabs);
             let index = this.initPicture(i);
             node.getComponent(cc.Sprite).spriteFrame = pictureManager.getIns().birdTuji[index - 1];
-            node.getChildByName("labName").getComponent(cc.Label).string = Game.CfgManager.getBirdName(index);
+            node.getChildByName("labName").getComponent(cc.Label).string = G_baseData.petData.getBirdName(index);
             node.parent = children[i];
             node.setPosition(cc.v2(0, 0));
         }
