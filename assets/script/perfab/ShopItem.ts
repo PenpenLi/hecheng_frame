@@ -98,13 +98,13 @@ export default class shopItem extends cc.Component {
 
     /**购买金币按钮 */
     BtnOfcoinBuy() {
-        if (userData.ins().is_Click_end) {
-            userData.ins().is_Click_end = !userData.ins().is_Click_end;
+        if (G_baseData.userData.is_Click_end) {
+            G_baseData.userData.is_Click_end = !G_baseData.userData.is_Click_end;
             this.scheduleOnce(function () {
-                userData.ins().is_Click_end = !userData.ins().is_Click_end;
+                G_baseData.userData.is_Click_end = !G_baseData.userData.is_Click_end;
             }, 0.2);
             G_baseData.petData.shop_buy_price = this.costOfCoin;
-            if (!userData.ins().isCanBuy(this.costOfCoin)) {
+            if (!G_baseData.userData.isCanBuy(this.costOfCoin)) {
                 uiManager.ins().show(UI_CONFIG_NAME.DlgNotCoin);
                 return;
             }
@@ -122,15 +122,15 @@ export default class shopItem extends cc.Component {
 
     /**购买钻石按钮 */
     BtnOfjewelBuy() {
-        if (userData.ins().FHBC < this.costOfjewel) {
+        if (G_baseData.userData.FHBC < this.costOfjewel) {
             let string_0 = "MBC余额不足";
             Game.gameManager.gameTips(string_0);
             return;
         } else {
-            if (userData.ins().is_Click_end) { //防止快速点击
-                userData.ins().is_Click_end = !userData.ins().is_Click_end;
+            if (G_baseData.userData.is_Click_end) { //防止快速点击
+                G_baseData.userData.is_Click_end = !G_baseData.userData.is_Click_end;
                 this.scheduleOnce(function () {
-                    userData.ins().is_Click_end = !userData.ins().is_Click_end;
+                    G_baseData.userData.is_Click_end = !G_baseData.userData.is_Click_end;
                 }, 0.2);
                 G_baseData.petData.shop_buy_Fhbc = this.costOfjewel;
                 Game.gameManager.buyBird(2, this.IndexNum)

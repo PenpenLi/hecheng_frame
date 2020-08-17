@@ -1,45 +1,21 @@
 import { uiManager } from "../common/ui/uiManager";
-import { uiFormType, UI_CONFIG_NAME, uiFormPath, musicPath } from "../common/base/gameConfigs";
+import { UI_CONFIG_NAME, uiFormPath, musicPath } from "../common/base/gameConfigs";
 import BigVal from "../common/bigval/BigVal";
-import userData from "../data/userData";
 import boxMove from "./BoxMove";
 
 //长连接
-import { WebSock } from "../common/net/WebSock";
 import { NetManager } from "../common/net/NetManager";
-import { NetNode } from "../common/net/NetNode";
-import { DefStringProtocol, NetData, INetworkTips } from "../common/net/NetInterface";
-import websockeConfig from "./websockeConfig";
 import pictureManager from "./pictureManager";
 import musicManager from "../common/music/musicManager";
 import { Game } from "./Game";
 import { EventDispatch, Event_Name } from "../common/event/EventDispatch";
 import { G_baseData } from "../data/baseData";
+import websocketHandler from "./websocketHandler";
 
 var callbackShop: Function = function () { };
 const { ccclass, property } = cc._decorator;
 
-class NetTips implements INetworkTips {
-    connectTips(isShow: boolean): void {
-        console.log("------", uiManager.ins())
-        if (isShow) {
-            uiManager.ins().waiting.showtips("网络开小差了")
-        } else {
-            uiManager.ins().waiting.hidetips(true);
-        }
-    }
 
-    reconnectTips(isShow: boolean): void {
-        if (isShow) {
-            uiManager.ins().waiting.showtips("网络重接中")
-        } else {
-            uiManager.ins().waiting.hidetips(true);
-        }
-    }
-
-    requestTips(isShow: boolean): void {
-    }
-}
 
 @ccclass
 export default class NewClass extends cc.Component {
@@ -92,18 +68,14 @@ export default class NewClass extends cc.Component {
 
     /**设定长连接监听 */
     addWebSocket() {
-        let Node = new NetNode();
-        Node.init(new WebSock(), new DefStringProtocol(), new NetTips());
-        Node.setResponeHandler(0, (cmd: number, data: NetData) => {
-            let res = JSON.parse(data as string);
-            this.swicthWebsocket(res);
-        });
-        NetManager.getInstance().setNetNode(Node);
-        NetManager.getInstance().connect({ url: websockeConfig.ins().URL, autoReconnect: -1 })
+        let self = this;
+        websocketHandler.ins().addWebSocket(function (res) {
+            self.switchWebsocket(res);
+        }.bind(this));
     }
 
     /**根据长连接的返回参数做回应 */
-    swicthWebsocket(res: any) {
+    switchWebsocket(res: any) {
         if (res) {
             let type: string = res.method;
             let data: any = res.data;
@@ -118,7 +90,7 @@ export default class NewClass extends cc.Component {
                                 callbackShop(data.shop.price);
                                 this.initMenuBuy(data.recommend);
                             } else if (data.pay === "fhbc") {
-                                userData.ins().FHBC = userData.ins().FHBC - G_baseData.petData.shop_buy_Fhbc;
+                                G_baseData.userData.FHBC = G_baseData.userData.FHBC - G_baseData.petData.shop_buy_Fhbc;
                                 Game.Tops.initFHBC();
                                 this.initMenuBuy(data.recommend);
                             }
@@ -130,7 +102,7 @@ export default class NewClass extends cc.Component {
                     {
                         if (err) return;
                         if (data) {
-                            userData.ins().RefrushGold(data.gold, data.timestamp);
+                            G_baseData.userData.RefrushGold(data.gold, data.timestamp);
                             Game.Tops.initCoinOfTotal();
                         }
                     }
@@ -183,7 +155,7 @@ export default class NewClass extends cc.Component {
         G_baseData.petData.buy_price = new BigVal(res.price);
         Game.Bottom.initmessBtnBuy();
         Game.Tops.initCoinOfSecond();
-        websockeConfig.ins().save_Birds_local();
+        websocketHandler.ins().save_Birds_local();
     }
 
     /**生成鸟窝 */
@@ -246,24 +218,24 @@ export default class NewClass extends cc.Component {
                 pictureManager.getIns().guideFrist();
                 let birdFather_0 = this.addBird(G_baseData.petData.buy_level);
                 if (birdFather_0) {
-                    userData.ins().TotalCoins = BigVal.Sub(userData.ins().TotalCoins, G_baseData.petData.buy_price); //总金币减少
+                    G_baseData.userData.TotalCoins = BigVal.Sub(G_baseData.userData.TotalCoins, G_baseData.petData.buy_price); //总金币减少
                     Game.Tops.initCoinOfTotal(2);
-                    websockeConfig.ins().saveBuyMess(G_baseData.petData.buy_level, "gold", "home")
+                    websocketHandler.ins().saveBuyMess(G_baseData.petData.buy_level, "gold", "home")
                 }
                 break;
             case 1:
                 callbackShop = call;
                 let birdFather_1 = this.addBird(shopnum);
                 if (birdFather_1) {
-                    userData.ins().TotalCoins = BigVal.Sub(userData.ins().TotalCoins, G_baseData.petData.shop_buy_price); //总金币减少
+                    G_baseData.userData.TotalCoins = BigVal.Sub(G_baseData.userData.TotalCoins, G_baseData.petData.shop_buy_price); //总金币减少
                     Game.Tops.initCoinOfTotal(2);
-                    websockeConfig.ins().saveBuyMess(shopnum, "gold", "shop")
+                    websocketHandler.ins().saveBuyMess(shopnum, "gold", "shop")
                 }
                 break;
             case 2:
                 let birdFather_2 = this.addBird(shopnum);
                 if (birdFather_2) {
-                    websockeConfig.ins().saveBuyMess(shopnum, "fhbc", "shop")
+                    websocketHandler.ins().saveBuyMess(shopnum, "fhbc", "shop")
                 }
                 break;
         }
@@ -304,17 +276,17 @@ export default class NewClass extends cc.Component {
         let num = Number(res.bird);
         let birdFather_0 = this.addBird(num, 2);
         if (birdFather_0) {
-            websockeConfig.ins().saveSureRewardBird(num);
-            websockeConfig.ins().save_Birds_local();
+            websocketHandler.ins().saveSureRewardBird(num);
+            websocketHandler.ins().save_Birds_local();
         } else {
-            websockeConfig.ins().saveSureRewardBird(0);
+            websocketHandler.ins().saveSureRewardBird(0);
         }
     }
 
 
     /**是否有限时分红龙 */
     isHave_XsLong() {
-        let xianShi =  G_baseData.petData.fenhong_breakerBird;
+        let xianShi = G_baseData.petData.fenhong_breakerBird;
         for (let index = 0; index < xianShi.length; index++) {
             this.addBird(47, 3, xianShi[index]);
         }
@@ -345,10 +317,10 @@ export default class NewClass extends cc.Component {
                             self.check_video_back(); //检查看视频的回调
                             break;
                         case "closeSound": //离开首页
-                            userData.ins().isHoutai = true; //关闭音效
+                            G_baseData.userData.isHoutai = true; //关闭音效
                             break;
                         case "openSound": //点击首页
-                            userData.ins().isHoutai = false;
+                            G_baseData.userData.isHoutai = false;
                             let ispauseGame_1 = cc.game.isPaused();
                             if (ispauseGame_1) {
                                 // console.log("恢复暂停");
@@ -377,9 +349,9 @@ export default class NewClass extends cc.Component {
         switch (type) {
             case "quan": //转盘券
                 var call = function () {
-                    userData.ins().NumOfTurntables = userData.ins().NumOfTurntables + Number(num_back);
+                    G_baseData.userData.NumOfTurntables = G_baseData.userData.NumOfTurntables + Number(num_back);
                     Game.gameManager.showFrameBack(1, num_back);
-                    userData.ins().addQuan_Video = userData.ins().addQuan_Video - 1;
+                    G_baseData.userData.addQuan_Video = G_baseData.userData.addQuan_Video - 1;
                 };
                 this.sendMes_videoback(call, 1); //看完视频的接口（转盘券）
                 break;
@@ -399,7 +371,7 @@ export default class NewClass extends cc.Component {
             case "speed": //加速
                 var call3 = function () {
                     Game.Bottom.speed_video_back(num_back);
-                    websockeConfig.ins().save_speedDouble(num_back);
+                    websocketHandler.ins().save_speedDouble(num_back);
                 }.bind(this);
                 this.sendMes_videoback(call3, 4); //看完视频的接口（宝箱）
                 break;
@@ -420,14 +392,14 @@ export default class NewClass extends cc.Component {
         var funSuc = function (ret) {
             if (ret.code == 0) {
                 if (type_0 <= 4 || type_0 == 9) {
-                    userData.ins().NumberOfVideosLeft = userData.ins().NumberOfVideosLeft - 1;
+                    G_baseData.userData.NumberOfVideosLeft = G_baseData.userData.NumberOfVideosLeft - 1;
                     self.Watch_restTime(); //限定视频时间
                 } else {
-                    userData.ins().inviteJuan = userData.ins().inviteJuan - 1;
-                    userData.ins().restOfJuan = userData.ins().restOfJuan - 1;
+                    G_baseData.userData.inviteJuan = G_baseData.userData.inviteJuan - 1;
+                    G_baseData.userData.restOfJuan = G_baseData.userData.restOfJuan - 1;
                 }
                 if (ret.data.amount != 0) {
-                    userData.ins().RefrushGold(ret.data.amount.toString(), ret.data.update_time);
+                    G_baseData.userData.RefrushGold(ret.data.amount.toString(), ret.data.update_time);
                     Game.Tops.initCoinOfTotal();
                 }
                 call(ret.data);
@@ -451,12 +423,12 @@ export default class NewClass extends cc.Component {
 
     /**看视频的间隔 */
     Watch_restTime() {
-        userData.ins().resttime_video = 15;
+        G_baseData.userData.resttime_video = 15;
         var callback = function () {
-            if (userData.ins().resttime_video == 0) {
+            if (G_baseData.userData.resttime_video == 0) {
                 this.unschedule(callback);
             }
-            userData.ins().resttime_video--;
+            G_baseData.userData.resttime_video--;
         }
         this.schedule(callback, 1);
     }

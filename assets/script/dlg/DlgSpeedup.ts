@@ -1,9 +1,9 @@
 import baseUi from "../common/ui/baseUi"
 import { uiFormType, uiFormPath, isUseBananer, widdleType } from "../common/base/gameConfigs";
 import uiType from "../common/ui/uitype";
-import userData from "../data/userData";
+import { G_baseData } from "../data/baseData";
 import { Game } from "../game/Game";
-import websocketConfig from "../game/websockeConfig";
+import websocketHandler from "../game/websocketHandler";
 
 
 /**花费钻石数量*/
@@ -37,11 +37,11 @@ export default class DlgSpeed extends baseUi {
 
     /**获得打开加速框的Button */
     getBtnSpeed() {
-        if (userData.ins().NumberOfVideosLeft > 0) {
+        if (G_baseData.userData.NumberOfVideosLeft > 0) {
             this.BtnwatchVideo.active = true;
             this.btnUserQuan.active = false;
             let node = this.BtnwatchVideo.getChildByName("tips");
-            node.getComponent(cc.Label).string = userData.ins().strOfLookVideo();
+            node.getComponent(cc.Label).string = G_baseData.userData.strOfLookVideo();
         } else {
             this.btnUserQuan.active = true;
             this.BtnwatchVideo.active = false;
@@ -57,7 +57,7 @@ export default class DlgSpeed extends baseUi {
     BtnCostOfFHBC() {
         //补写花费的逻辑
         this.BtnClose();
-        if (userData.ins().FHBC > reduceOfjewel) {
+        if (G_baseData.userData.FHBC > reduceOfjewel) {
             this.sendMessSpeed();
         } else {
             Game.gameManager.gameTips("MBC余额不足");
@@ -68,10 +68,10 @@ export default class DlgSpeed extends baseUi {
     sendMessSpeed() {
         var funSuc = function (ret) {
             if (ret.code == 0) {
-                userData.ins().FHBC = userData.ins().FHBC - reduceOfjewel; //成功减去FHBC数量
+                G_baseData.userData.FHBC = G_baseData.userData.FHBC - reduceOfjewel; //成功减去FHBC数量
                 Game.Tops.initFHBC(); //FHBC刷新
                 Game.Bottom.speed_video_back(jewelOfTime)
-                websocketConfig.ins().save_speedDouble(reduceOfjewel);
+                websocketHandler.ins().save_speedDouble(reduceOfjewel);
             }
         }
         var funErr = function (ret) {
@@ -83,8 +83,8 @@ export default class DlgSpeed extends baseUi {
 
     /**视频加速功能 +或者thbc*/
     BtnWatchVideo() {
-        if (userData.ins().resttime_video > 0) {
-            var str = userData.ins().strTimeOfVideo();
+        if (G_baseData.userData.resttime_video > 0) {
+            var str = G_baseData.userData.strTimeOfVideo();
             Game.gameManager.gameTips(str);
             return;
         }
@@ -98,11 +98,11 @@ export default class DlgSpeed extends baseUi {
     /**花费邀请券 */
     CostYaoQingjuan() {
         this.BtnClose();
-        if (userData.ins().inviteJuan <= 0) {
+        if (G_baseData.userData.inviteJuan <= 0) {
             Game.gameManager.gameTips("邀请券数量不足");
             return;
         }
-        if (userData.ins().restOfJuan <= 0) {
+        if (G_baseData.userData.restOfJuan <= 0) {
             Game.gameManager.gameTips("当日使用邀请券达到上限");
             return;
         }

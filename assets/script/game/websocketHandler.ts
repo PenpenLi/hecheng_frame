@@ -1,23 +1,40 @@
 import SingletonClass from "../common/base/SingletonClass";
 import { NetManager } from "../common/net/NetManager";
-import userData from "../data/userData";
 import { Game } from "./Game";
 import { G_baseData } from "../data/baseData";
+import { NetNode } from "../common/net/NetNode";
+import { DefStringProtocol, INetworkTips, NetData } from "../common/net/NetInterface";
+import { uiManager } from "../common/ui/uiManager";
+import { WebSock } from "../common/net/WebSock";
 /**演示服 */
 var url: string = 'wss://mihecheng.teamone.wang:443';
 /**本地 */
 // var url: string = 'ws://192.168.0.121:9501';
-export default class websocketConfig extends SingletonClass {
+export default class websocketHandler extends SingletonClass {
     public static ins() {
-        return super.ins() as websocketConfig;
+        return super.ins() as websocketHandler;
     }
 
     URL: string = "";
 
     constructor() {
         super();
-        this.URL = `${window.UrlManager.WebsocketUrl}/?token=${userData.ins().token}`;
+        this.URL = `${window.UrlManager.WebsocketUrl}/?token=${G_baseData.userData.token}`;
         //this.URL = `${window.UrlManager.WebsocketUrl}/?token=${'0'}`;
+    }
+
+    /**设定长连接监听 */
+    addWebSocket(callback) {
+        let Node = new NetNode();
+        Node.init(new WebSock(), new DefStringProtocol(), new NetTips());
+        Node.setResponseHandler(0, (cmd: number, data: NetData) => {
+            let res = JSON.parse(data as string);
+            if (typeof callback == "function") {
+                callback(res);
+            }
+        });
+        NetManager.getInstance().setNetNode(Node);
+        NetManager.getInstance().connect({ url: this.URL, autoReconnect: -1 })
     }
 
     /**长连接的方法(购买)*/
@@ -163,6 +180,26 @@ export default class websocketConfig extends SingletonClass {
     }
 }
 
+class NetTips implements INetworkTips {
+    //TODO tips需要剥离出去
+    connectTips(isShow: boolean): void {
+        console.log("------", uiManager.ins())
+        if (isShow) {
+            uiManager.ins().waiting.showtips("网络开小差了")
+        } else {
+            uiManager.ins().waiting.hidetips(true);
+        }
+    }
+    reconnectTips(isShow: boolean): void {
+        if (isShow) {
+            uiManager.ins().waiting.showtips("网络重接中")
+        } else {
+            uiManager.ins().waiting.hidetips(true);
+        }
+    }
+    requestTips(isShow: boolean): void {
+    }
+}
 
 type objtype = {
     method: any,

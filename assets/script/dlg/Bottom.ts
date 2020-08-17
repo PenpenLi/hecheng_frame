@@ -3,7 +3,6 @@ import { uiFormType, UI_CONFIG_NAME, uiFormPath } from "../common/base/gameConfi
 import uiType from "../common/ui/uitype";
 import AdaptationManager, { AdaptationType } from "../common/ui/AdaptationManager";
 import { uiManager } from "../common/ui/uiManager";
-import userData from "../data/userData";
 import pictureManager from "../game/pictureManager"
 import { Game } from "../game/Game";
 import { G_baseData } from "../data/baseData";
@@ -73,7 +72,7 @@ export default class bottom extends baseUi {
                 break;
             case "BtnBuyBird":
                 let cost = G_baseData.petData.buy_price;
-                if (!userData.ins().isCanBuy(cost)) {
+                if (!G_baseData.userData.isCanBuy(cost)) {
                     uiManager.ins().show(UI_CONFIG_NAME.DlgNotCoin);
                     return;
                 }

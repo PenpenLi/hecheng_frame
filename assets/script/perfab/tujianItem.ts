@@ -1,6 +1,5 @@
-import userData from "../data/userData";
-import pictureManager from "../game/pictureManager";
 import { G_baseData } from "../data/baseData";
+import pictureManager from "../game/pictureManager";
 
 const { ccclass, property } = cc._decorator;
 

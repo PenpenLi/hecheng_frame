@@ -5,7 +5,7 @@
 *   2019-10-8 by 宝爷
 */
 
-import websocketConfig from "../../game/websockeConfig";
+import websocketHandler from "../../game/websocketHandler";
 
 // type objtype = { apiName: any, params: any, anytoken: any }
 export type NetData = (string | ArrayBufferLike | Blob | ArrayBufferView);
@@ -40,7 +40,7 @@ export class DefStringProtocol implements IProtocolHelper {
     }
     /**心跳包格式 */
     getHearbeat(): NetData {
-        return websocketConfig.ins().sendHearbeat();
+        return websocketHandler.ins().sendHearbeat();
     }
     getPackageLen(msg: NetData): number {
         return msg.toString().length;

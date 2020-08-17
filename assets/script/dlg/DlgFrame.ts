@@ -2,8 +2,8 @@ import baseUi from "../common/ui/baseUi"
 import { uiFormType, uiFormPath, isUseBananer, widdleType } from "../common/base/gameConfigs";
 import uiType from "../common/ui/uitype";
 import BigVal from "../common/bigval/BigVal";
-import userData from "../data/userData";
 import { Game } from "../game/Game";
+import { G_baseData } from "../data/baseData";
 
 const { ccclass, property } = cc._decorator;
 
@@ -103,7 +103,7 @@ export default class setup extends baseUi {
             this.btnCloup[1].node.active = false;
             this.btnCloup[2].node.active = false;
 
-            userData.ins().FHBC = userData.ins().FHBC + Number(rewardnum);
+            G_baseData.userData.FHBC = G_baseData.userData.FHBC + Number(rewardnum);
             this.scheduleOnce(function () {
                 Game.Tops.initFHBC();
             }, 0.5);
@@ -113,13 +113,13 @@ export default class setup extends baseUi {
             this.LabReward.string = str;
             this.LabReward.fontSize = 30;
 
-            if (userData.ins().NumberOfVideosLeft > 0) {
-                console.log("剩余观看视频次数", userData.ins().NumberOfVideosLeft);
+            if (G_baseData.userData.NumberOfVideosLeft > 0) {
+                console.log("剩余观看视频次数", G_baseData.userData.NumberOfVideosLeft);
                 this.btnCloup[0].node.active = false;
                 this.btnCloup[1].node.active = true;
                 this.btnCloup[2].node.active = false;
                 let nodes = this.btnCloup[1].node.getChildByName("cishu");
-                nodes.getComponent(cc.Label).string = userData.ins().strOfLookVideo();
+                nodes.getComponent(cc.Label).string = G_baseData.userData.strOfLookVideo();
             } else {
                 //补写视频次数不足逻辑,邀请券
                 this.btnCloup[0].node.active = false;
@@ -136,8 +136,8 @@ export default class setup extends baseUi {
 
     /**观看视频的方法 */
     clickBtnVideo() {
-        if (userData.ins().resttime_video > 0) {
-            var str = userData.ins().strTimeOfVideo();
+        if (G_baseData.userData.resttime_video > 0) {
+            var str = G_baseData.userData.strTimeOfVideo();
             Game.gameManager.gameTips(str)
             return;
         }
@@ -149,11 +149,11 @@ export default class setup extends baseUi {
 
     /**使用邀请券的方法 */
     click_YaoQingJuan() {
-        if (userData.ins().inviteJuan <= 0) {
+        if (G_baseData.userData.inviteJuan <= 0) {
             Game.gameManager.gameTips("邀请券不足");
             return;
         }
-        if (userData.ins().restOfJuan <= 0) {
+        if (G_baseData.userData.restOfJuan <= 0) {
             Game.gameManager.gameTips("当日使用邀请券达到上限");
             return;
         }

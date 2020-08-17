@@ -1,4 +1,3 @@
-import userData from "../data/userData";
 import BigVal from "../common/bigval/BigVal";
 import { Game } from "./Game";
 import { GIFCache } from "../common/gif/GIF";
@@ -31,7 +30,6 @@ export default class loading extends cc.Component {
         GIFCache.getInstance()
         Game.ReloadGame();
         Game.ApiManager.sengMessSure();
-
         G_baseData.loadBaseData();
         G_baseData.petData.LogCfg();
         this.GetGameData();
@@ -58,8 +56,8 @@ export default class loading extends cc.Component {
     GetGameData() {
         var setupNum = Global_Var.getStorage('setup');
         if (setupNum == null) return;
-        Global_Var.getArrayFromStr(setupNum, userData.ins().isBool);
-        if (userData.ins().isBool[2] === 0) {
+        Global_Var.getArrayFromStr(setupNum, G_baseData.userData.isBool);
+        if (G_baseData.userData.isBool[2] === 0) {
             cc.audioEngine.setEffectsVolume(0);
         }
     }
@@ -70,7 +68,7 @@ export default class loading extends cc.Component {
         var vars = query.split("&");
         var pair = vars[0].split("=");
         if (pair[0] == "token") {
-            userData.ins().token = pair[1];
+            G_baseData.userData.token = pair[1];
         }
     }
 
@@ -136,7 +134,7 @@ export default class loading extends cc.Component {
     /**获取鸟的位置信息 */
     BirdPosition_get(obj) {
         var str = null;
-        var birdPositon = Global_Var.getStorage(userData.ins().PlayerId);
+        var birdPositon = Global_Var.getStorage(G_baseData.userData.PlayerId);
         var birdPositonNet = obj.is_have_bird;
         if (!birdPositon) {
             str = birdPositonNet;

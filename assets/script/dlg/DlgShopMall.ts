@@ -2,7 +2,7 @@ import baseUi from "../common/ui/baseUi"
 import { uiFormType, uiFormPath, isUseBananer, widdleType } from "../common/base/gameConfigs";
 import AdaptationManager, { AdaptationType } from "../common/ui/AdaptationManager";
 import uiType from "../common/ui/uitype";
-import userData from "../data/userData";
+import { G_baseData } from "../data/baseData";
 import { Game } from "../game/Game";
 const { ccclass, property } = cc._decorator;
 
@@ -26,14 +26,14 @@ export default class DlgShopMall extends baseUi {
 
     onLoad() {
         this.schedule(function () {
-            this.LabCoinOfTotal.string = userData.ins().TotalCoins.geteveryStr();
+            this.LabCoinOfTotal.string = G_baseData.userData.TotalCoins.geteveryStr();
         }, 1);
         this.content = this.srollView.content;
         AdaptationManager.GetInstance().adaptationFormByType(AdaptationType.topandBottom, this.node, 150);
     }
 
     _open() {
-        this.LabCoinOfTotal.string = userData.ins().TotalCoins.geteveryStr();
+        this.LabCoinOfTotal.string = G_baseData.userData.TotalCoins.geteveryStr();
         this.sengMessShop();
     }
 

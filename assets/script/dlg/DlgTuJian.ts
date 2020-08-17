@@ -2,7 +2,6 @@ import baseUi from "../common/ui/baseUi"
 import { uiFormType, uiFormPath, isUseBananer, widdleType } from "../common/base/gameConfigs";
 import AdaptationManager, { AdaptationType } from "../common/ui/AdaptationManager";
 import uiType from "../common/ui/uitype";
-import userData from "../data/userData";
 import pictureManager from "../game/pictureManager"
 import { G_baseData } from "../data/baseData";
 

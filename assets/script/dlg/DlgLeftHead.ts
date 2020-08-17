@@ -1,7 +1,6 @@
 import baseUi from "../common/ui/baseUi"
 import { uiFormType, uiFormPath } from "../common/base/gameConfigs";
 import uiType from "../common/ui/uitype";
-import userData from "../data/userData";
 import pictureManager from "../game/pictureManager";
 import BigVal from "../common/bigval/BigVal"
 import { Game } from "../game/Game";

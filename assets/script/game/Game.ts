@@ -2,7 +2,7 @@
 import main from "./main";
 import boxMove from "./BoxMove"
 import { ApiManager } from "./ApiManager";
-import HTTP from "../HTTP/HTTP";
+import httpHandler from "../http/httpHandler";
 import Tops from "../dlg/Tops";
 import bottom from "../dlg/Bottom";
 import { Console } from "../common/unitl/Console";
@@ -15,13 +15,13 @@ export class Game {
     static ParentItem: cc.Node = null;
     static Box: boxMove = null;
     static ApiManager: ApiManager = null;
-    static HttpManager: HTTP = null;
+    static HttpManager: httpHandler = null;
     static Console: Console = null;
     static UtilFunction: UtilFunction = null;
 
     static ReloadGame() {
         this.ApiManager = new ApiManager();
-        this.HttpManager = new HTTP();
+        this.HttpManager = new httpHandler();
         this.Console = new Console();
         this.Console.GetGameType();
         this.UtilFunction = new UtilFunction();

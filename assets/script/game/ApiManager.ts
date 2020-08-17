@@ -1,5 +1,5 @@
-import userData from "../data/userData";
 import { Game } from "./Game";
+import { G_baseData } from "../data/baseData";
 
 
 export class ApiManager {
@@ -128,7 +128,7 @@ export class ApiManager {
                     type: 'property',
                     params: {
                         type: 0,
-                        propertyNum: userData.ins().FHBC.toFixed(3)
+                        propertyNum: G_baseData.userData.FHBC.toFixed(3)
                     }
                 } //打开视频
             });
@@ -190,11 +190,11 @@ export class ApiManager {
                     lx: adtype,
                     key1: rewardType,
                     key2: rewardnum,
-                    key3: userData.ins().uuid
+                    key3: G_baseData.userData.uuid
                 } //打开视频
             });
         } catch (e) {
-            Game.Console.Log("看视频跳链接", userData.ins().uuid);
+            Game.Console.Log("看视频跳链接", G_baseData.userData.uuid);
         }
     }
 
@@ -369,7 +369,7 @@ export class ApiManager {
                 break;
             case 2:
                 if (this.adver_type === 1) {
-                    vedioType = userData.ins().NumberOfVideosLeft % 2;
+                    vedioType = G_baseData.userData.NumberOfVideosLeft % 2;
                 } else {
                     vedioType = 2;
                 }

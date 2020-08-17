@@ -1,7 +1,7 @@
 import baseUi from "../common/ui/baseUi"
 import { uiFormType, uiFormPath, isUseBananer, widdleType } from "../common/base/gameConfigs";
 import uiType from "../common/ui/uitype";
-import userData from "../data/userData";
+import { G_baseData } from "../data/baseData";
 import { uiManager } from "../common/ui/uiManager";
 import { UI_CONFIG_NAME } from "../common/base/gameConfigs"
 import { Game } from "../game/Game";
@@ -36,16 +36,16 @@ export default class setup extends baseUi {
 
     // LIFE-CYCLE CALLBACKS:
     start() {
-        if (userData.ins().NumOfTurntables < 0) {
-            userData.ins().NumOfTurntables = 0;
+        if (G_baseData.userData.NumOfTurntables < 0) {
+            G_baseData.userData.NumOfTurntables = 0;
         }
-        this.LabZpOfNum.string = userData.ins().NumOfTurntables.toString();
+        this.LabZpOfNum.string = G_baseData.userData.NumOfTurntables.toString();
         this.isRolling = false;
     }
 
     /**开始转盘的逻辑 */
     BtnStart() {
-        var ResidueOfnum = userData.ins().NumOfTurntables; //剩余次数
+        var ResidueOfnum = G_baseData.userData.NumOfTurntables; //剩余次数
         if (ResidueOfnum <= 0) {
             Game.gameManager.gameTips("转盘券数量不足");
             this.clickBtnStart.interactable = false;
@@ -69,8 +69,8 @@ export default class setup extends baseUi {
                 }
                 self.isRolling = true;
                 self.clickBtnStart.interactable = false;
-                userData.ins().NumOfTurntables = data.ticket;
-                self.LabZpOfNum.string = userData.ins().NumOfTurntables.toString();
+                G_baseData.userData.NumOfTurntables = data.ticket;
+                self.LabZpOfNum.string = G_baseData.userData.NumOfTurntables.toString();
                 //num值从服务器获取
                 let rewardnum = data.num;
 
@@ -147,7 +147,7 @@ export default class setup extends baseUi {
     showOfReward(indexOfNum, rewardnum) {
         this.isRolling = false;
         if (this.GoldMsg.gold != 0) {
-            userData.ins().RefrushGold(this.GoldMsg.gold, this.GoldMsg.update_time);
+            G_baseData.userData.RefrushGold(this.GoldMsg.gold, this.GoldMsg.update_time);
         }
         this.GoldMsg = null;
         //参数0打开第一种
@@ -163,7 +163,7 @@ export default class setup extends baseUi {
     /**看视频回调奖励 */
     callbackReward() {
         this.clickBtnStart.getComponent(cc.Button).interactable = true;
-        this.LabZpOfNum.string = userData.ins().NumOfTurntables.toString();
+        this.LabZpOfNum.string = G_baseData.userData.NumOfTurntables.toString();
     }
 
     _hide() {

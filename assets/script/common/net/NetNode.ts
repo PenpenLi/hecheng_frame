@@ -295,7 +295,7 @@ export class NetNode {
     }
 
     /********************** 回调相关处理 *********************/
-    public setResponeHandler(cmd: number, callback: NetCallFunc, target?: any): boolean {
+    public setResponseHandler(cmd: number, callback: NetCallFunc, target?: any): boolean {
         if (callback == null) {
             console.error(`NetNode setResponeHandler error ${cmd}`);
             return false;

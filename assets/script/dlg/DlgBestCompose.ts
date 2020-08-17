@@ -3,7 +3,7 @@ import { uiFormType, uiFormPath } from "../common/base/gameConfigs";
 import uiType from "../common/ui/uitype";
 import pictureManager from "../game/pictureManager";
 import { Game } from "../game/Game";
-import websocketConfig from "../game/websockeConfig";
+import websocketHandler from "../game/websocketHandler";
 import { EventDispatch, Event_Name } from "../common/event/EventDispatch";
 import blockitem from "../perfab/blockitem";
 import { G_baseData } from "../data/baseData";
@@ -278,7 +278,7 @@ export default class DlgBestCompose extends baseUi {
     sendMessageFIVE() {
         var self = this;
         //服务端：高级合成
-        websocketConfig.ins().saveComposeBest();
+        websocketHandler.ins().saveComposeBest();
         let call: Function = function (reward_lv: number) {
             Game.Console.Log("获得奖励的鸟", reward_lv)
             if (reward_lv > 37) {

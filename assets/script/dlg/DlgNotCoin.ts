@@ -1,9 +1,9 @@
 import baseUi from "../common/ui/baseUi"
 import { uiFormType, uiFormPath, isUseBananer, widdleType } from "../common/base/gameConfigs";
 import uiType from "../common/ui/uitype";
-import userData from "../data/userData";
 import BigVal from "../common/bigval/BigVal"
 import { Game } from "../game/Game";
+import { G_baseData } from "../data/baseData";
 
 
 
@@ -36,10 +36,10 @@ export default class setup extends baseUi {
 
     /**金币初始化 */
     initNotCoin() {
-        if (userData.ins().NumberOfVideosLeft > 0) { //剩余视频次数
+        if (G_baseData.userData.NumberOfVideosLeft > 0) { //剩余视频次数
             this.BtnWatchVideo.active = true;
             this.BtnJuan.active = false;
-            this.BtnWatchVideo.getChildByName("cishu").getComponent(cc.Label).string = userData.ins().strOfLookVideo();
+            this.BtnWatchVideo.getChildByName("cishu").getComponent(cc.Label).string = G_baseData.userData.strOfLookVideo();
         } else {
             this.BtnWatchVideo.active = false;
             this.BtnJuan.active = true;
@@ -54,8 +54,8 @@ export default class setup extends baseUi {
 
     /**观看视频接口 */
     btnWatch() {
-        if (userData.ins().resttime_video > 0) {
-            var str = userData.ins().strTimeOfVideo();
+        if (G_baseData.userData.resttime_video > 0) {
+            var str = G_baseData.userData.strTimeOfVideo();
             Game.gameManager.gameTips(str);
             return;
         }
@@ -68,11 +68,11 @@ export default class setup extends baseUi {
     User_yaoqingjuan() {
         this.btnClose();
         console.log("邀请券");
-        if (userData.ins().inviteJuan <= 0) {
+        if (G_baseData.userData.inviteJuan <= 0) {
             Game.gameManager.gameTips("邀请券不足");
             return;
         }
-        if (userData.ins().restOfJuan <= 0) {
+        if (G_baseData.userData.restOfJuan <= 0) {
             Game.gameManager.gameTips("当日使用邀请券达到上限");
             return;
         }

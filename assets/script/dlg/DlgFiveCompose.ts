@@ -1,10 +1,9 @@
 import baseUi from "../common/ui/baseUi"
 import { uiFormType, uiFormPath } from "../common/base/gameConfigs";
 import uiType from "../common/ui/uitype";
-import userData from "../data/userData";
 import pictureManager from "../game/pictureManager";
 import { Game } from "../game/Game";
-import websocketConfig from "../game/websockeConfig";
+import websocketHandler from "../game/websocketHandler";
 import { EventDispatch, Event_Name } from "../common/event/EventDispatch";
 import { G_baseData } from "../data/baseData";
 
@@ -102,7 +101,7 @@ export default class setup extends baseUi {
     }
 
     OnBtnClickStart() {
-        websocketConfig.ins().saveComposeFive();
+        websocketHandler.ins().saveComposeFive();
         let call: Function = (num: number) => {
             if (num === 0) {
                 this.addBestBird();

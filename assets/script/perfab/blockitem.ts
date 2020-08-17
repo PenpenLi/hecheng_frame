@@ -1,10 +1,9 @@
-import userData from "../data/userData";
 import pictureManager from "../game/pictureManager";
 import BigVal from "../common/bigval/BigVal";
 import { uiManager } from "../common/ui/uiManager";
 import { uiFormType, UI_CONFIG_NAME, uiFormPath, musicPath } from "../common/base/gameConfigs";
 import musicManager from "../common/music/musicManager";
-import webscoketConfig from "../game/websockeConfig";
+import webscoketConfig from "../game/websocketHandler";
 import { Game } from "../game/Game";
 import block from "./block";
 import { G_baseData } from "../data/baseData";
@@ -146,8 +145,8 @@ export default class blockitem extends cc.Component {
     /**数字飞升的效果 */
     FlyMoveThing() {
         //播放音效
-        if (!userData.ins().isAddCoin_bird) return; //网络加载时暂停收益
-        if (!userData.ins().isHoutai) {
+        if (!G_baseData.userData.isAddCoin_bird) return; //网络加载时暂停收益
+        if (!G_baseData.userData.isHoutai) {
             musicManager.ins().playEffectMusic(musicPath.getmoneyClip)
         }
         cc.tween(this.node)
@@ -163,7 +162,7 @@ export default class blockitem extends cc.Component {
         }
         var everyCoin = new BigVal(coins.toString());
         this.labFly.string = everyCoin.geteveryStr();
-        //userData.ins().TotalCoins = BigVal.Add(userData.ins().TotalCoins, everyCoin);
+        //G_baseData.userData.TotalCoins = BigVal.Add(G_baseData.userData.TotalCoins, everyCoin);
         let start_y = this.labFly.node.y;
         cc.tween(this.labFly.node)
             .to(0.2, { position: cc.v2(0, start_y + 70) })
@@ -413,7 +412,7 @@ export default class blockitem extends cc.Component {
         this.delYourself();
         //刷新每秒产生金币
         Game.Tops.initCoinOfSecond();
-        userData.ins().TotalCoins = BigVal.Add(userData.ins().TotalCoins, this.Price_Huishou);
+        G_baseData.userData.TotalCoins = BigVal.Add(G_baseData.userData.TotalCoins, this.Price_Huishou);
         //总金币的刷新
         Game.Tops.initCoinOfTotal();
         //播放音效

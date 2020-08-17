@@ -1,8 +1,7 @@
-import userData from "../data/userData";
 import { Game } from "./Game";
-import websocketConfig from "./websockeConfig";
 import { uiManager } from "../common/ui/uiManager";
 import { UI_CONFIG_NAME, uiFormPath } from "../common/base/gameConfigs";
+import { G_baseData } from "../data/baseData";
 
 var instance: pictureManager = null;
 
@@ -108,7 +107,7 @@ export default class pictureManager extends cc.Component {
 
     /**更新屠龙刀模块 */
     shuaxinDao() {
-        let num_dao = userData.ins().dao_num;
+        let num_dao = G_baseData.userData.dao_num;
         console.log("当前剩余屠龙刀" + num_dao);
         if (num_dao < 100) {
             this.jindu.fillRange = num_dao / 100;
@@ -122,7 +121,7 @@ export default class pictureManager extends cc.Component {
 
     /**新手指引第一步 */
     guideFrist() {
-        if (userData.ins().isxinshou != 0) return;
+        if (G_baseData.userData.isxinshou != 0) return;
         try {
             var mask = cc.find("Canvas/mask");
             var hand = mask.getChildByName("hand");
@@ -161,7 +160,7 @@ export default class pictureManager extends cc.Component {
                     Game.ApiManager.openHongbao(7); //新手红包
                     mask.active = false;
                     mask2.active = false;
-                    userData.ins().isxinshou = 1;
+                    G_baseData.userData.isxinshou = 1;
                     break;
             }
         } catch (e) {

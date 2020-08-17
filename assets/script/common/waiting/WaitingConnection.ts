@@ -1,4 +1,4 @@
-import userData from "../../data/userData"
+import { G_baseData } from "../../data/baseData";
 
 var labstr: string = "";
 const { ccclass, property } = cc._decorator;
@@ -28,7 +28,7 @@ export default class WaitingConnection extends cc.Component {
     /**显示加载框 */
     showtips(content?: string) {
         if (this._iswebsocket) return;
-        userData.ins().isAddCoin_bird = false;
+        G_baseData.userData.isAddCoin_bird = false;
         this._isShow = true;
         this.node.active = this._isShow;
         if (content == null && !this._iswebsocket) {
@@ -52,7 +52,7 @@ export default class WaitingConnection extends cc.Component {
                 this._isShow = false;
             }
         }
-        userData.ins().isAddCoin_bird = !this._isShow;
+        G_baseData.userData.isAddCoin_bird = !this._isShow;
         this.node.active = this._isShow;
     }
 
