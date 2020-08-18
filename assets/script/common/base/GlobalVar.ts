@@ -48,15 +48,12 @@ export class Global_Var {
     /**把数组转换成字符串 */
     public static getStrFromArray(arr, joinStr = "#"): string {
         let str = arr.join(joinStr);
-        console.log("jhjj","测试")
-        console.log("转换", str)
         return str;
     }
 
     /**把字符串转换成数组 */
     public static getArrayFromStr(str: string, arr: Array<number>, joinStr = "#") {
         let Array_str = str.split(joinStr);
-        console.log(">>>", Array_str);
         for (let i = 0; i < Array_str.length; i++) {
             arr[i] = Number(Array_str[i]);
         }

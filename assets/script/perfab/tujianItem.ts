@@ -37,7 +37,7 @@ export default class NewClass extends cc.Component {
                 this.labstr2.string = "1.两只37级凤合成有概率获得；";
                 this.labstr3.string = "2.拖到回收箱即可领取红包";
                 if (G_baseData.petData.CheckItemSelf(44)) {
-                    this.sprcatHead.spriteFrame = pictureManager.getIns().birdTuji[43];
+                    this.sprcatHead.spriteFrame = G_baseData.petData.birdSprList[43];
                 } else {
                     this.sprcatHead.spriteFrame = this.bird_tuji[num];
                 }
@@ -48,7 +48,7 @@ export default class NewClass extends cc.Component {
                 this.labstr2.string = "1.两只37级凤合成有概率获得；";
                 this.labstr3.string = "2.若回收，则算力增益效果将消失";
                 if (G_baseData.petData.CheckItemSelf(43)) {
-                    this.sprcatHead.spriteFrame = pictureManager.getIns().birdTuji[42];
+                    this.sprcatHead.spriteFrame = G_baseData.petData.birdSprList[42];
                 } else {
                     this.sprcatHead.spriteFrame = this.bird_tuji[num];
                 }
@@ -59,7 +59,7 @@ export default class NewClass extends cc.Component {
                 this.labstr2.string = "1.两只37级凤合成有概率获得；";
                 this.labstr3.string = "2.“爱情里也有红包”";
                 if (G_baseData.petData.CheckItemSelf(45)) {
-                    this.sprcatHead.spriteFrame = pictureManager.getIns().birdTuji[44];
+                    this.sprcatHead.spriteFrame = G_baseData.petData.birdSprList[44];
                 } else {
                     this.sprcatHead.spriteFrame = this.bird_tuji[num];
                 }
@@ -70,7 +70,7 @@ export default class NewClass extends cc.Component {
                 this.labstr2.string = "1.两只37级凤合成有概率获得；";
                 this.labstr3.string = "2.“爱情里也有红包”";
                 if (G_baseData.petData.CheckItemSelf(46)) {
-                    this.sprcatHead.spriteFrame = pictureManager.getIns().birdTuji[45];
+                    this.sprcatHead.spriteFrame = G_baseData.petData.birdSprList[45];
                 } else {
                     this.sprcatHead.spriteFrame = this.bird_tuji[num];
                 }
@@ -81,7 +81,7 @@ export default class NewClass extends cc.Component {
                 this.labstr2.string = "1.两只37级凤合成有概率获得；";
                 this.labstr3.string = "2.合成分红凤的碎片之一";
                 if (G_baseData.petData.CheckItemSelf(38)) {
-                    this.sprcatHead.spriteFrame = pictureManager.getIns().birdTuji[37];
+                    this.sprcatHead.spriteFrame = G_baseData.petData.birdSprList[37];
                 } else {
                     this.sprcatHead.spriteFrame = this.bird_tuji[num];
                 }
@@ -92,7 +92,7 @@ export default class NewClass extends cc.Component {
                 this.labstr2.string = "1.两只37级凤合成有概率获得；";
                 this.labstr3.string = "2.合成分红凤的碎片之一";
                 if (G_baseData.petData.CheckItemSelf(39)) {
-                    this.sprcatHead.spriteFrame = pictureManager.getIns().birdTuji[38];
+                    this.sprcatHead.spriteFrame = G_baseData.petData.birdSprList[38];
                 } else {
                     this.sprcatHead.spriteFrame = this.bird_tuji[num];
                 }
@@ -103,7 +103,7 @@ export default class NewClass extends cc.Component {
                 this.labstr2.string = "1.两只37级凤合成有概率获得；";
                 this.labstr3.string = "2.合成分红凤的碎片之一";
                 if (G_baseData.petData.CheckItemSelf(40)) {
-                    this.sprcatHead.spriteFrame = pictureManager.getIns().birdTuji[39];
+                    this.sprcatHead.spriteFrame = G_baseData.petData.birdSprList[39];
                 } else {
                     this.sprcatHead.spriteFrame = this.bird_tuji[num];
                 }
@@ -114,7 +114,7 @@ export default class NewClass extends cc.Component {
                 this.labstr2.string = "1.两只37级凤合成有概率获得；";
                 this.labstr3.string = "2.合成分红凤的碎片之一";
                 if (G_baseData.petData.CheckItemSelf(41)) {
-                    this.sprcatHead.spriteFrame = pictureManager.getIns().birdTuji[40];
+                    this.sprcatHead.spriteFrame = G_baseData.petData.birdSprList[40];
                 } else {
                     this.sprcatHead.spriteFrame = this.bird_tuji[num];
                 }
@@ -125,7 +125,7 @@ export default class NewClass extends cc.Component {
                 this.labstr2.string = "1.两只37级凤合成有概率获得；";
                 this.labstr3.string = "2.合成分红凤的碎片之一";
                 if (G_baseData.petData.CheckItemSelf(42)) {
-                    this.sprcatHead.spriteFrame = pictureManager.getIns().birdTuji[41];
+                    this.sprcatHead.spriteFrame = G_baseData.petData.birdSprList[41];
                 } else {
                     this.sprcatHead.spriteFrame = this.bird_tuji[num];
                 }

@@ -3,8 +3,8 @@ import { uiFormType, uiFormPath } from "../common/base/gameConfigs";
 import uiType from "../common/ui/uitype";
 import pictureManager from "../game/pictureManager";
 import { Game } from "../game/Game";
-import websocketHandler from "../game/websocketHandler";
-import { EventDispatch, Event_Name } from "../common/event/EventDispatch";
+import websocketHandler from "../net/websocketHandler";
+import { EventDispatch, Event_Name } from "../event/EventDispatch";
 import { G_baseData } from "../data/baseData";
 
 
@@ -87,7 +87,7 @@ export default class setup extends baseUi {
             if (isFiveCompose[i] == 0) {
                 birdSprTuji[i].getComponent(cc.Sprite).spriteFrame = this.fiveBirdTuji[i];
             } else {
-                birdSprTuji[i].getComponent(cc.Sprite).spriteFrame = pictureManager.getIns().birdTuji[37 + i]
+                birdSprTuji[i].getComponent(cc.Sprite).spriteFrame = G_baseData.petData.birdSprList[37 + i]
                 this.FIVE_BIRD_NUM += 1;
             }
         }

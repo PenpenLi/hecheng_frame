@@ -147,7 +147,7 @@ export default class setup extends baseUi {
     showOfReward(indexOfNum, rewardnum) {
         this.isRolling = false;
         if (this.GoldMsg.gold != 0) {
-            G_baseData.userData.RefrushGold(this.GoldMsg.gold, this.GoldMsg.update_time);
+            G_baseData.userData.RefreshGold(this.GoldMsg.gold, this.GoldMsg.update_time);
         }
         this.GoldMsg = null;
         //参数0打开第一种

@@ -1,11 +1,11 @@
 import SingletonClass from "../common/base/SingletonClass";
-import { NetManager } from "../common/net/NetManager";
-import { Game } from "./Game";
+import { NetManager } from "./websocket/NetManager";
+import { Game } from "../game/Game";
 import { G_baseData } from "../data/baseData";
-import { NetNode } from "../common/net/NetNode";
-import { DefStringProtocol, INetworkTips, NetData } from "../common/net/NetInterface";
+import { NetNode } from "./websocket/NetNode";
+import { DefStringProtocol, INetworkTips, NetData } from "./websocket/NetInterface";
 import { uiManager } from "../common/ui/uiManager";
-import { WebSock } from "../common/net/WebSock";
+import { WebSock } from "./websocket/WebSock";
 /**演示服 */
 var url: string = 'wss://mihecheng.teamone.wang:443';
 /**本地 */
@@ -35,6 +35,10 @@ export default class websocketHandler extends SingletonClass {
         });
         NetManager.getInstance().setNetNode(Node);
         NetManager.getInstance().connect({ url: this.URL, autoReconnect: -1 })
+    }
+
+    webSocketClose(){
+        NetManager.getInstance().close();
     }
 
     /**长连接的方法(购买)*/

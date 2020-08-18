@@ -17,7 +17,7 @@ export default class loading extends cc.Component {
     @property(cc.Label)
     LabProgress: cc.Label = null;
 
-
+    TBl_isOk = false;
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
@@ -27,11 +27,11 @@ export default class loading extends cc.Component {
     AssetOk = false;
     /**初始化游戏数据 */
     init() {
+        this.loadData();
         GIFCache.getInstance()
         Game.ReloadGame();
         Game.ApiManager.sengMessSure();
-        G_baseData.loadBaseData();
-        G_baseData.petData.LogCfg();
+
         this.GetGameData();
         this.getQueryVariable();
         cc.director.preloadScene("Game", null, () => {
@@ -50,6 +50,18 @@ export default class loading extends cc.Component {
             this.LoadGame();
             // cc.director.loadScene("Game");
         })
+    }
+
+    //初始化所有的数据层数据
+    loadData() {
+        let self = this;
+        G_baseData.loadBaseData();
+        let result = G_baseData.loadTBlData();
+        result.then(() => {
+            self.TBl_isOk = true;
+            self.LoadGame();
+        })
+        // G_baseData.petData.LogCfg();
     }
 
     /**获取游戏设置数据 */
@@ -158,7 +170,7 @@ export default class loading extends cc.Component {
     MsgOK = false;
 
     LoadGame() {
-        if (this.AssetOk == true && this.MsgOK == true) {
+        if (this.AssetOk == true && this.MsgOK == true && this.TBl_isOk == true) {
             cc.director.loadScene("Game");
         }
     }
@@ -166,9 +178,7 @@ export default class loading extends cc.Component {
     /**冒泡排序 */
     NumBsort(str) {
         var arr = [];
-        console.log("冒泡前", str);
         Global_Var.getArrayFromStr(str, arr);
-        console.log("冒泡后", arr);
         var len = arr.length;
         let strarr = [];
         for (var i = 0; i < len; i++) {
@@ -189,9 +199,7 @@ export default class loading extends cc.Component {
     /**服务器和本地数据进行比较 */
     comparePosition(str, str2) {
         var islast = true; //默认读本地
-        console.log("SSSSS", str);
         var array1 = this.NumBsort(str); //本地
-        console.log("SSSSS111111", array1);
         var array2 = this.NumBsort(str2); //服务器
 
         let arr1count = 0;
@@ -205,13 +213,10 @@ export default class loading extends cc.Component {
         for (const key in array2) {
             arr2count++;
         }
-        console.log("ssss", arr1count, arr2count);
         if (arr1count != arr2count) {
             islast = false;
         }
 
         return islast;
     }
-
-
 }

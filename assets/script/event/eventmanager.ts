@@ -1,4 +1,4 @@
-import SingletonClass from "../base/SingletonClass";
+import SingletonClass from "../common/base/SingletonClass";
 
 var self = null;
 

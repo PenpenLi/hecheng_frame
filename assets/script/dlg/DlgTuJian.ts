@@ -58,7 +58,7 @@ export default class DlgTUjian extends baseUi {
     /**刷新 */
     initshuxin() {
         if (G_baseData.petData.CheckItemSelf(47)) {
-            this.fenhongNode.spriteFrame = pictureManager.getIns().birdTuji[46];
+            this.fenhongNode.spriteFrame = G_baseData.petData.birdSprList[46];
         } else {
             this.fenhongNode.spriteFrame = this.tuji[0];
         }

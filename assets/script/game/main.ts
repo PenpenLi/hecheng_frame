@@ -1,25 +1,24 @@
+/*********本脚本主要执行net 前端api 全局Event事件处理及主界面相关window入口的初始化******* */
+
 import { uiManager } from "../common/ui/uiManager";
-import { UI_CONFIG_NAME, uiFormPath, musicPath } from "../common/base/gameConfigs";
+import { UI_CONFIG_NAME, uiFormPath, } from "../common/base/gameConfigs";
 import BigVal from "../common/bigval/BigVal";
 import boxMove from "./BoxMove";
 
 //长连接
-import { NetManager } from "../common/net/NetManager";
 import pictureManager from "./pictureManager";
-import musicManager from "../common/music/musicManager";
 import { Game } from "./Game";
-import { EventDispatch, Event_Name } from "../common/event/EventDispatch";
+import { EventDispatch, Event_Name } from "../event/EventDispatch";
 import { G_baseData } from "../data/baseData";
-import websocketHandler from "./websocketHandler";
+import websocketHandler from "../net/websocketHandler";
+import petWindow from "../wnd/petWindow";
+import guideWindow from "../wnd/guideWindow";
 
 var callbackShop: Function = function () { };
 const { ccclass, property } = cc._decorator;
 
-
-
 @ccclass
-export default class NewClass extends cc.Component {
-
+export default class main extends cc.Component {
     @property(cc.Node)
     birdBornFather: cc.Node = null;
 
@@ -29,39 +28,39 @@ export default class NewClass extends cc.Component {
     @property(cc.Prefab)
     game_Tips: cc.Prefab = null;
 
+    private guideWnd: guideWindow;//引导界面
+    private petWnd: petWindow;//宠物界面
+
     onLoad() {
-        Game.HttpManager.GetHttpUrl();
-        this.SetGame();
         this.initGame();
     }
 
-    SetGame() {
-        Game.gameManager = this;
-        Game.ParentItem = cc.find("Canvas/birdMoveFther");
-        Game.Box = cc.find("Canvas/UIROOT/FlyBox").getComponent(boxMove);
+    onDestroy() {
+        EventDispatch.ins().remove(Event_Name.MAIN_MSG, this.recvEventMsg.bind(this))
     }
 
     /**游戏初始化 */
     initGame() {
         this.addWebSocket();
         this.AddAppListen();
-
-        let manager = cc.director.getCollisionManager(); // 获取碰撞检测类
-        manager.enabled = true; //开启碰撞检测
-        // manager.enabledDebugDraw = true;
+        this.initModules();
 
         //加载上框和下框
         uiManager.ins().show(UI_CONFIG_NAME.Tops);
         uiManager.ins().show(UI_CONFIG_NAME.Bottom);
-        this.drawBgBlocks();
     }
 
-    start() {
-        this.scheduleOnce(() => {
-            this.CreateBirdOfLast();
-            this.isHave_XsLong();
-        }, 0.5)
-        pictureManager.getIns().guideFrist();
+    initModules() {
+        Game.gameManager = this;
+        Game.Box = cc.find("Canvas/UIROOT/FlyBox").getComponent(boxMove);
+
+        //加载宠物界面
+        this.petWnd = cc.find("Canvas/UIROOT/Middle/Panel_bird").getComponent(petWindow);
+        this.petWnd.initGame();
+        this.guideWnd = cc.find("Canvas/guideLayer").getComponent(guideWindow);
+        this.guideWnd.guideFirst();
+
+        //广告
         Game.ApiManager.sendMessOfGuanggaoType();//获取广告类型
         Game.ApiManager.openGuangGao();
     }
@@ -76,228 +75,32 @@ export default class NewClass extends cc.Component {
 
     /**根据长连接的返回参数做回应 */
     switchWebsocket(res: any) {
+        let self = this;
         if (res) {
             let type: string = res.method;
             let data: any = res.data;
             let err: any = res.error;
             switch (type) {
                 case "bird.buy":
-                    if (data) {
-                        if (data.scene === "home") {
-                            this.initMenuBuy(data.recommend);
-                        } else if (data.scene === "shop") {
-                            if (data.pay === "gold") {
-                                callbackShop(data.shop.price);
-                                this.initMenuBuy(data.recommend);
-                            } else if (data.pay === "fhbc") {
-                                G_baseData.userData.FHBC = G_baseData.userData.FHBC - G_baseData.petData.shop_buy_Fhbc;
-                                Game.Tops.initFHBC();
-                                this.initMenuBuy(data.recommend);
-                            }
-                            Game.Tops.initCoinOfTotal();
-                        }
-                    }
+                    self.buyBirdCb(err, data);
                     break;
                 case 'gold.refresh':
-                    {
-                        if (err) return;
-                        if (data) {
-                            G_baseData.userData.RefrushGold(data.gold, data.timestamp);
-                            Game.Tops.initCoinOfTotal();
-                        }
-                    }
+                    self.goldRefreshCb(err, data);
                     break;
                 case 'bird.compose38':
-                    {
-                        if (err) {
-                            EventDispatch.ins().fire(Event_Name.composeBest, 0)
-                            return;
-                        }
-                        if (data) {
-                            let reward_id: number = Number(data.bird);
-                            EventDispatch.ins().fire(Event_Name.composeBest, reward_id)
-                        }
-                    }
+                    self.composePTCb(err, data);
                     break;
                 case 'bird.compose47':
-                    if (err) {
-                        EventDispatch.ins().fire(Event_Name.composeFive, 1)
-                        return;
-                    }
-                    EventDispatch.ins().fire(Event_Name.composeFive, 0)
+                    self.composeSPCb(err, data);
                     break;
                 case 'server.auth'://403
-                    NetManager.getInstance().close();
-                    Game.HttpManager.lostToken();
+                    self.websocketLost();
                     break;
                 case 'bird.offer'://奖励的鸟
-                    this.isBird_reward(data);
+                    self.awardBirdCb(err, data);
                     break;
             }
         }
-    }
-
-    RestartGame() {
-        cc.tween(this.node)
-            .delay(2)
-            .call(() => {
-                //cc.game.
-                NetManager.getInstance().close();
-                cc.director.loadScene('Loading');
-            })
-            .start();
-
-    }
-
-    /**主界面购买健的刷新+每秒产比的刷新 */
-    initMenuBuy(res: any) {
-        G_baseData.petData.buy_level = Number(res.bird);
-        G_baseData.petData.buy_price = new BigVal(res.price);
-        Game.Bottom.initmessBtnBuy();
-        Game.Tops.initCoinOfSecond();
-        websocketHandler.ins().save_Birds_local();
-    }
-
-    /**生成鸟窝 */
-    private drawBgBlocks() {
-        this.birdBornFather.getComponent(cc.Widget).updateAlignment();
-        console.log("this.birdBornFather.height", this.birdBornFather.height);
-        let catFatherHeigth = Math.floor(this.birdBornFather.height);
-        if (catFatherHeigth >= 750) {
-            G_baseData.petData.scaleBlock = 1;
-        } else {
-            G_baseData.petData.scaleBlock = Number((catFatherHeigth / 780).toFixed(1));
-            console.log("缩放比例", G_baseData.petData.scaleBlock);
-        }
-        //记录鸟窝的编号的
-        var num0: number = 0;
-        let x = -250;
-        //Y默认220
-        let y = 220 + 190 * 2 * G_baseData.petData.scaleBlock;
-        // //分布12个格子
-        for (let i = 0; i < 3; i++) {
-            for (let j = 0; j < 4; j++) {
-                let block = cc.instantiate(this.blockFaps);
-                this.birdBornFather.addChild(block);
-
-                block.scaleX = G_baseData.petData.scaleBlock;
-                block.scaleY = G_baseData.petData.scaleBlock;
-                block.setPosition(cc.v2(x, y));
-                block.getComponent("block").init(num0++);
-                x += 170;
-            }
-            y -= 180 * G_baseData.petData.scaleBlock;
-            x = -250;
-        }
-    }
-
-    /**获取空的地方 */
-    public getEmpty(): cc.Node {
-        var emptyBlock: cc.Node = null;
-        var children = this.birdBornFather.children;
-        for (var i = 0; i < children.length; ++i) {
-            if (children[i].childrenCount == 0) {
-                emptyBlock = children[i];
-                //返回空的方格子
-                return emptyBlock;
-            }
-        }
-        return emptyBlock;
-    }
-
-    /**购买鸟（主界面0，商店（金币1/钻石2），） */
-    buyBird(type: number, shopnum?: number, call?: Function) {
-        let blockItem0 = this.getEmpty();
-        if (!blockItem0) {
-            var string_0 = "位置满了，请合成或者拖到右下角回收";
-            this.gameTips(string_0);
-            return;
-        }
-        switch (type) {
-            case 0:
-                pictureManager.getIns().guideFrist();
-                let birdFather_0 = this.addBird(G_baseData.petData.buy_level);
-                if (birdFather_0) {
-                    G_baseData.userData.TotalCoins = BigVal.Sub(G_baseData.userData.TotalCoins, G_baseData.petData.buy_price); //总金币减少
-                    Game.Tops.initCoinOfTotal(2);
-                    websocketHandler.ins().saveBuyMess(G_baseData.petData.buy_level, "gold", "home")
-                }
-                break;
-            case 1:
-                callbackShop = call;
-                let birdFather_1 = this.addBird(shopnum);
-                if (birdFather_1) {
-                    G_baseData.userData.TotalCoins = BigVal.Sub(G_baseData.userData.TotalCoins, G_baseData.petData.shop_buy_price); //总金币减少
-                    Game.Tops.initCoinOfTotal(2);
-                    websocketHandler.ins().saveBuyMess(shopnum, "gold", "shop")
-                }
-                break;
-            case 2:
-                let birdFather_2 = this.addBird(shopnum);
-                if (birdFather_2) {
-                    websocketHandler.ins().saveBuyMess(shopnum, "fhbc", "shop")
-                }
-                break;
-        }
-        musicManager.ins().playEffectMusic(musicPath.buyshopclip)
-    }
-
-    /**
-     * 购买成功后添加鸟 
-     * @param numlv 等级 
-     * @param type type=2奖励的鸟有奖励弹框
-     * @param weizhiindex 传入鸟的位置信息
-     */
-    public addBird(numlv: number, type?: number, timer?: number) {
-        let blockItem = this.getEmpty();
-        if (!blockItem) {
-            var string_0 = "位置满了，请合成或者拖到右下角回收";
-            this.gameTips(string_0);
-            return;
-        }
-        blockItem.getComponent("block").setNumber(numlv, type, timer); //关键的一步 添加不同等级的鸟
-        return blockItem;
-    }
-
-
-    /**根据上次记录生成鸟的位置 */
-    CreateBirdOfLast() {
-        var isHaveBird = G_baseData.petData.isHaveBird; //是否有鸟,以及鸟的等级等（37级以下包括37）；
-        var Birds = this.birdBornFather.children;
-        for (let i = 0; i < Birds.length; i++) {
-            if (isHaveBird[i] > 0 && isHaveBird[i] < 48) {
-                Birds[i].getComponent("block").setNumber(isHaveBird[i]);
-            }
-        }
-    }
-
-    /**是否有奖励的鸟 */
-    isBird_reward(res: any) {
-        let num = Number(res.bird);
-        let birdFather_0 = this.addBird(num, 2);
-        if (birdFather_0) {
-            websocketHandler.ins().saveSureRewardBird(num);
-            websocketHandler.ins().save_Birds_local();
-        } else {
-            websocketHandler.ins().saveSureRewardBird(0);
-        }
-    }
-
-
-    /**是否有限时分红龙 */
-    isHave_XsLong() {
-        let xianShi = G_baseData.petData.fenhong_breakerBird;
-        for (let index = 0; index < xianShi.length; index++) {
-            this.addBird(47, 3, xianShi[index]);
-        }
-    }
-
-    /**所有游戏中的的提示，弹框的克隆 */
-    gameTips(str: string) {
-        var canvas = cc.find("Canvas");
-        let gameTip = cc.instantiate(this.game_Tips);
-        gameTip.getComponent("gameTips").initMessage(str);
-        gameTip.parent = canvas;
     }
 
     /**添加APP的监听 */
@@ -308,24 +111,16 @@ export default class NewClass extends cc.Component {
                 name: "refreshGameEvent"
             },
                 function (ret, err) {
-                    // console.log(JSON.stringify(ret));
-                    // console.log(JSON.stringify(err));
-                    // console.log(Game.ApiManager.videocallback);
                     var type = ret.value.type;
                     switch (type) {
                         case "videoEnd": //看完视频
-                            self.check_video_back(); //检查看视频的回调
+                            self.watchVideoEndCb(); //检查看视频的回调
                             break;
                         case "closeSound": //离开首页
-                            G_baseData.userData.isHoutai = true; //关闭音效
+                            self.levelMainPageCb();
                             break;
                         case "openSound": //点击首页
-                            G_baseData.userData.isHoutai = false;
-                            let ispauseGame_1 = cc.game.isPaused();
-                            if (ispauseGame_1) {
-                                // console.log("恢复暂停");
-                                cc.game.resume();
-                            }
+                            self.enterMainPageCb();
                             break;
                         case "addGold": //金币刷新
                             break;
@@ -338,6 +133,142 @@ export default class NewClass extends cc.Component {
             );
         } catch (e) {
             console.log("添加视频监听");
+        }
+    }
+
+    //全局的事件监听
+    addEventListenerEvent() {
+        EventDispatch.ins().add(Event_Name.MAIN_MSG, this.recvEventMsg.bind(this), this)
+    }
+
+    //全局事件回调
+    recvEventMsg(msg) {
+        switch (msg.type) {
+            case "gameTips":
+                this.gameTips(msg.value);
+                break;
+            default:
+                break;
+        }
+    }
+
+    RestartGame() {
+        cc.tween(this.node)
+            .delay(2)
+            .call(() => {
+                //cc.game.
+                websocketHandler.ins().webSocketClose();
+                cc.director.loadScene('Loading');
+            })
+            .start();
+
+    }
+
+    /***********websocket监听回调*********************** */
+    /**
+    * 购买宠物回调
+    * @param data 
+    */
+    buyBirdCb(err, data) {
+        if (err || !!!data) return;
+        if (data.scene === "home") {
+            this.initMenuBuy(data.recommend);
+        } else if (data.scene === "shop") {
+            if (data.pay === "gold") {
+                callbackShop(data.shop.price);
+                this.initMenuBuy(data.recommend);
+            } else if (data.pay === "fhbc") {
+                G_baseData.userData.FHBC = G_baseData.userData.FHBC - G_baseData.petData.shop_buy_Fhbc;
+                Game.Tops.initFHBC();
+                this.initMenuBuy(data.recommend);
+            }
+            Game.Tops.initCoinOfTotal();
+        }
+    }
+
+    /**主界面购买健的刷新+每秒产比的刷新 */
+    initMenuBuy(res: any) {
+        G_baseData.petData.buy_level = Number(res.bird);
+        G_baseData.petData.buy_price = new BigVal(res.price);
+        Game.Bottom.initmessBtnBuy();
+        Game.Tops.initCoinOfSecond();
+        websocketHandler.ins().save_Birds_local();
+    }
+
+    /**
+     * 金币刷新回调
+     * @param data 
+     */
+    goldRefreshCb(err, data) {
+        if (err || !!!data) return;
+        G_baseData.userData.RefreshGold(data.gold, data.timestamp);
+        Game.Tops.initCoinOfTotal();
+    }
+
+    /**
+     * 合成38级以下鸟
+     * @param data 
+     */
+    composePTCb(err, data) {
+        if (err || !!!data) {
+            EventDispatch.ins().fire(Event_Name.composeBest, 0)
+            return;
+        }
+        let reward_id: number = Number(data.bird);
+        EventDispatch.ins().fire(Event_Name.composeBest, reward_id)
+    }
+
+    /**
+     * 合成47级鸟
+     * @param data
+     */
+    composeSPCb(err, data) {
+        if (err) {
+            EventDispatch.ins().fire(Event_Name.composeFive, 1)
+            return;
+        }
+        EventDispatch.ins().fire(Event_Name.composeFive, 0)
+    }
+
+    /**
+     * 奖励的鸟
+     * @param err 
+     * @param data 
+     */
+    awardBirdCb(err, data) {
+        if (err || !!!data) return;
+        this.petWnd.isBird_reward(data);
+    }
+
+    websocketLost() {
+        websocketHandler.ins().webSocketClose();
+        Game.HttpManager.lostToken();
+    }
+
+    /************与前端api交互回调***************** */
+    /**
+     * 观看视频结束
+     */
+    watchVideoEndCb() {
+        this.check_video_back();
+    }
+
+    /**
+     * 离开首页
+     */
+    levelMainPageCb() {
+        G_baseData.userData.isHoutai = true; //关闭音效
+    }
+
+    /**
+     * 进入首页
+     */
+    enterMainPageCb() {
+        G_baseData.userData.isHoutai = false;
+        let ispauseGame_1 = cc.game.isPaused();
+        if (ispauseGame_1) {
+            // console.log("恢复暂停");
+            cc.game.resume();
         }
     }
 
@@ -399,7 +330,7 @@ export default class NewClass extends cc.Component {
                     G_baseData.userData.restOfJuan = G_baseData.userData.restOfJuan - 1;
                 }
                 if (ret.data.amount != 0) {
-                    G_baseData.userData.RefrushGold(ret.data.amount.toString(), ret.data.update_time);
+                    G_baseData.userData.RefreshGold(ret.data.amount.toString(), ret.data.update_time);
                     Game.Tops.initCoinOfTotal();
                 }
                 call(ret.data);
@@ -454,5 +385,47 @@ export default class NewClass extends cc.Component {
         }
     }
 
+    /************与main相关的全局事件回调***************** */
+
+    /**所有游戏中的的提示，弹框的克隆 */
+    gameTips(str: string) {
+        var canvas = cc.find("Canvas");
+        let gameTip = cc.instantiate(this.game_Tips);
+        gameTip.getComponent("gameTips").initMessage(str);
+        gameTip.parent = canvas;
+    }
+
+    /****************window层事件******************* */
+    //引导
+    guideFirst() {
+        this.guideWnd.guideFirst();
+    }
+
+    /**获取空的地方 */
+    public getEmpty(): cc.Node {
+        var emptyBlock: cc.Node = this.petWnd.getEmpty();
+        return emptyBlock;
+    }
+
+    /**
+     * 购买鸟
+     * @param type 0主页 1商店金币 2商店MBC
+     * @param birdId 鸟id
+     * @param call 回调
+     */
+    buyBird(type: number, birdId?: number, call?: Function) {
+        this.petWnd.buyBird(type, birdId, call)
+    }
+
+    /**
+     * 购买成功后添加鸟 
+     * @param numLv 等级 
+     * @param type type=2奖励的鸟有奖励弹框
+     * @param weizhiindex 传入鸟的位置信息
+     */
+    public addBird(numLv: number, type?: number, timer?: number) {
+        let blockItem = this.petWnd.addBird(numLv, type, timer);
+        return blockItem;
+    }
 }
 

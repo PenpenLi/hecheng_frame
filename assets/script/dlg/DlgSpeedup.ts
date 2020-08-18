@@ -3,7 +3,7 @@ import { uiFormType, uiFormPath, isUseBananer, widdleType } from "../common/base
 import uiType from "../common/ui/uitype";
 import { G_baseData } from "../data/baseData";
 import { Game } from "../game/Game";
-import websocketHandler from "../game/websocketHandler";
+import websocketHandler from "../net/websocketHandler";
 
 
 /**花费钻石数量*/

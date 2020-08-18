@@ -1,7 +1,6 @@
 import baseUi from "../common/ui/baseUi"
 import { uiFormType, uiFormPath } from "../common/base/gameConfigs";
 import uiType from "../common/ui/uitype";
-import pictureManager from "../game/pictureManager";
 import { Game } from "../game/Game";
 import { G_baseData } from "../data/baseData";
 
@@ -37,7 +36,7 @@ export default class setup extends baseUi {
     formType = new uiType(uiFormType.PopUp)
 
     _open(param) {
-        pictureManager.getIns().guideFrist(); //新手指引
+        Game.gameManager.guideFirst(); //新手指引
         this.btnShare.on("click", this.Btnxaunyao, this);
         console.log("param", param);
         if (!param) {
@@ -47,11 +46,9 @@ export default class setup extends baseUi {
         this.changeBirdImage(param[0], param[1]);
     }
 
-
-
     /**换图片的方法 */
     changeBirdImage(num: number, type: number = 0) {
-        this.sprBirdHead.spriteFrame = pictureManager.getIns().birdTuji[num - 1];
+        this.sprBirdHead.spriteFrame = G_baseData.petData.birdSprList[num - 1];
         let str = G_baseData.petData.getBirdName(num);
         //补写鸟的名字
         this.labBirdName.string = str;
@@ -71,7 +68,7 @@ export default class setup extends baseUi {
             this.type_ku = 3;
         } else if (type == 4) {//限时分红
             this.labKuangName.spriteFrame = this.tukU[1]; //恭喜获得
-            this.sprBirdHead.spriteFrame = pictureManager.getIns().birdTuji[47];
+            this.sprBirdHead.spriteFrame = G_baseData.petData.birdSprList[47];
             this.type_ku = 4;
         }
     }
@@ -87,7 +84,7 @@ export default class setup extends baseUi {
     }
 
     _close() {
-        pictureManager.getIns().guideFrist(); //新手指引
+        Game.gameManager.guideFirst(); //新手指引
         if (this.type_ku == 2) {
             this.reward_bird();
         }

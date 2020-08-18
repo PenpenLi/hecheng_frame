@@ -101,7 +101,7 @@ export default class bottom extends baseUi {
     /**赋值购买健*/
     initmessBtnBuy() {
         let lv = G_baseData.petData.buy_level;
-        this.sprbtnBuy.spriteFrame = pictureManager.getIns().carHeads[lv - 1];
+        this.sprbtnBuy.spriteFrame = G_baseData.petData.smallBirdSprList[lv - 1];
         this.labcoinBtnBuy.string = G_baseData.petData.buy_price.geteveryStr();
         this.lablvBtnBuy.string = `Lv${lv}`;
     }

@@ -55,7 +55,7 @@ export default class shopItem extends cc.Component {
         this.LabBirdsName.node.parent.active = true;
         this.LabBirdsName.string = G_baseData.petData.getBirdName(this.IndexNum); //鸟的名字
         //两张图片
-        this.sprBird.spriteFrame = pictureManager.getIns().birdTuji[this.IndexNum - 1]; //鸟的图片
+        this.sprBird.spriteFrame = G_baseData.petData.birdSprList[this.IndexNum - 1]; //鸟的图片
         this.sprBird.node.color = new cc.Color(255, 255, 255, 255);
         this.LabIndex.string = this.IndexNum.toString();
         if (obj.type == 1) { //type=0 不能购买  type=1 金币 type=2 钻石

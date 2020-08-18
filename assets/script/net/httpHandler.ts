@@ -1,7 +1,7 @@
 
 import { G_baseData } from "../data/baseData";
 var url0 = "http://mihecheng.vmall99.com"; //测示服  _注意视频回调接口的更换
-import aes = require("../http/aes.js")
+import aes = require("./http/aes.js")
 import { Game } from "../game/Game";
 
 export default class httpHandler {
@@ -55,7 +55,6 @@ export default class httpHandler {
     }
 
     GetHttpUrl() {
-        console.log("222222",window.UrlManager.HttpUrl)
         return window.UrlManager.HttpUrl
     }
 
@@ -122,6 +121,5 @@ export default class httpHandler {
             // cc.game.end();
         }
     }
-
 };
 

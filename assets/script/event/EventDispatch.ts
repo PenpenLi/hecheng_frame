@@ -1,4 +1,4 @@
-import SingletonClass from "../base/SingletonClass";
+import SingletonClass from "../common/base/SingletonClass";
 
 /**加入自定义事件 孙 6/22 10：00 */
 export class EventDispatch extends SingletonClass {
@@ -55,6 +55,7 @@ export class EventDispatch extends SingletonClass {
 
 /**事件名称定义*/
 export enum Event_Name {
+    MAIN_MSG = "main_msg",
     /**37级合成 */
     composeBest = "composeBest",
     /**五龙合成 */

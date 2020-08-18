@@ -28,6 +28,12 @@ export const UI_CONFIG_NAME = {
     panel_overlay_bg: "prefab/panel/panel_overlay_bg"
 }
 
+//加载图集
+export const UI_ATLAS = {
+    BirdList: "atlas/birdList",
+    SmallBirdList:"atlas/birdSmallHead"
+}
+
 
 /**弹框的类型 */
 export enum uiFormType {

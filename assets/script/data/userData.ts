@@ -1,7 +1,7 @@
 import BigVal from "../common/bigval/BigVal";
 import SingletonClass from "../common/base/SingletonClass";
 
-/**基本的数据管理类 */
+/**基本的用户数据 */
 export default class userData extends SingletonClass {
 
     public static ins() {
@@ -110,7 +110,7 @@ export default class userData extends SingletonClass {
      * 如果时间戳过老、金币没有变化，则返回false
      * 如果可以更新，返回true，则自动将主页金币刷新到最新
     */
-    RefrushGold(gold, timestamp) {
+    RefreshGold(gold, timestamp) {
         if (timestamp > this.Last_GoldRefrush_Time) {
             this.Last_GoldRefrush_Time = timestamp;
             if (gold != this.TotalCoins.Num) {

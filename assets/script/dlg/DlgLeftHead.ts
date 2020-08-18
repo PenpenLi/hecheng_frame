@@ -68,7 +68,7 @@ export default class setup extends baseUi {
     changeHeadImage() {
         let num = G_baseData.petData.BestBirdOfLv;
         let str = G_baseData.petData.getBirdName((num));
-        this.sprBirds.spriteFrame = pictureManager.getIns().birdTuji[num - 1];
+        this.sprBirds.spriteFrame = G_baseData.petData.birdSprList[num - 1];
         this.labBirdName.string = str;
         this.sendMessBird();
     }

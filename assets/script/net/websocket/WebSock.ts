@@ -39,10 +39,17 @@ export class WebSock implements ISocket {
         if (cc.loader.md5Pipe) {
             pemUrl = cc.loader.md5Pipe.transformURL(pemUrl)
             console.log('pemUrlsssssssss' + pemUrl);
-            this._ws = new WebSocket(url, [], pemUrl);
+            try {
+                this._ws = new WebSocket(url, [], pemUrl);
+                //???? 
+                // this._ws = new WebSocket(url, [, pemUrl]);
+            } catch (error) {
+                console.log('-----_ws', error)
+            }
         } else {
             this._ws = new WebSocket(url, []);
         }
+
         // this._ws = new WebSocket(url);
         this._ws.binaryType = options.binaryType ? options.binaryType : "arraybuffer";
         this._ws.onmessage = (event) => {

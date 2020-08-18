@@ -3,7 +3,7 @@ import BigVal from "../common/bigval/BigVal";
 import { uiManager } from "../common/ui/uiManager";
 import { uiFormType, UI_CONFIG_NAME, uiFormPath, musicPath } from "../common/base/gameConfigs";
 import musicManager from "../common/music/musicManager";
-import webscoketConfig from "../game/websocketHandler";
+import webscoketConfig from "../net/websocketHandler";
 import { Game } from "../game/Game";
 import block from "./block";
 import { G_baseData } from "../data/baseData";
@@ -86,7 +86,7 @@ export default class blockitem extends cc.Component {
         this.num_best = num; //记录鸟唯一的标记
         this.Numlv = G_baseData.petData.returnBirdLV(num); //鸟的合成等级
         this.LabBirdLv.string = G_baseData.petData.showBirdLv(num); //鸟的显示等级
-        this.sprBird.spriteFrame = pictureManager.getIns().birdTuji[this.num_best - 1];
+        this.sprBird.spriteFrame = G_baseData.petData.birdSprList[this.num_best - 1];
         //开一个定时器,每一秒产生多少金币
         this.dataTime = this.num_best * 0.02 + 5;
         this.getCoinSpeed();
@@ -104,7 +104,7 @@ export default class blockitem extends cc.Component {
         this._issave = false;
         this.num_best = numlv; //唯一标记 
         this.Numlv = G_baseData.petData.returnBirdLV(numlv); //移动等级
-        this.sprBird.spriteFrame = pictureManager.getIns().birdTuji[numlv - 1]; //本身图片
+        this.sprBird.spriteFrame = G_baseData.petData.birdSprList[numlv - 1]; //本身图片
         // this.LabBirdLv.string = G_baseData.petData.showBirdLv(numlv); //显示等级 
         this.LabBirdLv.node.parent.active = false;
         this.xsTimmer.node.active = true;
@@ -201,7 +201,7 @@ export default class blockitem extends cc.Component {
         var LabBirdlv = this.moveItem.getChildByName("labBirdLv"); //等级
 
         bgClonebird.setPosition(this.sprBird.node.position);
-        bgClonebird.getComponent(cc.Sprite).spriteFrame = pictureManager.getIns().birdTuji[this.num_best - 1];
+        bgClonebird.getComponent(cc.Sprite).spriteFrame = G_baseData.petData.birdSprList[this.num_best - 1];
         LabBirdlv.getComponent(cc.Label).string = G_baseData.petData.showBirdLv(this.Numlv);
 
         this.num_start = this.node.parent.getComponent(block).birdOfId; //鸟窝的标记    
@@ -469,7 +469,7 @@ export default class blockitem extends cc.Component {
     /**合成成功后删除自身移动目标等级加一 */
     composeEnd(num: number) {
         var birdHead = this.otherBirdNest.getChildByName("Bird").getComponent(blockitem);
-        birdHead.sprBird.spriteFrame = pictureManager.getIns().birdTuji[num - 1];
+        birdHead.sprBird.spriteFrame = G_baseData.petData.birdSprList[num - 1];
         this.otherBirdNest.getChildByName("Bird").getComponent(blockitem).LabBirdLv.string = G_baseData.petData.showBirdLv(num);
         this.otherBirdNest.getChildByName("Bird").getComponent(blockitem).Numlv = G_baseData.petData.returnBirdLV(num);; //进行合成判断
         this.otherBirdNest.getChildByName("Bird").getComponent(blockitem).num_best = num; //鸟唯一的标记

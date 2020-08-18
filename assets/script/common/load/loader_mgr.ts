@@ -27,6 +27,11 @@ export class loader_mgr {
         })
     }
 
+    // cc.loader.loadRes("test assets/sheep", cc.SpriteAtlas, function (err, atlas) {
+    //     var frame = atlas.getSpriteFrame('sheep_down_0');
+    //     sprite.spriteFrame = frame;
+    // });
+
     /**从resources目录加载asset，asset是指cc.SpriteFrame, cc.AnimationClip, cc.Prefab*/
     public async  loadAsset(url: string, type: typeof cc.Asset) {
         if (!url || !type) {

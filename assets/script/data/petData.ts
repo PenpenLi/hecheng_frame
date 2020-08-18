@@ -4,12 +4,12 @@ import { G_baseData } from "./baseData";
 import { loader_mgr } from "../common/load/loader_mgr";
 import { Global_Var } from "../common/base/GlobalVar";
 
-/**基本的数据管理类 */
+/**宠物数据 */
 export default class petData extends SingletonClass {
     public static ins() {
         return super.ins() as petData;
     }
-    
+
     //每一次金币的总数
     everyCions: BigVal = new BigVal("80");
 
@@ -44,7 +44,9 @@ export default class petData extends SingletonClass {
     fenhong_breakerBird: Array<number> = [];
 
     /** 名字的集合*/
-    birdName: {} = null;
+    birdName: {} = null; //鸟的名字
+    birdSprList: cc.SpriteFrame[] = []; //鸟的头像合集
+    smallBirdSprList: cc.SpriteFrame[] = [];//鸟的小头像合集
 
     /**加载数据表 */
     public async LogCfg() {
@@ -139,7 +141,6 @@ export default class petData extends SingletonClass {
     /**保存鸟的本地数据 */
     saveBirdLocalPosition() {
         var str = this.isHaveBird.join("#");
-        console.log("存储1111",str);
         Global_Var.setStorage(G_baseData.userData.PlayerId, JSON.stringify(str));
     }
 }

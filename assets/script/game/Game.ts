@@ -2,7 +2,7 @@
 import main from "./main";
 import boxMove from "./BoxMove"
 import { ApiManager } from "./ApiManager";
-import httpHandler from "../http/httpHandler";
+import httpHandler from "../net/httpHandler";
 import Tops from "../dlg/Tops";
 import bottom from "../dlg/Bottom";
 import { Console } from "../common/unitl/Console";

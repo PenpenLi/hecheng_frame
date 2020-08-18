@@ -48,7 +48,7 @@ export default class DlgXianshFhView extends baseUi {
     }
     /**生成地图的样子 */
     creatOfFrame() {
-        let spr: cc.SpriteFrame = pictureManager.getIns().birdTuji[46];
+        let spr: cc.SpriteFrame = G_baseData.petData.birdSprList[46];
         var children = this.concent.children;
         for (var i = 0; i < children.length; i++) {
             var node = cc.instantiate(this.item_xianshi);

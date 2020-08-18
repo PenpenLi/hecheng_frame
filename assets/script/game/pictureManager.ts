@@ -15,18 +15,6 @@ export default class pictureManager extends cc.Component {
     @property(cc.Prefab)
     starEffects: cc.Prefab = null;
 
-    @property(cc.SpriteAtlas)
-    HeadImage: cc.SpriteAtlas = null;
-
-    /**long的头像 */
-    birdTuji: cc.SpriteFrame[] = [];
-
-    @property(cc.SpriteAtlas)
-    smallHeadImage: cc.SpriteAtlas = null;
-    /**车头的集合*/
-    carHeads: cc.SpriteFrame[] = [];
-
-
     /**聚宝盆 */
     @property(cc.Node)
     juBaoPen: cc.Node = null;
@@ -39,22 +27,20 @@ export default class pictureManager extends cc.Component {
     stPos: cc.Vec2 = null;
     edPos: cc.Vec2 = null;
 
-
     static getIns(): pictureManager {
+        if (!!!instance) {
+            instance = new pictureManager();
+        }
         return instance;
     }
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
         instance = this;
-        setTimeout(() => {
-            this.loadtuji();
-        }, 0)
         this.scheduleOnce(() => {
             this.initFlyCoin();
             //this.initDao();
         }, 2)
-        // cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
     }
 
     /**合成鸟时的特效 */
@@ -64,26 +50,6 @@ export default class pictureManager extends cc.Component {
         let heigth = this.node.height / 2;
         sterPer.setPosition(cc.v2(0, heigth));
     }
-
-    // onKeyDown(event: cc.Event.EventKeyboard) {
-    //     switch (event.keyCode) {
-    //         case cc.macro.KEY.a:
-    //             console.log("鸟窝的等级", G_baseData.petData.isHaveBird);
-    //             break;
-    //         case cc.macro.KEY.s:
-    //             uiManager.ins().show(UI_CONFIG_NAME.DlgUpGrade, 15, 3);
-    //             break;
-    //         case cc.macro.KEY.d:
-    //             uiManager.ins().show(UI_CONFIG_NAME.DlgXianshFhView)
-    //             break;
-    //         case cc.macro.KEY.f:
-    //             uiManager.ins().show(UI_CONFIG_NAME.DlgUpGrade, 15, 0);
-    //             break;
-    //         case cc.macro.KEY.x:
-    //             uiManager.ins().show(UI_CONFIG_NAME.DlgUpGrade, 15, 4);
-    //             break;
-    //     }
-    // }
 
     jindu: cc.Sprite = null;
     pen: cc.Button = null;
@@ -118,69 +84,7 @@ export default class pictureManager extends cc.Component {
         }
     }
 
-
-    /**新手指引第一步 */
-    guideFrist() {
-        if (G_baseData.userData.isxinshou != 0) return;
-        try {
-            var mask = cc.find("Canvas/mask");
-            var hand = mask.getChildByName("hand");
-            var tips1 = mask.getChildByName("labtips").getComponent(cc.Label);
-            num_newstep += 1;
-            var mask2 = cc.find("Canvas/mask2");
-            switch (num_newstep) {
-                case 1: //第一步买鸟
-                    mask.active = true;
-                    break;
-                case 2: //拖动
-                    mask.active = false;
-                    mask2.active = true;
-                    break;
-                case 3: //继续购买角色
-                    mask.active = false;
-                    mask2.active = false;
-                    break;
-                case 4:
-                    mask.active = true;
-                    tips1.string = "点这里可以继续购买角色";
-                    hand.x += 5;
-                    hand.y += 30;
-                    break;
-                case 5:
-                    tips1.string = "角色越多赚钱越多";
-                    hand.x -= 5;
-                    hand.y -= 30;
-                    break;
-                case 6:
-                    tips1.string = "角色越多赚钱越多";
-                    hand.x += 5;
-                    hand.y += 30;
-                    break;
-                case 7:
-                    Game.ApiManager.openHongbao(7); //新手红包
-                    mask.active = false;
-                    mask2.active = false;
-                    G_baseData.userData.isxinshou = 1;
-                    break;
-            }
-        } catch (e) {
-            console.log(e);
-        }
-    }
-
-    /**加载车头图标 */
-    loadtuji() {
-        let carHead = this.smallHeadImage.getSpriteFrames();
-        for (let i = 0; i < carHead.length; i++) {//排序
-            let index = parseInt(carHead[i].name);
-            this.carHeads[index - 1] = carHead[i];
-        }
-        let birdTujis = this.HeadImage.getSpriteFrames();
-        for (let i = 0; i < birdTujis.length; i++) {//排序
-            let index = parseInt(birdTujis[i].name);
-            this.birdTuji[index - 1] = birdTujis[i];
-        }
-    }
+  
 
     /**初始化金币位置 */
     initFlyCoin() {

@@ -3,8 +3,8 @@ import { uiFormType, uiFormPath } from "../common/base/gameConfigs";
 import uiType from "../common/ui/uitype";
 import pictureManager from "../game/pictureManager";
 import { Game } from "../game/Game";
-import websocketHandler from "../game/websocketHandler";
-import { EventDispatch, Event_Name } from "../common/event/EventDispatch";
+import websocketHandler from "../net/websocketHandler";
+import { EventDispatch, Event_Name } from "../event/EventDispatch";
 import blockitem from "../perfab/blockitem";
 import { G_baseData } from "../data/baseData";
 
@@ -68,7 +68,7 @@ export default class DlgBestCompose extends baseUi {
         for (var i = 0; i < children.length; i++) {
             var node = cc.instantiate(this.BirdPerfabs);
             let index = this.initPicture(i);
-            node.getComponent(cc.Sprite).spriteFrame = pictureManager.getIns().birdTuji[index - 1];
+            node.getComponent(cc.Sprite).spriteFrame = G_baseData.petData.birdSprList[index - 1];
             node.getChildByName("labName").getComponent(cc.Label).string = G_baseData.petData.getBirdName(index);
             node.parent = children[i];
             node.setPosition(cc.v2(0, 0));

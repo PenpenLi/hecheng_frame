@@ -149,7 +149,7 @@ export default class Tops extends baseUi {
 
                     var funSuc = (ret) => {
                         Game.Console.Log(ret)
-                        G_baseData.userData.RefrushGold(ret.data.amount, ret.data.update_time);
+                        G_baseData.userData.RefreshGold(ret.data.amount, ret.data.update_time);
                         if (ret.code == 0) {
                             initOFRigthCoin(ret.data.add_num);
                         }
@@ -311,7 +311,7 @@ export default class Tops extends baseUi {
 
     /**刷新我的头像 */
     initmyHead(lv: number) {
-        this.myheadSpr.spriteFrame = pictureManager.getIns().birdTuji[lv - 1];
+        this.myheadSpr.spriteFrame = G_baseData.petData.birdSprList[lv - 1];
         this.myheadName.string = G_baseData.petData.getBirdName(lv);
         let name_num: number = 1;
         if (lv < 38) {
@@ -383,7 +383,7 @@ export default class Tops extends baseUi {
             console.log("res", res.data.type)
             switch (res.data.type) {
                 case 'gold':
-                    G_baseData.userData.RefrushGold(res.data.amount, res.data.update_time);
+                    G_baseData.userData.RefreshGold(res.data.amount, res.data.update_time);
                     uiManager.ins().show(UI_CONFIG_NAME.DlgFrame, 1, 3, new BigVal(res.data.num));
                     break;
                 case 'fhbc':

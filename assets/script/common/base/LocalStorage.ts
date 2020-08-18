@@ -12,7 +12,6 @@ export class LocalStorage extends SingletonClass {
         try {
             if (typeof value == 'object')
                 value = JSON.stringify(value)
-            console.log("存储")
             cc.sys.localStorage.setItem(this.str_encrypt(this._game_key + key), this.str_encrypt(value, this._game_key + key))
         } catch (e) {
 
@@ -22,13 +21,11 @@ export class LocalStorage extends SingletonClass {
     public getLocal(key: string, defaultValue?) {
         try {
             let result = cc.sys.localStorage.getItem(this.str_encrypt(this._game_key + key));
-            console.log("预读取", result);
             if (result == null) {
                 return defaultValue
             }
             result = this.str_decrypt(result, this._game_key + key);
             result=JSON.parse(result);
-            console.log("读取", result);
 
             // switch (typeof defaultValue) {
             //     case 'object': {
