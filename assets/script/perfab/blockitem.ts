@@ -3,7 +3,7 @@ import BigVal from "../common/bigval/BigVal";
 import { uiManager } from "../common/ui/uiManager";
 import { uiFormType, UI_CONFIG_NAME, uiFormPath, musicPath } from "../common/base/gameConfigs";
 import musicManager from "../common/music/musicManager";
-import webscoketConfig from "../net/websocketHandler";
+import websocketHandler from "../net/websocketHandler";
 import { Game } from "../game/Game";
 import block from "./block";
 import { G_baseData } from "../data/baseData";
@@ -60,15 +60,12 @@ export default class blockitem extends cc.Component {
     onLoad() {
         this.labFly.string = "";
 
-        Game.ParentItem.scaleX = G_baseData.petData.scaleBlock;
-        Game.ParentItem.scaleY = G_baseData.petData.scaleBlock;
         this.node.on(cc.Node.EventType.TOUCH_START, this.FingerStart, this);
         this.node.on(cc.Node.EventType.TOUCH_MOVE, this.FingerMove, this);
         this.node.on(cc.Node.EventType.TOUCH_END, this.FingerEnd, this);
         //手指在目标节点区域外离开屏幕时
         this.node.on(cc.Node.EventType.TOUCH_CANCEL, this.clickUP, this);
     }
-
 
     /**初始化购买不通等级的鸟时(37级以下的鸟) */
     initOfBird(num: number, type?: number, timer?: number) {
@@ -204,8 +201,9 @@ export default class blockitem extends cc.Component {
         bgClonebird.getComponent(cc.Sprite).spriteFrame = G_baseData.petData.birdSprList[this.num_best - 1];
         LabBirdlv.getComponent(cc.Label).string = G_baseData.petData.showBirdLv(this.Numlv);
 
+        let blockNode = this.node.parent;
         this.num_start = this.node.parent.getComponent(block).birdOfId; //鸟窝的标记    
-        this.node.parent = Game.ParentItem;
+        this.node.parent = blockNode.parent.parent.getChildByName("birdMoveFather");
         let fingerPos = event.getLocation(); //获得触摸点的坐标
         this.node.position = this.node.parent.convertToNodeSpaceAR(cc.v3(fingerPos)); //转换为UI坐标
 
@@ -287,7 +285,7 @@ export default class blockitem extends cc.Component {
                 this.otherBirdNest.getChildByName("Bird").setPosition(this.position_chuwu);
                 this.moveItem.destroy();
                 //本地保存
-                webscoketConfig.ins().save_Birds_local();
+                websocketHandler.ins().save_Birds_local();
                 break;
             case 3: //没有
                 this.parents = this.moveItem.parent;
@@ -295,17 +293,15 @@ export default class blockitem extends cc.Component {
                 this.node.setPosition(this.position_chuwu);
                 this.moveItem.destroy();
                 //本地保存
-                webscoketConfig.ins().save_Birds_local();
+                websocketHandler.ins().save_Birds_local();
                 break;
             case 4: //垃圾箱
                 if (this.num_best != 44) {
-
                     if (this.Is_TimeBird == 1) {
                         Game.gameManager.gameTips('限时分红凤不可回收');
                         this.clickUP('');
                         return;
                     }
-
                     this.ShowDlgDusBin();
                     this.parents = this.moveItem.parent;
                     this.moveItem.destroy();
@@ -318,9 +314,9 @@ export default class blockitem extends cc.Component {
                     Game.Tops.initCoinOfSecond();
 
                     let _num2: number = this.num_best;
-                    webscoketConfig.ins().saveDelBird(_num2);
+                    websocketHandler.ins().saveDelBird(_num2);
                     //本地保存
-                    webscoketConfig.ins().save_Birds_local();
+                    websocketHandler.ins().save_Birds_local();
                 }
                 break;
         }
@@ -337,7 +333,7 @@ export default class blockitem extends cc.Component {
             this.parents = this.moveItem.parent;
             this.moveItem.destroy();
             //服务器：普通合成
-            webscoketConfig.ins().saveComposeMess(bestnum);
+            websocketHandler.ins().saveComposeMess(bestnum);
             //播放音效
             musicManager.ins().playEffectMusic(musicPath.addcoinclip);
             //合成特效
@@ -408,7 +404,7 @@ export default class blockitem extends cc.Component {
     BtnRecovery() {
         let _num2 = this.num_best;
         //服务端删除宠物
-        webscoketConfig.ins().saveDelBird(_num2);
+        websocketHandler.ins().saveDelBird(_num2);
         this.delYourself();
         //刷新每秒产生金币
         Game.Tops.initCoinOfSecond();
@@ -418,7 +414,7 @@ export default class blockitem extends cc.Component {
         //播放音效
         musicManager.ins().playEffectMusic(musicPath.getmoneyClip)
         //本地保存
-        webscoketConfig.ins().save_Birds_local();
+        websocketHandler.ins().save_Birds_local();
     }
 
     /**外部关闭（一打开就关闭）弹框时调用的方法（） */
@@ -451,9 +447,9 @@ export default class blockitem extends cc.Component {
             // //刷新每秒产生金币
             Game.Tops.initCoinOfSecond();
             //服务端：情侣龙删除
-            webscoketConfig.ins().saveComposeQinglv();
+            websocketHandler.ins().saveComposeQinglv();
             //本地保存
-            webscoketConfig.ins().save_Birds_local();
+            websocketHandler.ins().save_Birds_local();
         } else {
             this.parents = this.moveItem.parent;
             this.node.parent = this.parents;
@@ -481,7 +477,7 @@ export default class blockitem extends cc.Component {
         G_baseData.petData.isHaveBird[index] = num;
 
         //本地保存
-        webscoketConfig.ins().save_Birds_local();
+        websocketHandler.ins().save_Birds_local();
     }
 
     /**37抽奖完成+五龙合成+系统赠送(type=2)+普通合成更高级的鸟type=1——恭喜获得 默认0=升级成功*/

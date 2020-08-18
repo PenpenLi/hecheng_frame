@@ -61,7 +61,6 @@ export default class loading extends cc.Component {
             self.TBl_isOk = true;
             self.LoadGame();
         })
-        // G_baseData.petData.LogCfg();
     }
 
     /**获取游戏设置数据 */
@@ -158,9 +157,7 @@ export default class loading extends cc.Component {
                 str = birdPositonNet;
             }
         }
-        console.log("----", str)
         Global_Var.getArrayFromStr(str, G_baseData.petData.isHaveBird); //鸟的位置
-        console.log("鸟的位置", G_baseData.petData.isHaveBird)
         G_baseData.petData.fenhong_breakerBird = obj.fenhong_compose;
 
         this.MsgOK = true;
@@ -201,7 +198,6 @@ export default class loading extends cc.Component {
         var islast = true; //默认读本地
         var array1 = this.NumBsort(str); //本地
         var array2 = this.NumBsort(str2); //服务器
-
         let arr1count = 0;
         let arr2count = 0;
         for (const key in array1) {

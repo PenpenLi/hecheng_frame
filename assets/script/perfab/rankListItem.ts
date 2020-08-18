@@ -1,5 +1,5 @@
 import BigVal from "../common/bigval/BigVal";
-import { loader_mgr } from "../common/load/loader_mgr"
+import { loaderMgr } from "../common/load/loaderMgr"
 import { Game } from "../game/Game";
 import { G_baseData } from "../data/baseData";
 
@@ -78,7 +78,7 @@ export default class rankListItem extends cc.Component {
     public async loadingHead(container: cc.Sprite, remoteUrl: string) {
         container.spriteFrame = null;
         if (remoteUrl === "") return;
-        let pngs = await loader_mgr.ins().loadExternalAsset(remoteUrl, "png");
+        let pngs = await loaderMgr.ins().loadExternalAsset(remoteUrl, "png");
         container.spriteFrame = new cc.SpriteFrame(pngs)
     }
 

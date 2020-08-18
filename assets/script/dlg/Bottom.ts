@@ -106,7 +106,6 @@ export default class bottom extends baseUi {
         this.lablvBtnBuy.string = `Lv${lv}`;
     }
 
-
     /**视频回掉完显示加速的方法 */
     speed_video_back(jiasutime: number) {
         var labTimer = this.btnSpeed.getChildByName("LabTimer"); //显示文字

@@ -2,7 +2,6 @@ import { musicPath } from "../common/base/gameConfigs";
 import BigVal from "../common/bigval/BigVal";
 
 //长连接
-import pictureManager from "../game/pictureManager";
 import musicManager from "../common/music/musicManager";
 import { Game } from "../game/Game";
 import { EventDispatch, Event_Name } from "../event/EventDispatch";
@@ -21,9 +20,6 @@ export default class petWindow extends cc.Component {
     @property(cc.Prefab)
     blockFaps: cc.Prefab = null;
 
-    @property(cc.Prefab)
-    game_Tips: cc.Prefab = null;
-
     onLoad() {
 
     }
@@ -38,7 +34,7 @@ export default class petWindow extends cc.Component {
         manager.enabled = true; //开启碰撞检测
         // manager.enabledDebugDraw = true;
 
-        Game.ParentItem = cc.find("Canvas/UIROOT/Middle/Panel_bird/birdMoveFther");
+        this.setBlockScale();
         this.drawBgBlocks();
 
         this.scheduleOnce(() => {
@@ -47,17 +43,22 @@ export default class petWindow extends cc.Component {
         }, 0.5)
     }
 
-    /**生成鸟窝 */
-    private drawBgBlocks() {
+    /**
+     * 设置鸟窝的缩放比例
+     */
+    private setBlockScale() {
         this.birdBornFather.getComponent(cc.Widget).updateAlignment();
-        console.log("this.birdBornFather.height", this.birdBornFather.height);
-        let catFatherHeigth = Math.floor(this.birdBornFather.height);
-        if (catFatherHeigth >= 750) {
+        let catFatherHeight = Math.floor(this.birdBornFather.height);
+        if (catFatherHeight >= 750) {
             G_baseData.petData.scaleBlock = 1;
         } else {
-            G_baseData.petData.scaleBlock = Number((catFatherHeigth / 780).toFixed(1));
+            G_baseData.petData.scaleBlock = Number((catFatherHeight / 780).toFixed(1));
             console.log("缩放比例", G_baseData.petData.scaleBlock);
         }
+    }
+
+    /**生成鸟窝 */
+    private drawBgBlocks() {
         //记录鸟窝的编号的
         var num0: number = 0;
         let x = -250;

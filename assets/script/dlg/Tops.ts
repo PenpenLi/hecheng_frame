@@ -4,7 +4,6 @@ import uiType from "../common/ui/uitype";
 import AdaptationManager, { AdaptationType } from "../common/ui/AdaptationManager";
 import { uiManager } from "../common/ui/uiManager";
 import { UI_CONFIG_NAME } from "../common/base/gameConfigs";
-import pictureManager from "../game/pictureManager"
 import BigVal from "../common/bigval/BigVal"
 import { Game } from "../game/Game";
 import LabelGundong from "../common/unitl/LabelGundong";
@@ -31,7 +30,6 @@ export default class Tops extends baseUi {
     @property(cc.Node)
     JewelClick: cc.Node = null;
 
-
     /**fhbc */
     FHBC: cc.Label = null;
     /**昨日收益 */
@@ -42,7 +40,6 @@ export default class Tops extends baseUi {
     myheadName: cc.Label = null;
     /**我的头像的等级 */
     myheadLv: cc.Label = null;
-
 
     /**领取金币的按钮 */
     btnrightCoins: cc.Node = null;
@@ -139,12 +136,8 @@ export default class Tops extends baseUi {
                         G_baseData.userData.now_time = _nowtime;
                         G_baseData.userData.rec_time = _nowtime;
                         G_baseData.userData.LocolIndexTime = _nowtime;
-
                         var coins = new BigVal(price);
-
-
                         uiManager.ins().show(UI_CONFIG_NAME.DlgRigthCoins, "+" + coins.geteveryStr());
-
                     }
 
                     var funSuc = (ret) => {
@@ -242,7 +235,6 @@ export default class Tops extends baseUi {
             this.btnrightCoins.getComponent(cc.Button).interactable = false;
         }
     }
-
 
     /**填零方法 */
     addZone(num) {

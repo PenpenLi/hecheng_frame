@@ -1,9 +1,9 @@
-export class loader_mgr {
-    private static instance: loader_mgr;
+export class loaderMgr {
+    private static instance: loaderMgr;
 
     static ins() {
         if (!this.instance) {
-            this.instance = new loader_mgr();
+            this.instance = new loaderMgr();
         }
         return this.instance;
     }

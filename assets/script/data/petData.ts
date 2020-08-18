@@ -1,7 +1,7 @@
 import BigVal from "../common/bigval/BigVal";
 import SingletonClass from "../common/base/SingletonClass";
 import { G_baseData } from "./baseData";
-import { loader_mgr } from "../common/load/loader_mgr";
+import { loaderMgr } from "../common/load/loaderMgr";
 import { Global_Var } from "../common/base/GlobalVar";
 
 /**宠物数据 */
@@ -50,7 +50,7 @@ export default class petData extends SingletonClass {
 
     /**加载数据表 */
     public async LogCfg() {
-        this.birdName = await loader_mgr.ins().loadName("namejson/birdName");
+        this.birdName = await loaderMgr.ins().loadName("namejson/birdName");
     }
 
     /**鸟的名字 */

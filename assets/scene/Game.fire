@@ -17,7 +17,7 @@
         "__id__": 2
       },
       {
-        "__id__": 95
+        "__id__": 96
       }
     ],
     "_active": false,
@@ -97,6 +97,9 @@
       },
       {
         "__id__": 94
+      },
+      {
+        "__id__": 95
       }
     ],
     "_prefab": null,
@@ -186,7 +189,7 @@
       "array": [
         0,
         0,
-        398.3716857408418,
+        474.5819212738724,
         0,
         0,
         0,
@@ -835,7 +838,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "birdBornFther",
+    "_name": "birdBornFather",
     "_objFlags": 512,
     "_parent": {
       "__id__": 15
@@ -924,7 +927,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "birdMoveFther",
+    "_name": "birdMoveFather",
     "_objFlags": 0,
     "_parent": {
       "__id__": 15
@@ -994,7 +997,6 @@
     "blockFaps": {
       "__uuid__": "0a2600db-6606-4c45-b189-5624f5cf9cb6"
     },
-    "game_Tips": null,
     "_id": "5btZd1jsxIvoUK27eOFA8r"
   },
   {
@@ -3780,6 +3782,16 @@
     "_id": "77pUYFxf1Om5FqaneJ78xV"
   },
   {
+    "__type__": "2bbeajgLAJM2b5cShsH7EYZ",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 2
+    },
+    "_enabled": true,
+    "_id": "3fO9WmI5NKx6z5Bw1labRv"
+  },
+  {
     "__type__": "cc.Node",
     "_name": "gameManager",
     "_objFlags": 0,
@@ -3790,10 +3802,10 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 96
+        "__id__": 97
       },
       {
-        "__id__": 97
+        "__id__": 98
       }
     ],
     "_prefab": null,
@@ -3849,7 +3861,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 95
+      "__id__": 96
     },
     "_enabled": true,
     "birdBornFather": {
@@ -3868,7 +3880,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 95
+      "__id__": 96
     },
     "_enabled": true,
     "starEffects": {

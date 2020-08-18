@@ -1,5 +1,5 @@
 import SingletonClass from "../common/base/SingletonClass";
-import { loader_mgr } from "../common/load/loader_mgr";
+import { loaderMgr } from "../common/load/loaderMgr";
 import { UI_ATLAS } from "../common/base/gameConfigs";
 import { G_baseData } from "./baseData";
 
@@ -14,9 +14,9 @@ export default class tblData extends SingletonClass {
     }
 
     async loadTbl() {
-        let birdsAtlas = await loader_mgr.ins().loadAsset(UI_ATLAS.BirdList, cc.SpriteAtlas) as cc.SpriteAtlas;
-        let smallBirdsAtlas = await loader_mgr.ins().loadAsset(UI_ATLAS.SmallBirdList, cc.SpriteAtlas) as cc.SpriteAtlas;
-        G_baseData.petData.birdName = await loader_mgr.ins().loadName("namejson/birdName");
+        let birdsAtlas = await loaderMgr.ins().loadAsset(UI_ATLAS.BirdList, cc.SpriteAtlas) as cc.SpriteAtlas;
+        let smallBirdsAtlas = await loaderMgr.ins().loadAsset(UI_ATLAS.SmallBirdList, cc.SpriteAtlas) as cc.SpriteAtlas;
+        G_baseData.petData.birdName = await loaderMgr.ins().loadName("namejson/birdName");
         this.loadBirdSpr(birdsAtlas);
         this.loadSmallBirdSpr(smallBirdsAtlas)
         return true;

@@ -1,4 +1,4 @@
-import { loader_mgr } from "../load/loader_mgr";
+import { loaderMgr } from "../load/loaderMgr";
 import SingletonClass from "../base/SingletonClass";
 
 export default class musicManager extends SingletonClass {
@@ -9,7 +9,7 @@ export default class musicManager extends SingletonClass {
     /** 播放音效,不用担心会重复loadRes会消耗网络, 有缓存 */
     public async playEffectMusic(url: string, volume?: number) {
         if (!url || url.length === 0) return;
-        let sound = await loader_mgr.ins().loadAsset(url, cc.AudioClip) as cc.AudioClip;
+        let sound = await loaderMgr.ins().loadAsset(url, cc.AudioClip) as cc.AudioClip;
         if (volume != undefined) {
             cc.audioEngine.setEffectsVolume(volume);
         }

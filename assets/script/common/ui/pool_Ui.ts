@@ -1,5 +1,5 @@
 import SingletonClass from "../base/SingletonClass"
-import { loader_mgr } from "../load/loader_mgr"
+import { loaderMgr } from "../load/loaderMgr"
 import ui_pool from "./ui_Pool"
 
 export class pool_Ui extends SingletonClass {
@@ -22,7 +22,7 @@ export class pool_Ui extends SingletonClass {
             console.warn("再缓存中")
             return ui;
         }
-        let ui_load: any = await loader_mgr.ins().loadAsset(path, cc.Prefab);
+        let ui_load: any = await loaderMgr.ins().loadAsset(path, cc.Prefab);
         let node1_1: cc.Node = cc.instantiate(ui_load);
         return node1_1;
     }
