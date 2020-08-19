@@ -22,7 +22,7 @@ export const UI_CONFIG_NAME = {
     Tops: "prefab/Preload/top",
     DlgFrame: "prefab/Preload/DlgFrame",
     DlgNotCoin: "prefab/Preload/DlgNotCoin",
-    DlgRigthCoins: "prefab/Preload/DlgRigthCoins",
+    DlgRigthCoins: "prefab/Preload/DlgRigthCoins",//已ok
     DlgOffLine: "prefab/Preload/DlgOffLine",
     DlgShopMall: "prefab/Preload/DlgShopMall",
     panel_overlay_bg: "prefab/panel/panel_overlay_bg"

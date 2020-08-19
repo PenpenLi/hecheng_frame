@@ -8,7 +8,8 @@ import BigVal from "../common/bigval/BigVal"
 import { Game } from "../game/Game";
 import LabelGundong from "../common/unitl/LabelGundong";
 import { G_baseData } from "../data/baseData";
-import timedCoinAwardLayer from "../wnd/mainWindow/timedCoinAwardLayer";
+import timedCoinAwardLayer from "../wnd/mainWindow/mainTimedCoinAwardLayer";
+import mainTimedGemItem from "../wnd/mainWindow/mainTimedGemItem";
 
 const { ccclass, property } = cc._decorator;
 
@@ -51,8 +52,6 @@ export default class Tops extends baseUi {
         tooltip: "定时赠送金币模块"
     })
     timedCoinAwardLayer: timedCoinAwardLayer = null;
-
-
 
     formType = new uiType(uiFormType.Fixed);
 
@@ -260,7 +259,7 @@ export default class Tops extends baseUi {
         G_baseData.userData.FHBC_LIST.length > 4 ? num_lenth = 4 : num_lenth = G_baseData.userData.FHBC_LIST.length;
         for (let i = 0; i < num_lenth; i++) {
             let jewel = cc.instantiate(this.FHBC_Pab);
-            jewel.getComponent("jewelBiaoJi").initSelf(G_baseData.userData.FHBC_LIST.shift()); //shift删除数组第一个元素并返回自身
+            jewel.getComponent(mainTimedGemItem).initSelf(G_baseData.userData.FHBC_LIST.shift()); //shift删除数组第一个元素并返回自身
             jewel.setParent(this.JewelClick.getChildByName("click_0"));
             switch (i) {
                 case 0:

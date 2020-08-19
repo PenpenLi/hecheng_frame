@@ -23,10 +23,8 @@ export default class timedCoinAwardLayer extends cc.Component {
     awardSpr: cc.Node = null;
 
     // LIFE-CYCLE CALLBACKS:
-
     _time = 0; //时间
     _isCd = false; //是否倒计时
-    test = true;
     onLoad() {
         this.node.on("click", this.clickTimedCoinAward.bind(this), this);
     }
@@ -43,8 +41,7 @@ export default class timedCoinAwardLayer extends cc.Component {
 
     /**右上方提示玩家收获金币的按钮 */
     showCoinTips() {
-        if (G_baseData.userData.rest_time <= 0 || this.test) {
-            this.test = false;
+        if (G_baseData.userData.rest_time <= 0) {
             this._isCd = false;
             this.node.getComponent(cc.Button).interactable = true;
             let tween = cc.tween()
