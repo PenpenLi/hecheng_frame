@@ -109,6 +109,7 @@ export default class loading extends cc.Component {
     /**进入游戏后的赋值 */
     getMainCanshu(obj) {
         try {
+            console.log("enter", obj)
             let _userData = G_baseData.userData;
             _userData.uuid = obj.id;
             _userData.setPlayerKey(obj.id); //获取玩家唯一的key
@@ -137,6 +138,10 @@ export default class loading extends cc.Component {
             _userData.isxinshou = obj.is_novice; //新手指导
             _userData.video_coin = new BigVal(obj.bird_top); //看视频返还的最高金币
             this.BirdPosition_get(obj); //鸟的位置信息
+
+            // //TEST
+            // _userData.FHBC_LIST = [{ id: 1, price: 10000 },{ id: 1, price: 10000 }]
+            console.log("---user", _userData);
         } catch (e) {
             console.log(e);
         }

@@ -1,9 +1,9 @@
-import { Game } from "../game/Game";
+import { Game } from "../../game/Game";
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class mainTimedGemItem extends cc.Component {
     /**显示hfbcf个数*/
     @property(cc.Label)
     labTips: cc.Label = null;
@@ -79,7 +79,7 @@ export default class NewClass extends cc.Component {
         var action = cc.sequence(
             cc.bezierTo(0.5, [cc.v2(x1, y1), cc.v2(x1 - 80, y1 + 180), cc.v2(-150, 200)]),
             cc.callFunc(function () {
-                Game.Tops.ClickJewelEnd(price); //加金币
+                Game.Tops.showTimedGemView(price); //加金币
                 self.node.destroy();
             }, self),
         )

@@ -14,7 +14,7 @@ import { Game } from "../../game/Game";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class timedCoinAwardLayer extends cc.Component {
+export default class mainTimedCoinAwardLayer extends cc.Component {
 
     @property(cc.Label)
     timeLabel: cc.Label = null;

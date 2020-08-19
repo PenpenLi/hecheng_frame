@@ -30,7 +30,7 @@
         "__id__": 6
       },
       {
-        "__id__": 7
+        "__id__": 8
       }
     ],
     "_prefab": {
@@ -225,19 +225,6 @@
     "_id": ""
   },
   {
-    "__type__": "7bf49LXDzdMH4w/Q2kWWdCA",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "labTips": {
-      "__id__": 3
-    },
-    "_id": ""
-  },
-  {
     "__type__": "cc.Button",
     "_name": "",
     "_objFlags": 0,
@@ -251,7 +238,7 @@
     "zoomScale": 1.2,
     "clickEvents": [
       {
-        "__id__": 8
+        "__id__": 7
       }
     ],
     "_N$interactable": true,
@@ -317,9 +304,22 @@
       "__id__": 1
     },
     "component": "",
-    "_componentId": "7bf49LXDzdMH4w/Q2kWWdCA",
+    "_componentId": "8c76cLHQvxNe6HZ18NHxykG",
     "handler": "btnClickJewel",
     "customEventData": ""
+  },
+  {
+    "__type__": "8c76cLHQvxNe6HZ18NHxykG",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "labTips": {
+      "__id__": 3
+    },
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",

@@ -8,28 +8,20 @@ import BigVal from "../common/bigval/BigVal"
 import { Game } from "../game/Game";
 import LabelGundong from "../common/unitl/LabelGundong";
 import { G_baseData } from "../data/baseData";
-import timedCoinAwardLayer from "../wnd/mainWindow/mainTimedCoinAwardLayer";
+import mainTimedCoinAwardLayer from "../wnd/mainWindow/mainTimedCoinAwardLayer";
 import mainTimedGemItem from "../wnd/mainWindow/mainTimedGemItem";
+import mainTimedGemLayer from "../wnd/mainWindow/mainTimedGemLayer";
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class Tops extends baseUi {
-
     // /**总金币 */
     @property(cc.Label)
     labTotalCoins: cc.Label = null;
     /**每秒产生的金币 */
     @property(cc.Label)
     labeveryCoins: cc.Label = null;
-    /**FHbc预制体*/
-    @property(cc.Prefab)
-    FHBC_Pab: cc.Prefab = null;
-
-    @property(cc.ProgressBar)
-    FHBC_Progress: cc.ProgressBar = null;
-    @property(cc.Node)
-    JewelClick: cc.Node = null;
 
     /**fhbc */
     FHBC: cc.Label = null;
@@ -41,17 +33,21 @@ export default class Tops extends baseUi {
     myheadName: cc.Label = null;
     /**我的头像的等级 */
     myheadLv: cc.Label = null;
-
-    /**领取金币的按钮 */
-    btnrightCoins: cc.Node = null;
+  
     /**按键集合 */
     btnGroup: Btnnodes[] = [];
 
     @property({
-        type: timedCoinAwardLayer,
+        type: mainTimedCoinAwardLayer,
         tooltip: "定时赠送金币模块"
     })
-    timedCoinAwardLayer: timedCoinAwardLayer = null;
+    mainTimedCoinAwardLayer: mainTimedCoinAwardLayer = null;
+
+    @property({
+        type: mainTimedGemLayer,
+        tooltip: "定时赠送FHBC模块"
+    })
+    mainTimedGemLayer: mainTimedGemLayer = null;
 
     formType = new uiType(uiFormType.Fixed);
 
@@ -65,14 +61,12 @@ export default class Tops extends baseUi {
 
     _open() {
         this.initgameTops();
-        // this.FristRight_coin();
         //弹出离线金币
         if (G_baseData.userData.offLineCoin.Num != "0") {
             uiManager.ins().show(UI_CONFIG_NAME.DlgOffLine)
         }
         this.initCoinOfTotal();
         this.initCoinOfSecond();
-        this.showJewelClick();
     }
 
     /**给按钮添加监听事件 */
@@ -178,19 +172,11 @@ export default class Tops extends baseUi {
                         this.initmyHead(numbest);
                     }, 500)
                     break;
-                case "BtnrightCoins":
-                    this.btnrightCoins = v.node;
-                    break;
                 default:
                     // console.log("不需要");
                     break;
             }
         }
-    }
-
-    //更新定时赠送金币模块视图
-    showTimeCoinAwardView() {
-        this.timedCoinAwardLayer.showCoinTips();
     }
 
     /**每秒产生金币的更新 */
@@ -242,49 +228,24 @@ export default class Tops extends baseUi {
         this.FHBC.string = G_baseData.userData.FHBC.toFixed(2);
     }
 
-    /**FHBC界面的更新 */
-    showJewelClick() {
-        if (G_baseData.userData.FHBC_LIST.length == 0) {
-            this.FHBC_Progress.progress = G_baseData.userData.FHBC_LIST.length / 12; //进度条
-            this.JewelClick.getChildByName("click_1").active = true;
-            return;
-        }
-        this.JewelClick.getChildByName("click_1").active = false;
-        this.FHBC_Progress.progress = G_baseData.userData.FHBC_LIST.length / 12;
-        var p1 = cc.v2(-50, 10),
-            p2 = cc.v2(10, 10),
-            p3 = cc.v2(70, 10),
-            p4 = cc.v2(130, 10);
-        var num_lenth = 0;
-        G_baseData.userData.FHBC_LIST.length > 4 ? num_lenth = 4 : num_lenth = G_baseData.userData.FHBC_LIST.length;
-        for (let i = 0; i < num_lenth; i++) {
-            let jewel = cc.instantiate(this.FHBC_Pab);
-            jewel.getComponent(mainTimedGemItem).initSelf(G_baseData.userData.FHBC_LIST.shift()); //shift删除数组第一个元素并返回自身
-            jewel.setParent(this.JewelClick.getChildByName("click_0"));
-            switch (i) {
-                case 0:
-                    jewel.setPosition(p1);
-                    break;
-                case 1:
-                    jewel.setPosition(p2);
-                    break;
-                case 2:
-                    jewel.setPosition(p3);
-                    break;
-                case 3:
-                    jewel.setPosition(p4);
-                    break;
-            }
-        }
+    /**********************模块************************************ */
+
+    //更新定时赠送金币模块视图
+    showTimeCoinAwardView() {
+        if (!!!this.mainTimedCoinAwardLayer) return;
+        this.mainTimedCoinAwardLayer.showCoinTips();
     }
 
-    /**收完FHBC后的更新 */
-    ClickJewelEnd(price) {
+    /**
+     * 更新定时宝石/Fhbc模块视图
+     * 收完FHBC后的更新
+     * @param price  收取的FHBC
+     */
+    showTimedGemView(price) {
         G_baseData.userData.FHBC = G_baseData.userData.FHBC + price;
         this.initFHBC();
-        if (this.JewelClick.getChildByName("click_0").childrenCount == 1) {
-            this.showJewelClick();
-        }
+        if (!!!this.mainTimedGemLayer) return;
+        this.mainTimedGemLayer.updateGemView();
     }
 
     //TODO 逻辑测试
