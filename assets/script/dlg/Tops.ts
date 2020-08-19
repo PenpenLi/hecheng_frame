@@ -8,7 +8,7 @@ import BigVal from "../common/bigval/BigVal"
 import { Game } from "../game/Game";
 import LabelGundong from "../common/unitl/LabelGundong";
 import { G_baseData } from "../data/baseData";
-
+import timedCoinAwardLayer from "../wnd/mainWindow/timedCoinAwardLayer";
 
 const { ccclass, property } = cc._decorator;
 
@@ -46,6 +46,14 @@ export default class Tops extends baseUi {
     /**按键集合 */
     btnGroup: Btnnodes[] = [];
 
+    @property({
+        type: timedCoinAwardLayer,
+        tooltip: "定时赠送金币模块"
+    })
+    timedCoinAwardLayer: timedCoinAwardLayer = null;
+
+
+
     formType = new uiType(uiFormType.Fixed);
 
     /**我的喵喵 */
@@ -58,7 +66,7 @@ export default class Tops extends baseUi {
 
     _open() {
         this.initgameTops();
-        this.FristRight_coin();
+        // this.FristRight_coin();
         //弹出离线金币
         if (G_baseData.userData.offLineCoin.Num != "0") {
             uiManager.ins().show(UI_CONFIG_NAME.DlgOffLine)
@@ -103,11 +111,23 @@ export default class Tops extends baseUi {
     opentopFrame(touch: cc.Event.EventTouch) {
         let self = this;
         switch (touch.target._name) {
+            case "BtnHowPlay": //怎么玩按钮?
+                Game.ApiManager.btnClickPlay();
+                break;
+            case "Btnkefu": //客服
+                Game.ApiManager.clickMessage_0();
+                break;
+            case "BtnActivity": //活动
+                Game.ApiManager.clickactive_0();
+                break;
+            case "BtnFHBC": //fhbc
+                Game.ApiManager.btnClickLeftJewel();
+                break;
+            case "BtnFENHONG": //分红
+                Game.ApiManager.btnClickFenhong();
+                break;
             case "BtnPaiHang":
                 uiManager.ins().show(UI_CONFIG_NAME.DlgRankList);
-                break;
-            case "BtnHowPlay":
-                Game.ApiManager.btnClickPlay();
                 break;
             case "BtnTuJian":
                 uiManager.ins().show(UI_CONFIG_NAME.DlgTuJian);
@@ -118,56 +138,15 @@ export default class Tops extends baseUi {
             case "BtnSetup":
                 uiManager.ins().show(UI_CONFIG_NAME.DlgSetUp);
                 break;
-            case "Btnyaoyiyao":
-                self.clickYaoAgain();
-                break;
-            case "Btnkefu":
-                Game.ApiManager.clickMessage_0();
-                break;
             case "BtnheadImage":
                 // Game.gameManager.RestartGame();
                 uiManager.ins().show(UI_CONFIG_NAME.DlgLeftHead);
                 break;
+            case "Btnyaoyiyao":
+                self.clickYaoAgain();
+                break;
             case "BtnrightCoins":
-                {
-                    /**初始化值 */
-                    let initOFRigthCoin = (price) => {
-                        let _nowtime = parseInt((new Date().getTime() / 1000).toString());
-                        G_baseData.userData.now_time = _nowtime;
-                        G_baseData.userData.rec_time = _nowtime;
-                        G_baseData.userData.LocolIndexTime = _nowtime;
-                        var coins = new BigVal(price);
-                        uiManager.ins().show(UI_CONFIG_NAME.DlgRigthCoins, "+" + coins.geteveryStr());
-                    }
-
-                    var funSuc = (ret) => {
-                        Game.Console.Log(ret)
-                        G_baseData.userData.RefreshGold(ret.data.amount, ret.data.update_time);
-                        if (ret.code == 0) {
-                            initOFRigthCoin(ret.data.add_num);
-                        }
-                    }
-                    var funErr = (ret) => {
-                        Game.gameManager.gameTips('金币领取失败，请检查网络连接或联系游戏客服，错误信息：' + JSON.stringify(ret));
-                    }
-                    let params = {
-                        type: 1,
-                    }
-                    try {
-                        Game.HttpManager.sendRequest('/api/game/receiveGold', params, funSuc, funErr);
-                    } catch (e) {
-                        console.log(e);
-                    }
-                }
-                break;
-            case "BtnActivity":
-                Game.ApiManager.clickactive_0();
-                break;
-            case "BtnFHBC":
-                Game.ApiManager.btnClickLeftJewel();
-                break;
-            case "BtnFENHONG":
-                Game.ApiManager.btnClickFenhong();
+                // self.clickTimedCoinAward();
                 break;
             default:
                 console.log("没有", touch.target._name);
@@ -208,67 +187,11 @@ export default class Tops extends baseUi {
                     break;
             }
         }
-
     }
 
-    /**进入游戏时的右上角首次金币时间的更新 */
-    FristRight_coin() {
-        G_baseData.userData.rest_time = 3600 - (G_baseData.userData.now_time + (parseInt((new Date().getTime() / 1000).toString()) - G_baseData.userData.LocolIndexTime) - G_baseData.userData.rec_time);
-        this.showCoinTips();
-    }
-    /**右上方提示玩家收获金币的按钮 */
-    showCoinTips() {
-        if (G_baseData.userData.rest_time <= 0) {
-            this._iscd = false;
-            this.btnrightCoins.getComponent(cc.Button).interactable = true;
-            let tween = cc.tween()
-                .to(0.1, { scale: 1.3 })
-                .to(0.1, { scale: 1 })
-                .to(0.1, { scale: 1.6 })
-                .to(0.1, { scale: 1 })
-                .delay(5)
-            tween.clone(this.btnrightCoins).repeatForever().start();
-        } else {
-            //显示倒计时
-            this._iscd = true;
-            this.btnrightCoins.stopAllActions();
-            this.btnrightCoins.getComponent(cc.Button).interactable = false;
-        }
-    }
-
-    /**填零方法 */
-    addZone(num) {
-        let a = num.toString();
-        if (a.length < 2) {
-            a = "0" + a;
-        }
-        return a;
-    }
-
-    /**显示倒计时的方法 */
-    _time = 0;
-    _iscd = false;
-    update(dt) {
-        if (this._iscd == false) {
-            return;
-        }
-
-        this._time += dt;
-        if (this._time < 1) {
-            return
-        }
-        this._time = 0;
-
-        let cd_time = G_baseData.userData.rest_time = 3600 - (G_baseData.userData.now_time + (parseInt((new Date().getTime() / 1000).toString()) - G_baseData.userData.LocolIndexTime) - G_baseData.userData.rec_time);
-        if (cd_time <= 0) {
-            this.btnrightCoins.getChildByName("labtips").getComponent(cc.Label).string = '领取';
-            this.showCoinTips(); //剩余时间为零
-            return;
-        }
-        let min = Math.floor(G_baseData.userData.rest_time / 60);
-        let sec = Math.floor(G_baseData.userData.rest_time % 60);
-        var str_time = this.addZone(min) + ":" + this.addZone(sec);
-        this.btnrightCoins.getChildByName("labtips").getComponent(cc.Label).string = str_time;
+    //更新定时赠送金币模块视图
+    showTimeCoinAwardView() {
+        this.timedCoinAwardLayer.showCoinTips();
     }
 
     /**每秒产生金币的更新 */
@@ -364,8 +287,6 @@ export default class Tops extends baseUi {
             this.showJewelClick();
         }
     }
-
-
 
     //TODO 逻辑测试
     /**摇一摇 */

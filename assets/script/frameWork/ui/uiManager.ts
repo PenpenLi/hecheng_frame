@@ -84,7 +84,6 @@ export class uiManager extends SingletonClass {
         }
         this.waiting.hidetips(false);
         ui_base.open(param);
-
     }
 }
 

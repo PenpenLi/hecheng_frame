@@ -8,7 +8,7 @@ export const UI_CONFIG_NAME = {
     DlgGift: "prefab/panels/DlgGift",
     DlgLeftHead: "prefab/panels/DlgLeftHead",
     DlgRankList: "prefab/panels/DlgRankList",
-    DlgSetUp: "prefab/panels/DlgSetUp",
+    DlgSetUp: "prefab/panels/DlgSetUp", //已ok
     DlgSpeedup: "prefab/panels/DlgSpeedup",
     DlgTuJian: "prefab/panels/DlgTuJian",
     DlgUpGrade: "prefab/Preload/DlgUpGrade",
@@ -31,7 +31,7 @@ export const UI_CONFIG_NAME = {
 //加载图集
 export const UI_ATLAS = {
     BirdList: "atlas/birdList",
-    SmallBirdList:"atlas/birdSmallHead"
+    SmallBirdList: "atlas/birdSmallHead"
 }
 
 

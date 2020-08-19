@@ -145,16 +145,16 @@ export default class loading extends cc.Component {
     /**获取鸟的位置信息 */
     BirdPosition_get(obj) {
         var str = null;
-        var birdPositon = Global_Var.getStorage(G_baseData.userData.PlayerId);
-        var birdPositonNet = obj.is_have_bird;
-        if (!birdPositon) {
-            str = birdPositonNet;
+        var birdPosition = Global_Var.getStorage(G_baseData.userData.PlayerId);
+        var birdPositionNet = obj.is_have_bird;
+        if (!birdPosition) {
+            str = birdPositionNet;
         } else {
-            let isbool = this.comparePosition(birdPositon, birdPositonNet);
+            let isbool = this.comparePosition(birdPosition, birdPositionNet);
             if (isbool) {
-                str = birdPositon;
+                str = birdPosition;
             } else {
-                str = birdPositonNet;
+                str = birdPositionNet;
             }
         }
         Global_Var.getArrayFromStr(str, G_baseData.petData.isHaveBird); //鸟的位置

@@ -1,3 +1,11 @@
+
+/**
+ * @data 2020/8/19 待处理
+ * 说明:目前bigVal没有对负数进行兼容，负数可能会出现错误！！！！！！
+ * 但是目前项目所有数据都是按正数进行的，后续如果要有负数，需要优化此脚本！！！！
+ */
+
+ //TODO 需要兼容负数
 export default class BigVal {
     Num: string = "0";
     private Negative: boolean = false;

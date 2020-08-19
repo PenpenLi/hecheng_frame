@@ -6,7 +6,6 @@ import BigVal from "../common/bigval/BigVal";
 import boxMove from "./BoxMove";
 
 //长连接
-import pictureManager from "./pictureManager";
 import { Game } from "./Game";
 import { EventDispatch, Event_Name } from "../frameWork/event/EventDispatch";
 import { G_baseData } from "../data/baseData";
@@ -30,7 +29,6 @@ export default class main extends cc.Component {
 
     private guideWnd: guideWindow;//引导界面
     private petWnd: petWindow;//宠物界面
-
     onLoad() {
         this.initGame();
     }
@@ -43,17 +41,20 @@ export default class main extends cc.Component {
     initGame() {
         this.addWebSocket();
         this.AddAppListen();
+        this.addEventListen();
         this.initModules();
 
-        //加载上框和下框
-        uiManager.ins().show(UI_CONFIG_NAME.Tops);
-        uiManager.ins().show(UI_CONFIG_NAME.Bottom);
+
     }
 
     initModules() {
         Game.gameManager = this;
         Game.Box = cc.find("Canvas/UIROOT/FlyBox").getComponent(boxMove);
 
+        //加载上框和下框
+        uiManager.ins().show(UI_CONFIG_NAME.Tops);
+        uiManager.ins().show(UI_CONFIG_NAME.Bottom);
+        
         //加载宠物界面
         this.petWnd = cc.find("Canvas/UIROOT/Middle/Panel_bird").getComponent(petWindow);
         this.petWnd.initGame();
@@ -137,7 +138,7 @@ export default class main extends cc.Component {
     }
 
     //全局的事件监听
-    addEventListenerEvent() {
+    addEventListen() {
         EventDispatch.ins().add(Event_Name.MAIN_MSG, this.recvEventMsg.bind(this), this)
     }
 
@@ -161,7 +162,6 @@ export default class main extends cc.Component {
                 cc.director.loadScene('Loading');
             })
             .start();
-
     }
 
     /***********websocket监听回调*********************** */

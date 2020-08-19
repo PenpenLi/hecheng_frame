@@ -20,7 +20,7 @@ export default class setup extends baseUi {
     _open(res) {
         this.btnSure.node.on("click", this.btnClose, this);
         G_baseData.userData.rest_time = 3600;
-        Game.Tops.showCoinTips();
+        Game.Tops.showTimeCoinAwardView();
         this.labCoins.string = res;
         //this.sendMessRigthCoio();
     }

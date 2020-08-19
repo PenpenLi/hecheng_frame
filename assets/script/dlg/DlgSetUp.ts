@@ -72,7 +72,6 @@ export default class setup extends baseUi {
     /**如何绑定账号 */
     howbinaccount() {
         super._close();
-        // cc.sys.openURL('fenghuangguoduscheme://?type=focusWeiXinMark');
         Game.ApiManager.btnHowbinaccount();
     }
 

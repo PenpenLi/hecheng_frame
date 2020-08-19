@@ -3,7 +3,6 @@ import { uiFormType, UI_CONFIG_NAME, uiFormPath } from "../common/gameConfig/gam
 import uiType from "../frameWork/ui/uitype";
 import AdaptationManager, { AdaptationType } from "../frameWork/ui/AdaptationManager";
 import { uiManager } from "../frameWork/ui/uiManager";
-import pictureManager from "../game/pictureManager"
 import { Game } from "../game/Game";
 import { G_baseData } from "../data/baseData";
 

@@ -5,7 +5,6 @@ import { G_baseData } from "../data/baseData";
 import { Game } from "../game/Game";
 import websocketHandler from "../net/websocketHandler";
 
-
 /**花费钻石数量*/
 const reduceOfjewel: number = 60;
 /**钻石的时间*/
