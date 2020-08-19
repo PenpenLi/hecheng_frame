@@ -1,6 +1,6 @@
 import { Game } from "./Game";
-import { uiManager } from "../common/ui/uiManager";
-import { UI_CONFIG_NAME, uiFormPath } from "../common/base/gameConfigs";
+import { uiManager } from "../frameWork/ui/uiManager";
+import { UI_CONFIG_NAME, uiFormPath } from "../common/gameConfig/gameConfigs";
 import { G_baseData } from "../data/baseData";
 
 var instance: pictureManager = null;
@@ -83,8 +83,6 @@ export default class pictureManager extends cc.Component {
             this.pen.interactable = true;
         }
     }
-
-  
 
     /**初始化金币位置 */
     initFlyCoin() {

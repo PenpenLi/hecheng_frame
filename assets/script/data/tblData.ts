@@ -1,6 +1,6 @@
-import SingletonClass from "../common/base/SingletonClass";
-import { loaderMgr } from "../common/load/loaderMgr";
-import { UI_ATLAS } from "../common/base/gameConfigs";
+import SingletonClass from "../frameWork/base/SingletonClass";
+import { loaderMgr } from "../frameWork/load/loaderMgr";
+import { UI_ATLAS } from "../common/gameConfig/gameConfigs";
 import { G_baseData } from "./baseData";
 
 //只做加载 最后把所有数据 发送至对应模块

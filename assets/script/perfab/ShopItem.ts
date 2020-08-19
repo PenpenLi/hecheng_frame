@@ -1,8 +1,8 @@
 import pictureManager from "../game/pictureManager"
 import userData from "../data/userData"
 import BigVal from "../common/bigval/BigVal"
-import { uiManager } from "../common/ui/uiManager";
-import { uiFormType, UI_CONFIG_NAME, uiFormPath } from "../common/base/gameConfigs";
+import { uiManager } from "../frameWork/ui/uiManager";
+import { uiFormType, UI_CONFIG_NAME, uiFormPath } from "../common/gameConfig/gameConfigs";
 import { Game } from "../game/Game";
 import { G_baseData } from "../data/baseData";
 const { ccclass, property } = cc._decorator;

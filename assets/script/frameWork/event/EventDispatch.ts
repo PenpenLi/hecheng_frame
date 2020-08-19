@@ -1,4 +1,4 @@
-import SingletonClass from "../common/base/SingletonClass";
+import SingletonClass from "../base/SingletonClass";
 
 /**加入自定义事件 孙 6/22 10：00 */
 export class EventDispatch extends SingletonClass {

@@ -1,4 +1,4 @@
-import { uiFormType, isUseBananer, widdleType } from "../base/gameConfigs";
+import { uiFormType, isUseBanner, widdleType } from "../../common/gameConfig/gameConfigs";
 import AdaptationManager, { AdaptationType } from "./AdaptationManager";
 import uiType from "./uitype";
 import { uiManager } from "./uiManager";
@@ -84,7 +84,7 @@ export default class baseUi extends cc.Component {
                 this.node.setScale(cc.v2(G_baseData.petData.scaleBlock, G_baseData.petData.scaleBlock));
             }
         }
-        if (this.formType.isopenbanner === isUseBananer.openbanner) {
+        if (this.formType.isopenbanner === isUseBanner.openBanner) {
             if (this.formType.kuang_sizetype === widdleType.long) {//只打开banner广告
                 Game.ApiManager.openBannerAD();
             } else if (this.formType.kuang_sizetype === widdleType.short) {//原生广告
@@ -96,7 +96,7 @@ export default class baseUi extends cc.Component {
     /**关闭广告逻辑*/
     private closeListeguangGao() {
 
-        if (this.formType.isopenbanner === isUseBananer.openbanner) {
+        if (this.formType.isopenbanner === isUseBanner.openBanner) {
             if (this.formType.kuang_sizetype === widdleType.long) {//只打开banner广告
                 Game.ApiManager.hideBannerAD();
             } else if (this.formType.kuang_sizetype === widdleType.short) {//原生广告

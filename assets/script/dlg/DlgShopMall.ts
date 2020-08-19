@@ -1,7 +1,7 @@
-import baseUi from "../common/ui/baseUi"
-import { uiFormType, uiFormPath, isUseBananer, widdleType } from "../common/base/gameConfigs";
-import AdaptationManager, { AdaptationType } from "../common/ui/AdaptationManager";
-import uiType from "../common/ui/uitype";
+import baseUi from "../frameWork/ui/baseUi"
+import { uiFormType, uiFormPath, isUseBanner, widdleType } from "../common/gameConfig/gameConfigs";
+import AdaptationManager, { AdaptationType } from "../frameWork/ui/AdaptationManager";
+import uiType from "../frameWork/ui/uitype";
 import { G_baseData } from "../data/baseData";
 import { Game } from "../game/Game";
 const { ccclass, property } = cc._decorator;
@@ -22,7 +22,7 @@ export default class DlgShopMall extends baseUi {
     content: cc.Node = null;
 
 
-    formType = new uiType(uiFormType.PopUp, isUseBananer.openbanner, widdleType.long);
+    formType = new uiType(uiFormType.PopUp, isUseBanner.openBanner, widdleType.long);
 
     onLoad() {
         this.schedule(function () {

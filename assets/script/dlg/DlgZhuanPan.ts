@@ -1,9 +1,9 @@
-import baseUi from "../common/ui/baseUi"
-import { uiFormType, uiFormPath, isUseBananer, widdleType } from "../common/base/gameConfigs";
-import uiType from "../common/ui/uitype";
+import baseUi from "../frameWork/ui/baseUi"
+import { uiFormType, uiFormPath, isUseBanner, widdleType } from "../common/gameConfig/gameConfigs";
+import uiType from "../frameWork/ui/uitype";
 import { G_baseData } from "../data/baseData";
-import { uiManager } from "../common/ui/uiManager";
-import { UI_CONFIG_NAME } from "../common/base/gameConfigs"
+import { uiManager } from "../frameWork/ui/uiManager";
+import { UI_CONFIG_NAME } from "../common/gameConfig/gameConfigs"
 import { Game } from "../game/Game";
 const { ccclass, property } = cc._decorator;
 
@@ -25,7 +25,7 @@ export default class setup extends baseUi {
     /**轮盘是否开始转动*/
     isRolling: boolean = false;
 
-    formType = new uiType(uiFormType.PopUp, isUseBananer.openbanner, widdleType.long)
+    formType = new uiType(uiFormType.PopUp, isUseBanner.openBanner, widdleType.long)
 
 
     _open() {

@@ -1,8 +1,8 @@
 import SingletonClass from "../base/SingletonClass"
-import { pool_Ui } from "./pool_Ui"
+import { uiPoolMgr } from "./uiPoolMgr"
 import baseUi from "./baseUi"
-import { uiFormPath, uiFormType } from "../base/gameConfigs";
-import WaitingConnection from "../waiting/WaitingConnection";
+import { uiFormPath, uiFormType } from "../../common/gameConfig/gameConfigs";
+import WaitingConnection from "../../common/waiting/WaitingConnection";
 
 export class uiManager extends SingletonClass {
     private ui_cache: any = {};           //path => pop_ui
@@ -37,7 +37,7 @@ export class uiManager extends SingletonClass {
         }
         this.waiting.showtips();
         ui.is_show = true;
-        let node_0: cc.Node = await pool_Ui.ins().get_ui(path);
+        let node_0: cc.Node = await uiPoolMgr.ins().get_ui(path);
         node_0.active = true;
         ui.node = node_0;
         this.addnode(node_0, path, param);
@@ -52,15 +52,13 @@ export class uiManager extends SingletonClass {
         this.ui_cache[path] = null;
         ui.is_show = false;
         if (ui.node) {
-            pool_Ui.ins().put_ui(path, ui.node);
+            uiPoolMgr.ins().put_ui(path, ui.node);
             let ui_base = ui.node.getComponent(baseUi) as baseUi;
             ui_base._ui_name = path;
             // console.log("关闭" + ui_base._ui_name)
             ui_base.hide();
         }
-
     }
-
 
     /**添加节点到那 */
     private addnode(node: cc.Node, path: string, param: any) {

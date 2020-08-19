@@ -1,6 +1,6 @@
 import { G_baseData } from "../data/baseData";
-import { uiManager } from "../common/ui/uiManager";
-import { UI_CONFIG_NAME } from "../common/base/gameConfigs"
+import { uiManager } from "../frameWork/ui/uiManager";
+import { UI_CONFIG_NAME } from "../common/gameConfig/gameConfigs"
 
 
 const { ccclass, property } = cc._decorator;

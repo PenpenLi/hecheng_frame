@@ -1,10 +1,10 @@
-import baseUi from "../common/ui/baseUi"
-import { uiFormType, uiFormPath } from "../common/base/gameConfigs";
-import uiType from "../common/ui/uitype";
+import baseUi from "../frameWork/ui/baseUi"
+import { uiFormType, uiFormPath } from "../common/gameConfig/gameConfigs";
+import uiType from "../frameWork/ui/uitype";
 import pictureManager from "../game/pictureManager";
 import { Game } from "../game/Game";
 import websocketHandler from "../net/websocketHandler";
-import { EventDispatch, Event_Name } from "../event/EventDispatch";
+import { EventDispatch, Event_Name } from "../frameWork/event/EventDispatch";
 import blockitem from "../perfab/blockitem";
 import { G_baseData } from "../data/baseData";
 

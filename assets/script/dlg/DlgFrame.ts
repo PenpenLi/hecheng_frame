@@ -1,6 +1,6 @@
-import baseUi from "../common/ui/baseUi"
-import { uiFormType, uiFormPath, isUseBananer, widdleType } from "../common/base/gameConfigs";
-import uiType from "../common/ui/uitype";
+import baseUi from "../frameWork/ui/baseUi"
+import { uiFormType, uiFormPath, isUseBanner, widdleType } from "../common/gameConfig/gameConfigs";
+import uiType from "../frameWork/ui/uitype";
 import BigVal from "../common/bigval/BigVal";
 import { Game } from "../game/Game";
 import { G_baseData } from "../data/baseData";
@@ -27,7 +27,7 @@ export default class setup extends baseUi {
     @property(cc.SpriteFrame)
     LuckdrawTuji: cc.SpriteFrame[] = [];
 
-    formType = new uiType(uiFormType.PopUp1, isUseBananer.openbanner, widdleType.long)
+    formType = new uiType(uiFormType.PopUp1, isUseBanner.openBanner, widdleType.long)
     // onLoad () {}
     _open(param) {
         this.btnCloup[0].node.on("click", this.BtnClose, this);

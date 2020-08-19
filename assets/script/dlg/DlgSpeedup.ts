@@ -1,6 +1,6 @@
-import baseUi from "../common/ui/baseUi"
-import { uiFormType, uiFormPath, isUseBananer, widdleType } from "../common/base/gameConfigs";
-import uiType from "../common/ui/uitype";
+import baseUi from "../frameWork/ui/baseUi"
+import { uiFormType, uiFormPath, isUseBanner, widdleType } from "../common/gameConfig/gameConfigs";
+import uiType from "../frameWork/ui/uitype";
 import { G_baseData } from "../data/baseData";
 import { Game } from "../game/Game";
 import websocketHandler from "../net/websocketHandler";
@@ -26,7 +26,7 @@ export default class DlgSpeed extends baseUi {
     @property(cc.Node)
     btnUserQuan: cc.Node = null; //使用券观看视频
 
-    formType = new uiType(uiFormType.PopUp, isUseBananer.openbanner, widdleType.short)
+    formType = new uiType(uiFormType.PopUp, isUseBanner.openBanner, widdleType.short)
 
     _open() {
         this.BtnFhbc.on("click", this.BtnCostOfFHBC, this);

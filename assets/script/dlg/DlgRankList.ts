@@ -1,9 +1,9 @@
-import baseUi from "../common/ui/baseUi"
-import { uiFormType, uiFormPath, isUseBananer, widdleType } from "../common/base/gameConfigs";
-import AdaptationManager, { AdaptationType } from "../common/ui/AdaptationManager";
-import uiType from "../common/ui/uitype";
+import baseUi from "../frameWork/ui/baseUi"
+import { uiFormType, uiFormPath, isUseBanner, widdleType } from "../common/gameConfig/gameConfigs";
+import AdaptationManager, { AdaptationType } from "../frameWork/ui/AdaptationManager";
+import uiType from "../frameWork/ui/uitype";
 import { Game } from "../game/Game";
-import { uiManager } from "../common/ui/uiManager";
+import { uiManager } from "../frameWork/ui/uiManager";
 
 const { ccclass, property } = cc._decorator;
 
@@ -29,7 +29,7 @@ export default class DlfRankList extends baseUi {
     content: cc.Node = null;
 
 
-    formType = new uiType(uiFormType.PopUp, isUseBananer.openbanner, widdleType.long);
+    formType = new uiType(uiFormType.PopUp, isUseBanner.openBanner, widdleType.long);
 
     onLoad() {
         this.content = this.scrolllview.content;

@@ -5,7 +5,7 @@
 *   2019-10-8 by 宝爷
 */
 
-import websocketHandler from "../websocketHandler";
+import websocketHandler from "../../net/websocketHandler";
 
 // type objtype = { apiName: any, params: any, anytoken: any }
 export type NetData = (string | ArrayBufferLike | Blob | ArrayBufferView);

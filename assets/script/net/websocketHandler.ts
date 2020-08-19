@@ -1,11 +1,11 @@
-import SingletonClass from "../common/base/SingletonClass";
-import { NetManager } from "./websocket/NetManager";
+import SingletonClass from "../frameWork/base/SingletonClass";
+import { NetManager } from "../frameWork/websocket/NetManager";
 import { Game } from "../game/Game";
 import { G_baseData } from "../data/baseData";
-import { NetNode } from "./websocket/NetNode";
-import { DefStringProtocol, INetworkTips, NetData } from "./websocket/NetInterface";
-import { uiManager } from "../common/ui/uiManager";
-import { WebSock } from "./websocket/WebSock";
+import { NetNode } from "../frameWork/websocket/NetNode";
+import { DefStringProtocol, INetworkTips, NetData } from "../frameWork/websocket/NetInterface";
+import { uiManager } from "../frameWork/ui/uiManager";
+import { WebSock } from "../frameWork/websocket/WebSock";
 /**演示服 */
 var url: string = 'wss://mihecheng.teamone.wang:443';
 /**本地 */
@@ -187,7 +187,6 @@ export default class websocketHandler extends SingletonClass {
 class NetTips implements INetworkTips {
     //TODO tips需要剥离出去
     connectTips(isShow: boolean): void {
-        console.log("------", uiManager.ins())
         if (isShow) {
             uiManager.ins().waiting.showtips("网络开小差了")
         } else {

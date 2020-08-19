@@ -1,5 +1,5 @@
 //lru(last recently used) cache
-export default class ui_pool {
+export default class uiPool {
     private cache: any; //path => cc.Node[]
     private path2time: any;
     private size: number;
@@ -48,7 +48,7 @@ export default class ui_pool {
         this.path2time[path] = cc.sys.now();
     }
 
-    clear_atpath(path: string): void {
+    clearCacheByPath(path: string): void {
         let uis: cc.Node[] = this.cache[path];
         if (!uis || uis.length <= 0) {
             return;
@@ -62,7 +62,7 @@ export default class ui_pool {
 
     clear(): void {
         for (let path in this.cache) {
-            this.clear_atpath(path);
+            this.clearCacheByPath(path);
         }
         this.cache = {};
         this.path2time = {};

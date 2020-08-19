@@ -1,10 +1,10 @@
-import { musicPath } from "../common/base/gameConfigs";
+import { musicPath } from "../common/gameConfig/gameConfigs";
 import BigVal from "../common/bigval/BigVal";
 
 //长连接
-import musicManager from "../common/music/musicManager";
+import musicManager from "../frameWork/music/musicManager";
 import { Game } from "../game/Game";
-import { EventDispatch, Event_Name } from "../event/EventDispatch";
+import { EventDispatch, Event_Name } from "../frameWork/event/EventDispatch";
 import { G_baseData } from "../data/baseData";
 import websocketHandler from "../net/websocketHandler";
 

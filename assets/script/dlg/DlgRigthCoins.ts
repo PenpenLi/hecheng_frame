@@ -1,6 +1,6 @@
-import baseUi from "../common/ui/baseUi"
-import { uiFormType, uiFormPath } from "../common/base/gameConfigs";
-import uiType from "../common/ui/uitype";
+import baseUi from "../frameWork/ui/baseUi"
+import { uiFormType, uiFormPath } from "../common/gameConfig/gameConfigs";
+import uiType from "../frameWork/ui/uitype";
 import { G_baseData } from "../data/baseData";
 import BigVal from "../common/bigval/BigVal"
 import { Game } from "../game/Game";

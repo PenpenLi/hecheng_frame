@@ -1,9 +1,9 @@
-import baseUi from "../common/ui/baseUi"
-import { uiFormType, uiFormPath, UI_CONFIG_NAME } from "../common/base/gameConfigs";
-import uiType from "../common/ui/uitype";
+import baseUi from "../frameWork/ui/baseUi"
+import { uiFormType, uiFormPath, UI_CONFIG_NAME } from "../common/gameConfig/gameConfigs";
+import uiType from "../frameWork/ui/uitype";
 import pictureManager from "../game/pictureManager";
 import { G_baseData } from "../data/baseData";
-import { uiManager } from "../common/ui/uiManager";
+import { uiManager } from "../frameWork/ui/uiManager";
 import { Game } from "../game/Game";
 
 //12中凤凰的名字

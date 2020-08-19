@@ -1,8 +1,8 @@
 import BigVal from "../common/bigval/BigVal";
-import SingletonClass from "../common/base/SingletonClass";
+import SingletonClass from "../frameWork/base/SingletonClass";
 import { G_baseData } from "./baseData";
-import { loaderMgr } from "../common/load/loaderMgr";
-import { Global_Var } from "../common/base/GlobalVar";
+import { loaderMgr } from "../frameWork/load/loaderMgr";
+import { Global_Var } from "../common/globalVar/GlobalVar";
 
 /**宠物数据 */
 export default class petData extends SingletonClass {

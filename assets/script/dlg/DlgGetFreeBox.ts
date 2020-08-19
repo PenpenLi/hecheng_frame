@@ -1,6 +1,6 @@
-import baseUi from "../common/ui/baseUi"
-import { uiFormType, uiFormPath, isUseBananer } from "../common/base/gameConfigs";
-import uiType from "../common/ui/uitype";
+import baseUi from "../frameWork/ui/baseUi"
+import { uiFormType, uiFormPath, isUseBanner } from "../common/gameConfig/gameConfigs";
+import uiType from "../frameWork/ui/uitype";
 import BigVal from "../common/bigval/BigVal"
 import { Game } from "../game/Game";
 import { G_baseData } from "../data/baseData";
@@ -20,7 +20,7 @@ export default class setup extends baseUi {
 
     getprice: BigVal = new BigVal("0");
 
-    formType = new uiType(uiFormType.PopUp, isUseBananer.openbanner)
+    formType = new uiType(uiFormType.PopUp, isUseBanner.openBanner)
 
     _open() {
         this.BtnLookVideo.on("click", this.BtnWatchVideo, this);

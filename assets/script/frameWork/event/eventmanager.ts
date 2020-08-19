@@ -1,9 +1,10 @@
-import SingletonClass from "../common/base/SingletonClass";
+import SingletonClass from "../base/SingletonClass";
 
 var self = null;
 
 export class eventManager extends SingletonClass {
-    ctor() {
+    constructor() {
+        super();
         self = this;
         self._isDispatching = false;
         self._observerList = {};

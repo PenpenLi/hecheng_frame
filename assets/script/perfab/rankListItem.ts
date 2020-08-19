@@ -1,5 +1,5 @@
 import BigVal from "../common/bigval/BigVal";
-import { loaderMgr } from "../common/load/loaderMgr"
+import { loaderMgr } from "../frameWork/load/loaderMgr"
 import { Game } from "../game/Game";
 import { G_baseData } from "../data/baseData";
 

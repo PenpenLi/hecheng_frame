@@ -1,9 +1,9 @@
-import baseUi from "../common/ui/baseUi"
-import { uiFormType, uiFormPath, musicPath } from "../common/base/gameConfigs";
-import uiType from "../common/ui/uitype";
+import baseUi from "../frameWork/ui/baseUi"
+import { uiFormType, uiFormPath, musicPath } from "../common/gameConfig/gameConfigs";
+import uiType from "../frameWork/ui/uitype";
 import BigVal from "../common/bigval/BigVal";
 import pictureManager from "../game/pictureManager"
-import musicManager from "../common/music/musicManager";
+import musicManager from "../frameWork/music/musicManager";
 import blockitem from "../perfab/blockitem";
 const { ccclass, property } = cc._decorator;
 

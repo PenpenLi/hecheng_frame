@@ -1,6 +1,6 @@
-import baseUi from "../common/ui/baseUi"
-import { uiFormType, uiFormPath, isUseBananer, widdleType } from "../common/base/gameConfigs";
-import uiType from "../common/ui/uitype";
+import baseUi from "../frameWork/ui/baseUi"
+import { uiFormType, uiFormPath, isUseBanner, widdleType } from "../common/gameConfig/gameConfigs";
+import uiType from "../frameWork/ui/uitype";
 import { G_baseData } from "../data/baseData";
 import { Game } from "../game/Game";
 const { ccclass, property } = cc._decorator;
@@ -15,7 +15,7 @@ export default class setup extends baseUi {
     btnShare: cc.Button = null;
 
 
-    formType = new uiType(uiFormType.PopUp, isUseBananer.openbanner, widdleType.short)
+    formType = new uiType(uiFormType.PopUp, isUseBanner.openBanner, widdleType.short)
 
 
     _open() {

@@ -1,5 +1,5 @@
 
-import { LocalStorage } from "./LocalStorage";
+import { LocalStorage } from "../../frameWork/base/LocalStorage";
 
 export class Global_Var {
 

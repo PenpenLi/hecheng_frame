@@ -1,14 +1,14 @@
 /*********本脚本主要执行net 前端api 全局Event事件处理及主界面相关window入口的初始化******* */
 
-import { uiManager } from "../common/ui/uiManager";
-import { UI_CONFIG_NAME, uiFormPath, } from "../common/base/gameConfigs";
+import { uiManager } from "../frameWork/ui/uiManager";
+import { UI_CONFIG_NAME, uiFormPath, } from "../common/gameConfig/gameConfigs";
 import BigVal from "../common/bigval/BigVal";
 import boxMove from "./BoxMove";
 
 //长连接
 import pictureManager from "./pictureManager";
 import { Game } from "./Game";
-import { EventDispatch, Event_Name } from "../event/EventDispatch";
+import { EventDispatch, Event_Name } from "../frameWork/event/EventDispatch";
 import { G_baseData } from "../data/baseData";
 import websocketHandler from "../net/websocketHandler";
 import petWindow from "../wnd/petWindow";

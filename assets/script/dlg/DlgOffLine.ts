@@ -1,6 +1,6 @@
-import baseUi from "../common/ui/baseUi"
-import { uiFormType, uiFormPath, isUseBananer, widdleType } from "../common/base/gameConfigs";
-import uiType from "../common/ui/uitype";
+import baseUi from "../frameWork/ui/baseUi"
+import { uiFormType, uiFormPath, isUseBanner, widdleType } from "../common/gameConfig/gameConfigs";
+import uiType from "../frameWork/ui/uitype";
 import { G_baseData } from "../data/baseData";
 import BigVal from "../common/bigval/BigVal"
 import { Game } from "../game/Game";
@@ -24,7 +24,7 @@ export default class DlgOffLine extends baseUi {
     Btnsure: cc.Node = null;
 
 
-    formType = new uiType(uiFormType.PopUp, isUseBananer.openbanner)
+    formType = new uiType(uiFormType.PopUp, isUseBanner.openBanner)
     // onLoad () {}
     _open() {
         this.Btnlookvideo.on("click", this.BtnWatchVideo, this);

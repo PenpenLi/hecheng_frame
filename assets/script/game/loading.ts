@@ -2,7 +2,7 @@ import BigVal from "../common/bigval/BigVal";
 import { Game } from "./Game";
 import { GIFCache } from "../common/gif/GIF";
 import { G_baseData } from "../data/baseData";
-import { Global_Var } from "../common/base/GlobalVar";
+import { Global_Var } from "../common/globalVar/GlobalVar";
 
 const { ccclass, property } = cc._decorator;
 

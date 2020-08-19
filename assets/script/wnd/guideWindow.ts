@@ -1,7 +1,7 @@
 
 
 import { Game } from "../game/Game";
-import { EventDispatch, Event_Name } from "../event/EventDispatch";
+import { EventDispatch, Event_Name } from "../frameWork/event/EventDispatch";
 import { G_baseData } from "../data/baseData";
 const { ccclass, property } = cc._decorator;
 

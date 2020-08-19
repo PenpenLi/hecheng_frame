@@ -1,10 +1,10 @@
-import baseUi from "../common/ui/baseUi"
-import { uiFormType, uiFormPath, isUseBananer, widdleType } from "../common/base/gameConfigs";
-import uiType from "../common/ui/uitype";
+import baseUi from "../frameWork/ui/baseUi"
+import { uiFormType, uiFormPath, isUseBanner, widdleType } from "../common/gameConfig/gameConfigs";
+import uiType from "../frameWork/ui/uitype";
 import { G_baseData } from "../data/baseData";
-import musicManager from "../common/music/musicManager"
+import musicManager from "../frameWork/music/musicManager"
 import { Game } from "../game/Game";
-import { Global_Var } from "../common/base/GlobalVar";
+import { Global_Var } from "../common/globalVar/GlobalVar";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -17,7 +17,7 @@ export default class setup extends baseUi {
     @property(cc.Button)
     btnCloup: cc.Button[] = [];
 
-    formType = new uiType(uiFormType.PopUp, isUseBananer.openbanner, widdleType.short)
+    formType = new uiType(uiFormType.PopUp, isUseBanner.openBanner, widdleType.short)
     _open() {
         var num1 = G_baseData.userData.isBool[0];
         this.btnCloup[0].getComponent(cc.Sprite).spriteFrame = this.setUPtuji[num1];

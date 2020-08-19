@@ -1,5 +1,5 @@
 import BigVal from "../common/bigval/BigVal";
-import SingletonClass from "../common/base/SingletonClass";
+import SingletonClass from "../frameWork/base/SingletonClass";
 
 /**基本的用户数据 */
 export default class userData extends SingletonClass {

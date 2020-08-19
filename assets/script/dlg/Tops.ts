@@ -1,9 +1,9 @@
-import baseUi from "../common/ui/baseUi"
-import { uiFormType, uiFormPath } from "../common/base/gameConfigs";
-import uiType from "../common/ui/uitype";
-import AdaptationManager, { AdaptationType } from "../common/ui/AdaptationManager";
-import { uiManager } from "../common/ui/uiManager";
-import { UI_CONFIG_NAME } from "../common/base/gameConfigs";
+import baseUi from "../frameWork/ui/baseUi"
+import { uiFormType, uiFormPath } from "../common/gameConfig/gameConfigs";
+import uiType from "../frameWork/ui/uitype";
+import AdaptationManager, { AdaptationType } from "../frameWork/ui/AdaptationManager";
+import { uiManager } from "../frameWork/ui/uiManager";
+import { UI_CONFIG_NAME } from "../common/gameConfig/gameConfigs";
 import BigVal from "../common/bigval/BigVal"
 import { Game } from "../game/Game";
 import LabelGundong from "../common/unitl/LabelGundong";

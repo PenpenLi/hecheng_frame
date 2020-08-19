@@ -71,11 +71,11 @@ export const musicPath = {
 
 
 /**弹框是否调用广告 */
-export enum isUseBananer {
+export enum isUseBanner {
     /**无 */
     none,
     /**调用 */
-    openbanner,
+    openBanner,
 }
 
 /**弹框适配类型 */
