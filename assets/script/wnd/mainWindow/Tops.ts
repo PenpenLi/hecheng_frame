@@ -1,16 +1,15 @@
-import baseUi from "../frameWork/ui/baseUi"
-import { uiFormType, uiFormPath } from "../common/gameConfig/gameConfigs";
-import uiType from "../frameWork/ui/uitype";
-import AdaptationManager, { AdaptationType } from "../frameWork/ui/AdaptationManager";
-import { uiManager } from "../frameWork/ui/uiManager";
-import { UI_CONFIG_NAME } from "../common/gameConfig/gameConfigs";
-import BigVal from "../common/bigval/BigVal"
-import { Game } from "../game/Game";
-import LabelGundong from "../common/unitl/LabelGundong";
-import { G_baseData } from "../data/baseData";
-import mainTimedCoinAwardLayer from "../wnd/mainWindow/mainTimedCoinAwardLayer";
-import mainTimedGemItem from "../wnd/mainWindow/mainTimedGemItem";
-import mainTimedGemLayer from "../wnd/mainWindow/mainTimedGemLayer";
+import baseUi from "../../frameWork/ui/baseUi"
+import uiType from "../../frameWork/ui/uitype";
+import AdaptationManager, { AdaptationType } from "../../frameWork/ui/AdaptationManager";
+import { uiManager } from "../../frameWork/ui/uiManager";
+import BigVal from "../../common/bigval/BigVal"
+import { Game } from "../../game/Game";
+import LabelGundong from "../../common/unitl/LabelGundong";
+import { G_baseData } from "../../data/baseData";
+import mainTimedCoinAwardLayer from "./mainTimedCoinAwardLayer";
+import mainTimedGemItem from "./mainTimedGemItem";
+import mainTimedGemLayer from "./mainTimedGemLayer";
+import { uiFormType, uiFormPath,UI_CONFIG_NAME } from "../../common/gameConfig/gameConfigs";
 
 const { ccclass, property } = cc._decorator;
 
@@ -33,7 +32,7 @@ export default class Tops extends baseUi {
     myheadName: cc.Label = null;
     /**我的头像的等级 */
     myheadLv: cc.Label = null;
-  
+
     /**按键集合 */
     btnGroup: Btnnodes[] = [];
 

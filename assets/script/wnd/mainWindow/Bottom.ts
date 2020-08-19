@@ -1,10 +1,10 @@
-import baseUi from "../frameWork/ui/baseUi"
-import { uiFormType, UI_CONFIG_NAME, uiFormPath } from "../common/gameConfig/gameConfigs";
-import uiType from "../frameWork/ui/uitype";
-import AdaptationManager, { AdaptationType } from "../frameWork/ui/AdaptationManager";
-import { uiManager } from "../frameWork/ui/uiManager";
-import { Game } from "../game/Game";
-import { G_baseData } from "../data/baseData";
+import baseUi from "../../frameWork/ui/baseUi"
+import { uiFormType, UI_CONFIG_NAME, uiFormPath } from "../../common/gameConfig/gameConfigs";
+import uiType from "../../frameWork/ui/uitype";
+import AdaptationManager, { AdaptationType } from "../../frameWork/ui/AdaptationManager";
+import { uiManager } from "../../frameWork/ui/uiManager";
+import { Game } from "../../game/Game";
+import { G_baseData } from "../../data/baseData";
 
 const { ccclass, property } = cc._decorator;
 

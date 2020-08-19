@@ -1,9 +1,8 @@
-import baseUi from "../frameWork/ui/baseUi"
-import { uiFormType, uiFormPath, isUseBanner, widdleType } from "../common/gameConfig/gameConfigs";
-import AdaptationManager, { AdaptationType } from "../frameWork/ui/AdaptationManager";
-import uiType from "../frameWork/ui/uitype";
-import pictureManager from "../game/pictureManager"
-import { G_baseData } from "../data/baseData";
+import baseUi from "../../frameWork/ui/baseUi"
+import { uiFormType, uiFormPath, isUseBanner, widdleType } from "../../common/gameConfig/gameConfigs";
+import AdaptationManager, { AdaptationType } from "../../frameWork/ui/AdaptationManager";
+import uiType from "../../frameWork/ui/uitype";
+import { G_baseData } from "../../data/baseData";
 
 const { ccclass, property } = cc._decorator;
 

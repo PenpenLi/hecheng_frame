@@ -1,9 +1,8 @@
 import baseUi from "../frameWork/ui/baseUi"
-import { uiFormType, uiFormPath, isUseBanner, widdleType } from "../common/gameConfig/gameConfigs";
+import { UI_CONFIG_NAME, uiFormType, uiFormPath, isUseBanner, widdleType } from "../common/gameConfig/gameConfigs";
 import uiType from "../frameWork/ui/uitype";
 import { G_baseData } from "../data/baseData";
 import { uiManager } from "../frameWork/ui/uiManager";
-import { UI_CONFIG_NAME } from "../common/gameConfig/gameConfigs"
 import { Game } from "../game/Game";
 const { ccclass, property } = cc._decorator;
 

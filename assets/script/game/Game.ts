@@ -3,8 +3,8 @@ import main from "./main";
 import boxMove from "./BoxMove"
 import { ApiManager } from "./ApiManager";
 import httpHandler from "../net/httpHandler";
-import Tops from "../dlg/Tops";
-import bottom from "../dlg/Bottom";
+import Tops from "../wnd/mainWindow/Tops";
+import bottom from "../wnd/mainWindow/Bottom";
 import { Console } from "../common/unitl/Console";
 import { UtilFunction } from "../common/unitl/UtilFunction";
 

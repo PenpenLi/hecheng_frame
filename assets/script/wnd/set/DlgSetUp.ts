@@ -1,10 +1,10 @@
-import baseUi from "../frameWork/ui/baseUi"
-import { uiFormType, uiFormPath, isUseBanner, widdleType } from "../common/gameConfig/gameConfigs";
-import uiType from "../frameWork/ui/uitype";
-import { G_baseData } from "../data/baseData";
-import musicManager from "../frameWork/music/musicManager"
-import { Game } from "../game/Game";
-import { Global_Var } from "../common/globalVar/GlobalVar";
+import baseUi from "../../frameWork/ui/baseUi"
+import { uiFormType, uiFormPath, isUseBanner, widdleType } from "../../common/gameConfig/gameConfigs";
+import uiType from "../../frameWork/ui/uitype";
+import { G_baseData } from "../../data/baseData";
+import musicManager from "../../frameWork/music/musicManager"
+import { Game } from "../../game/Game";
+import { Global_Var } from "../../common/globalVar/GlobalVar";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
