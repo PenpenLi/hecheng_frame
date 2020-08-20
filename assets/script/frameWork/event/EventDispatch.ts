@@ -59,5 +59,7 @@ export enum Event_Name {
     /**37级合成 */
     composeBest = "composeBest",
     /**五龙合成 */
-    composeFive = "composeFive"
+    composeFive = "composeFive",
+    
+    TurnTable_AddZhuanPanQuan = "TurnTable_AddZhuanPanQuan",//转盘观看视频结束
 }

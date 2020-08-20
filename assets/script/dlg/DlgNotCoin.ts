@@ -10,7 +10,7 @@ import { G_baseData } from "../data/baseData";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class setup extends baseUi {
+export default class NewClass extends baseUi {
 
     /**显示金币数*/
     @property(cc.Label)

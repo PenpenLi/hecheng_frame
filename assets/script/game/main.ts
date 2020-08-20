@@ -54,7 +54,7 @@ export default class main extends cc.Component {
         //加载上框和下框
         uiManager.ins().show(UI_CONFIG_NAME.Tops);
         uiManager.ins().show(UI_CONFIG_NAME.Bottom);
-        
+
         //加载宠物界面
         this.petWnd = cc.find("Canvas/UIROOT/Middle/Panel_bird").getComponent(petWindow);
         this.petWnd.initGame();
@@ -281,8 +281,9 @@ export default class main extends cc.Component {
             case "quan": //转盘券
                 var call = function () {
                     G_baseData.userData.NumOfTurntables = G_baseData.userData.NumOfTurntables + Number(num_back);
-                    Game.gameManager.showFrameBack(1, num_back);
+                    // Game.gameManager.showFrameBack(1, num_back);
                     G_baseData.userData.addQuan_Video = G_baseData.userData.addQuan_Video - 1;
+                    EventDispatch.ins().fire(Event_Name.TurnTable_AddZhuanPanQuan, null)
                 };
                 this.sendMes_videoback(call, 1); //看完视频的接口（转盘券）
                 break;
@@ -367,23 +368,24 @@ export default class main extends cc.Component {
     /**看完 视频 获得奖励的弹框 转盘券1 金币2 宝箱3  mbc 4 */
     showFrameBack(index: number, num: any) {
         if (index == 1) {
-            this.shuaxinShowQaun();
+            //已重构掉
+            // this.shuaxinShowQaun();
         } else {
             //参数1打开第二种,Frame界面仅为展示界面，道具获取逻辑，理应写在调用此方法的外层
             uiManager.ins().show(UI_CONFIG_NAME.DlgFrame, 1, index, num)
         }
     }
 
-    /**看完视频刷新转盘券*/
-    shuaxinShowQaun() {
-        let PopUp = cc.find(uiFormPath.PopUp);
-        let zhuangpan = PopUp.getChildByName("DlgZhuanPan");
-        if (!zhuangpan) {
-            console.log("no find")
-        } else {
-            zhuangpan.getComponent("DlgZhuanPan").callbackReward();
-        }
-    }
+    // /**看完视频刷新转盘券*/
+    // shuaxinShowQaun() {
+    //     let PopUp = cc.find(uiFormPath.PopUp);
+    //     let zhuangpan = PopUp.getChildByName("DlgZhuanPan");
+    //     if (!zhuangpan) {
+    //         console.log("no find")
+    //     } else {
+    //         zhuangpan.getComponent("DlgZhuanPan").callbackReward();
+    //     }
+    // }
 
     /************与main相关的全局事件回调***************** */
 

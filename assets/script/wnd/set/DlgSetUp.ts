@@ -8,7 +8,7 @@ import { Global_Var } from "../../common/globalVar/GlobalVar";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class setup extends baseUi {
+export default class setUp extends baseUi {
     /**按钮图片 */
     @property(cc.SpriteFrame)
     setUPtuji: cc.SpriteFrame[] = [];

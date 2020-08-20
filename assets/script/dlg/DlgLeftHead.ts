@@ -9,7 +9,7 @@ import { G_baseData } from "../data/baseData";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class setup extends baseUi {
+export default class NewClass extends baseUi {
 
     /** 上下滑动的框*/
     @property(cc.Node)

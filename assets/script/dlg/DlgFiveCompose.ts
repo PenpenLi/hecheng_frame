@@ -21,7 +21,7 @@ var isFiveCompose = [0, 0, 0, 0, 0]; //可以根据上面两个数据得到参�
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class setup extends baseUi {
+export default class NewClass extends baseUi {
 
     /**金木水火土 */
     @property(cc.SpriteFrame)

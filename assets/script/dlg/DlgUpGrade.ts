@@ -7,7 +7,7 @@ import { G_baseData } from "../data/baseData";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class setup extends baseUi {
+export default class NewClass extends baseUi {
 
     /**鸟的头像 */
     @property(cc.Sprite)

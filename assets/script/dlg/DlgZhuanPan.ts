@@ -4,10 +4,11 @@ import uiType from "../frameWork/ui/uitype";
 import { G_baseData } from "../data/baseData";
 import { uiManager } from "../frameWork/ui/uiManager";
 import { Game } from "../game/Game";
+import { EventDispatch, Event_Name } from "../frameWork/event/EventDispatch";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class setup extends baseUi {
+export default class dlgZhuanPan extends baseUi {
     /**显示转盘剩余次数的文本框 */
     @property(cc.Label)
     LabZpOfNum: cc.Label = null;
@@ -26,6 +27,13 @@ export default class setup extends baseUi {
 
     formType = new uiType(uiFormType.PopUp, isUseBanner.openBanner, widdleType.long)
 
+    onLoad() {
+        EventDispatch.ins().add(Event_Name.TurnTable_AddZhuanPanQuan, this.watchVideoCb, this)
+    }
+
+    onDestroy() {
+        EventDispatch.ins().remove(Event_Name.TurnTable_AddZhuanPanQuan, this.watchVideoCb)
+    }
 
     _open() {
         this.clickBtnStart.node.on("click", this.BtnStart, this);
@@ -158,9 +166,8 @@ export default class setup extends baseUi {
         uiManager.ins().show(UI_CONFIG_NAME.DlgZpTips);
     }
 
-
     /**看视频回调奖励 */
-    callbackReward() {
+    watchVideoCb() {
         this.clickBtnStart.getComponent(cc.Button).interactable = true;
         this.LabZpOfNum.string = G_baseData.userData.NumOfTurntables.toString();
     }

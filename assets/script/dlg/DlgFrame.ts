@@ -9,7 +9,7 @@ const { ccclass, property } = cc._decorator;
 
 var box: number = 0;
 @ccclass
-export default class setup extends baseUi {
+export default class NewClass extends baseUi {
 
     /** 确认按钮,观看视频,使用券*/
     @property(cc.Button)

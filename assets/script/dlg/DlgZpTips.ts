@@ -3,10 +3,11 @@ import { uiFormType, UI_CONFIG_NAME, isUseBanner, widdleType } from "../common/g
 import uiType from "../frameWork/ui/uitype";
 import { G_baseData } from "../data/baseData";
 import { Game } from "../game/Game";
+import { EventDispatch, Event_Name } from "../frameWork/event/EventDispatch";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class setup extends baseUi {
+export default class dlgZpTips extends baseUi {
 
     /**观看视频按钮*/
     @property(cc.Node)
@@ -16,9 +17,7 @@ export default class setup extends baseUi {
     @property(cc.Node)
     btnGetQuan: cc.Node = null;
 
-
     formType = new uiType(uiFormType.PopUp1, isUseBanner.openBanner, widdleType.short)
-
 
     _open() {
         this.initZP();
@@ -81,12 +80,10 @@ export default class setup extends baseUi {
         Game.gameManager.sendMes_videoback(call, 5); //成功回调
     }
 
-
     /**增加完奖励的转盘按钮的显示及次数的增加 */
     show_btn_back() {
-        Game.gameManager.shuaxinShowQaun();
+        EventDispatch.ins().fire(Event_Name.TurnTable_AddZhuanPanQuan, {})
     }
-
 
     /**关闭按钮 */
     btnClose() {

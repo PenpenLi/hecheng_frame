@@ -8,7 +8,7 @@ import { Game } from "../game/Game";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class setup extends baseUi {
+export default class NewClass extends baseUi {
     @property(cc.Label)
     labCoins: cc.Label = null;
 
