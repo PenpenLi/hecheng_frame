@@ -1,7 +1,6 @@
 import baseUi from "../frameWork/ui/baseUi"
 import { uiFormType, uiFormPath } from "../common/gameConfig/gameConfigs";
 import uiType from "../frameWork/ui/uitype";
-import pictureManager from "../game/pictureManager";
 import BigVal from "../common/bigval/BigVal"
 import { Game } from "../game/Game";
 import { G_baseData } from "../data/baseData";
@@ -39,9 +38,6 @@ export default class NewClass extends baseUi {
     /** 下*/
     @property(cc.Node)
     btnmovedown: cc.Node = null;
-
-
-
 
     formType = new uiType(uiFormType.PopUp)
 
@@ -84,7 +80,6 @@ export default class NewClass extends baseUi {
                 self.FENHONNSTR.string = "3.必得凤" + data.fenhong_ratio + '%'
                 self.FenHongProgress.fillRange = data.fenhong_ratio / 100;
             }
-
         }
         var funErr = function () { }
         let params = {}
