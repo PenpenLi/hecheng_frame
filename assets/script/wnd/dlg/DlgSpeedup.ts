@@ -1,9 +1,9 @@
-import baseUi from "../frameWork/ui/baseUi"
-import { uiFormType, uiFormPath, isUseBanner, widdleType } from "../common/gameConfig/gameConfigs";
-import uiType from "../frameWork/ui/uitype";
-import { G_baseData } from "../data/baseData";
-import { Game } from "../game/Game";
-import websocketHandler from "../net/websocketHandler";
+import baseUi from "../../frameWork/ui/baseUi"
+import { uiFormType, uiFormPath, isUseBanner, widdleType } from "../../common/gameConfig/gameConfigs";
+import uiType from "../../frameWork/ui/uitype";
+import { G_baseData } from "../../data/baseData";
+import { Game } from "../../game/Game";
+import websocketHandler from "../../net/websocketHandler";
 
 /**花费钻石数量*/
 const reduceOfjewel: number = 60;

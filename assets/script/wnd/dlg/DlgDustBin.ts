@@ -1,10 +1,10 @@
-import baseUi from "../frameWork/ui/baseUi"
-import { uiFormType, uiFormPath, musicPath } from "../common/gameConfig/gameConfigs";
-import uiType from "../frameWork/ui/uitype";
-import BigVal from "../common/bigval/BigVal";
-import pictureManager from "../game/pictureManager"
-import musicManager from "../frameWork/music/musicManager";
-import blockitem from "../perfab/blockitem";
+import baseUi from "../../frameWork/ui/baseUi"
+import { uiFormType, uiFormPath, musicPath } from "../../common/gameConfig/gameConfigs";
+import uiType from "../../frameWork/ui/uitype";
+import BigVal from "../../common/bigval/BigVal";
+import pictureManager from "../../game/pictureManager"
+import musicManager from "../../frameWork/music/musicManager";
+import blockitem from "../../perfab/blockitem";
 const { ccclass, property } = cc._decorator;
 
 @ccclass

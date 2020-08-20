@@ -1,9 +1,9 @@
-import baseUi from "../frameWork/ui/baseUi"
-import { uiFormType, uiFormPath } from "../common/gameConfig/gameConfigs";
-import uiType from "../frameWork/ui/uitype";
-import { G_baseData } from "../data/baseData";
-import BigVal from "../common/bigval/BigVal"
-import { Game } from "../game/Game";
+import baseUi from "../../frameWork/ui/baseUi"
+import { uiFormType, uiFormPath } from "../../common/gameConfig/gameConfigs";
+import uiType from "../../frameWork/ui/uitype";
+import { G_baseData } from "../../data/baseData";
+import BigVal from "../../common/bigval/BigVal"
+import { Game } from "../../game/Game";
 
 const { ccclass, property } = cc._decorator;
 

@@ -10,8 +10,8 @@ import { Game } from "./Game";
 import { EventDispatch, Event_Name } from "../frameWork/event/EventDispatch";
 import { G_baseData } from "../data/baseData";
 import websocketHandler from "../net/websocketHandler";
-import petWindow from "../wnd/petWindow";
-import guideWindow from "../wnd/guideWindow";
+import petWindow from "../wnd/pet/petWindow";
+import guideWindow from "../wnd/guide/guideWindow";
 
 var callbackShop: Function = function () { };
 const { ccclass, property } = cc._decorator;

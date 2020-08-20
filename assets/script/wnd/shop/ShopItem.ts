@@ -1,10 +1,8 @@
-import pictureManager from "../game/pictureManager"
-import userData from "../data/userData"
-import BigVal from "../common/bigval/BigVal"
-import { uiManager } from "../frameWork/ui/uiManager";
-import { uiFormType, UI_CONFIG_NAME, uiFormPath } from "../common/gameConfig/gameConfigs";
-import { Game } from "../game/Game";
-import { G_baseData } from "../data/baseData";
+import BigVal from "../../common/bigval/BigVal"
+import { uiManager } from "../../frameWork/ui/uiManager";
+import { uiFormType, UI_CONFIG_NAME, uiFormPath } from "../../common/gameConfig/gameConfigs";
+import { Game } from "../../game/Game";
+import { G_baseData } from "../../data/baseData";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -94,7 +92,6 @@ export default class shopItem extends cc.Component {
         this.BtnNotBuy.active = true;
         this.BtnNotBuy.getChildByName("tips").getComponent(cc.Label).string = obj.num;
     }
-
 
     /**购买金币按钮 */
     BtnOfcoinBuy() {

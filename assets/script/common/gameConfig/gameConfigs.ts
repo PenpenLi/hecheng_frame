@@ -6,8 +6,8 @@ export const UI_CONFIG_NAME = {
     DlgFiveCompose: "prefab/panels/DlgFiveCompose",
     DlgGetFreeBox: "prefab/panels/DlgGetFreeBox",
     DlgGift: "prefab/panels/DlgGift",
-    DlgLeftHead: "prefab/panels/DlgLeftHead",
-    DlgRankList: "prefab/panels/DlgRankList",
+    DlgLeftHead: "prefab/panels/DlgLeftHead",//已ok
+    DlgRankList: "prefab/panels/DlgRankList",//已ok
     DlgSetUp: "prefab/panels/DlgSetUp", //已ok
     DlgSpeedup: "prefab/panels/DlgSpeedup",
     DlgTuJian: "prefab/panels/DlgTuJian",

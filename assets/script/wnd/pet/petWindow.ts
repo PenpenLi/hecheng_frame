@@ -1,12 +1,12 @@
-import { musicPath } from "../common/gameConfig/gameConfigs";
-import BigVal from "../common/bigval/BigVal";
+import { musicPath } from "../../common/gameConfig/gameConfigs";
+import BigVal from "../../common/bigval/BigVal";
 
 //长连接
-import musicManager from "../frameWork/music/musicManager";
-import { Game } from "../game/Game";
-import { EventDispatch, Event_Name } from "../frameWork/event/EventDispatch";
-import { G_baseData } from "../data/baseData";
-import websocketHandler from "../net/websocketHandler";
+import musicManager from "../../frameWork/music/musicManager";
+import { Game } from "../../game/Game";
+import { EventDispatch, Event_Name } from "../../frameWork/event/EventDispatch";
+import { G_baseData } from "../../data/baseData";
+import websocketHandler from "../../net/websocketHandler";
 
 var callbackShop: Function = function () { };
 const { ccclass, property } = cc._decorator;

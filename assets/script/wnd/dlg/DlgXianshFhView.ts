@@ -1,10 +1,10 @@
-import baseUi from "../frameWork/ui/baseUi"
-import { uiFormType, uiFormPath, UI_CONFIG_NAME } from "../common/gameConfig/gameConfigs";
-import uiType from "../frameWork/ui/uitype";
-import pictureManager from "../game/pictureManager";
-import { G_baseData } from "../data/baseData";
-import { uiManager } from "../frameWork/ui/uiManager";
-import { Game } from "../game/Game";
+import baseUi from "../../frameWork/ui/baseUi"
+import { uiFormType, uiFormPath, UI_CONFIG_NAME } from "../../common/gameConfig/gameConfigs";
+import uiType from "../../frameWork/ui/uitype";
+import pictureManager from "../../game/pictureManager";
+import { G_baseData } from "../../data/baseData";
+import { uiManager } from "../../frameWork/ui/uiManager";
+import { Game } from "../../game/Game";
 
 //12中凤凰的名字
 var itemdName: Array<string> = [

@@ -1,9 +1,9 @@
-import baseUi from "../frameWork/ui/baseUi"
-import { uiFormType, uiFormPath, isUseBanner, widdleType } from "../common/gameConfig/gameConfigs";
-import uiType from "../frameWork/ui/uitype";
-import BigVal from "../common/bigval/BigVal"
-import { Game } from "../game/Game";
-import { G_baseData } from "../data/baseData";
+import baseUi from "../../frameWork/ui/baseUi"
+import { uiFormType, uiFormPath, isUseBanner, widdleType } from "../../common/gameConfig/gameConfigs";
+import uiType from "../../frameWork/ui/uitype";
+import BigVal from "../../common/bigval/BigVal"
+import { Game } from "../../game/Game";
+import { G_baseData } from "../../data/baseData";
 
 
 

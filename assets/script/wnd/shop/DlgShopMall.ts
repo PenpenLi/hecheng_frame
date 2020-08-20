@@ -1,9 +1,9 @@
-import baseUi from "../frameWork/ui/baseUi"
-import { uiFormType, uiFormPath, isUseBanner, widdleType } from "../common/gameConfig/gameConfigs";
-import AdaptationManager, { AdaptationType } from "../frameWork/ui/AdaptationManager";
-import uiType from "../frameWork/ui/uitype";
-import { G_baseData } from "../data/baseData";
-import { Game } from "../game/Game";
+import baseUi from "../../frameWork/ui/baseUi"
+import { uiFormType, uiFormPath, isUseBanner, widdleType } from "../../common/gameConfig/gameConfigs";
+import AdaptationManager, { AdaptationType } from "../../frameWork/ui/AdaptationManager";
+import uiType from "../../frameWork/ui/uitype";
+import { G_baseData } from "../../data/baseData";
+import { Game } from "../../game/Game";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -36,8 +36,6 @@ export default class DlgShopMall extends baseUi {
         this.LabCoinOfTotal.string = G_baseData.userData.TotalCoins.geteveryStr();
         this.sengMessShop();
     }
-
-
 
     /**克隆完商城界面 */
     initClonse(shoplist) {

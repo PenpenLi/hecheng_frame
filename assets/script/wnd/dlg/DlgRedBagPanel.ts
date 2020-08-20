@@ -1,8 +1,8 @@
-import baseUi from "../frameWork/ui/baseUi";
-import { uiFormType, uiFormPath, musicPath } from "../common/gameConfig/gameConfigs";
-import uiType from "../frameWork/ui/uitype";
-import AdaptationManager, { AdaptationType } from "../frameWork/ui/AdaptationManager";
-import { Game } from "../game/Game";
+import baseUi from "../../frameWork/ui/baseUi";
+import { uiFormType, uiFormPath, musicPath } from "../../common/gameConfig/gameConfigs";
+import uiType from "../../frameWork/ui/uitype";
+import AdaptationManager, { AdaptationType } from "../../frameWork/ui/AdaptationManager";
+import { Game } from "../../game/Game";
 const { ccclass, property } = cc._decorator;
 
 @ccclass

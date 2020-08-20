@@ -1,10 +1,10 @@
-import baseUi from "../frameWork/ui/baseUi"
-import { UI_CONFIG_NAME, uiFormType, uiFormPath, isUseBanner, widdleType } from "../common/gameConfig/gameConfigs";
-import uiType from "../frameWork/ui/uitype";
-import { G_baseData } from "../data/baseData";
-import { uiManager } from "../frameWork/ui/uiManager";
-import { Game } from "../game/Game";
-import { EventDispatch, Event_Name } from "../frameWork/event/EventDispatch";
+import baseUi from "../../frameWork/ui/baseUi"
+import { UI_CONFIG_NAME, uiFormType, uiFormPath, isUseBanner, widdleType } from "../../common/gameConfig/gameConfigs";
+import uiType from "../../frameWork/ui/uitype";
+import { G_baseData } from "../../data/baseData";
+import { uiManager } from "../../frameWork/ui/uiManager";
+import { Game } from "../../game/Game";
+import { EventDispatch, Event_Name } from "../../frameWork/event/EventDispatch";
 const { ccclass, property } = cc._decorator;
 
 @ccclass

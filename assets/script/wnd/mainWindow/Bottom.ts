@@ -27,7 +27,6 @@ export default class bottom extends baseUi {
         this.addListen();
     }
 
-
     /**给按钮添加监听事件 */
     addListen() {
         const childs = this.node.getChildByName("nodeFather").children;

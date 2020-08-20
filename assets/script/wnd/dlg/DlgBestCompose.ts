@@ -1,12 +1,12 @@
-import baseUi from "../frameWork/ui/baseUi"
-import { uiFormType, uiFormPath } from "../common/gameConfig/gameConfigs";
-import uiType from "../frameWork/ui/uitype";
-import pictureManager from "../game/pictureManager";
-import { Game } from "../game/Game";
-import websocketHandler from "../net/websocketHandler";
-import { EventDispatch, Event_Name } from "../frameWork/event/EventDispatch";
-import blockitem from "../perfab/blockitem";
-import { G_baseData } from "../data/baseData";
+import baseUi from "../../frameWork/ui/baseUi"
+import { uiFormType, uiFormPath } from "../../common/gameConfig/gameConfigs";
+import uiType from "../../frameWork/ui/uitype";
+import pictureManager from "../../game/pictureManager";
+import { Game } from "../../game/Game";
+import websocketHandler from "../../net/websocketHandler";
+import { EventDispatch, Event_Name } from "../../frameWork/event/EventDispatch";
+import blockitem from "../../perfab/blockitem";
+import { G_baseData } from "../../data/baseData";
 
 const START_NUM: number = 36;
 const JIN_BIRD: number = 38; //金
