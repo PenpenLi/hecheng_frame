@@ -31,7 +31,7 @@ cc.Class({
     // onLoad () {},
 
     start() {
-  
+        let out = cc.color();
     },
 
     checkCN() {

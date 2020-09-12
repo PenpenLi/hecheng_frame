@@ -1,5 +1,5 @@
 import blockItem from "./blockitem";
-import { G_baseData } from "../data/baseData";
+import { G_baseData } from "../../data/baseData";
 
 const { ccclass, property } = cc._decorator;
 

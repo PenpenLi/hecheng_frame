@@ -43,8 +43,6 @@ export default class main extends cc.Component {
         this.AddAppListen();
         this.addEventListen();
         this.initModules();
-
-
     }
 
     initModules() {

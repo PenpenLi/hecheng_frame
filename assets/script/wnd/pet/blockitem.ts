@@ -1,13 +1,13 @@
-import pictureManager from "../game/pictureManager";
-import BigVal from "../common/bigval/BigVal";
-import { uiManager } from "../frameWork/ui/uiManager";
-import { uiFormType, UI_CONFIG_NAME, uiFormPath, musicPath } from "../common/gameConfig/gameConfigs";
-import musicManager from "../frameWork/music/musicManager";
-import websocketHandler from "../net/websocketHandler";
-import { Game } from "../game/Game";
+import pictureManager from "../../game/pictureManager";
+import BigVal from "../../common/bigval/BigVal";
+import { uiManager } from "../../frameWork/ui/uiManager";
+import { uiFormType, UI_CONFIG_NAME, uiFormPath, musicPath } from "../../common/gameConfig/gameConfigs";
+import musicManager from "../../frameWork/music/musicManager";
+import websocketHandler from "../../net/websocketHandler";
+import { Game } from "../../game/Game";
 import block from "./block";
-import { G_baseData } from "../data/baseData";
-import { Global_Var } from "../common/globalVar/GlobalVar";
+import { G_baseData } from "../../data/baseData";
+import { Global_Var } from "../../common/globalVar/GlobalVar";
 
 const { ccclass, property } = cc._decorator;
 

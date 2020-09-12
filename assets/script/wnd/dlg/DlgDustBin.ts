@@ -4,7 +4,7 @@ import uiType from "../../frameWork/ui/uitype";
 import BigVal from "../../common/bigval/BigVal";
 import pictureManager from "../../game/pictureManager"
 import musicManager from "../../frameWork/music/musicManager";
-import blockitem from "../../perfab/blockitem";
+import blockitem from "../pet/blockitem";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
